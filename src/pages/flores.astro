@@ -116,7 +116,7 @@ nav ul a:hover, nav ul a.active { color: var(--gold); }
 .item-card.in-cart::after { content: '✓'; position: absolute; top: 14px; right: 14px; background: var(--rose-deep); color: var(--parchment); width: 22px; height: 22px; display: grid; place-items: center; font-size: 11px; font-family: var(--sans); font-weight: 500; z-index: 2; }
 
 .card-img { width: 100%; aspect-ratio: 1; overflow: hidden; position: relative; background: var(--parchment-2); }
-.card-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) saturate(0.85) brightness(1.02); transition: transform 0.5s ease, filter 0.4s; }
+.card-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; filter: sepia(10%) saturate(0.85) brightness(1.02); transition: transform 0.5s ease, filter 0.4s; }
 .item-card:hover .card-img img { transform: scale(1.05); filter: sepia(0%) saturate(1); }
 .card-img-placeholder { width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(192,134,143,0.05) 0px, rgba(192,134,143,0.05) 1px, transparent 1px, transparent 13px), linear-gradient(160deg, #EDD9DC 0%, #DEC8CC 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
 .card-img-placeholder svg { width: 32px; height: 32px; stroke: var(--rose-deep); fill: none; stroke-width: 1; opacity: 0.45; }
