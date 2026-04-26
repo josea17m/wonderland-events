@@ -1,0 +1,846 @@
+---
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo — Wonderland Events</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --parchment:   #F2E5CC;
+  --parchment-2: #EBD9B8;
+  --parchment-3: #F8F1E4;
+  --rose:        #C0868F;
+  --rose-pale:   #EDD9DC;
+  --rose-deep:   #9A5F68;
+  --gold:        #B8892E;
+  --gold-light:  #D4A84B;
+  --gold-pale:   #E8D5AA;
+  --sepia:       #7D5A3C;
+  --ink:         #231409;
+  --ink-soft:    #56382A;
+  --deep:        #1A0E07;
+  --white:       #FDFAF5;
+  --serif:       'Cormorant Garamond', Georgia, serif;
+  --serif-sc:    'Cormorant SC', Georgia, serif;
+  --sans:        'Raleway', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--parchment-3);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 64px;
+  background: rgba(242,229,204,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,137,46,0.22);
+}
+nav::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 48px; right: 48px; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(184,137,46,0.28) 20%, rgba(184,137,46,0.28) 80%, transparent);
+}
+.nav-logo {
+  font-family: var(--serif-sc); font-size: 16px; font-weight: 400;
+  letter-spacing: 0.22em; color: var(--ink); text-decoration: none;
+}
+nav ul { list-style: none; display: flex; gap: 32px; }
+nav ul a {
+  font-family: var(--sans); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none; transition: color 0.2s;
+}
+nav ul a:hover, nav ul a.active { color: var(--gold); }
+.nav-cart-btn {
+  font-family: var(--serif-sc); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--parchment-3); background: var(--rose-deep);
+  border: none; padding: 9px 20px; cursor: pointer;
+  transition: background 0.2s; display: flex; align-items: center; gap: 8px;
+}
+.nav-cart-btn:hover { background: var(--rose); }
+.cart-count {
+  background: var(--gold); color: var(--ink);
+  font-size: 9px; font-weight: 600; font-family: var(--sans);
+  width: 18px; height: 18px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+}
+.cart-count.visible { display: flex; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(242,229,204,0.98); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,137,46,0.2);
+  z-index: 190; flex-direction: column; padding: 16px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none;
+  padding: 14px 28px; border-bottom: 1px solid rgba(184,137,46,0.12);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover, .mobile-menu a.active { color: var(--gold); }
+
+.page-header {
+  padding: 100px 80px 56px;
+  background: var(--parchment);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='8' y='36' font-size='16' fill='%23B8892E' opacity='0.06' font-family='Georgia,serif'%3E%E2%99%A0%3C/text%3E%3Ctext x='58' y='82' font-size='16' fill='%23C0868F' opacity='0.06' font-family='Georgia,serif'%3E%E2%99%A5%3C/text%3E%3Ctext x='68' y='28' font-size='12' fill='%23B8892E' opacity='0.05' font-family='Georgia,serif'%3E%E2%99%A6%3C/text%3E%3Ctext x='10' y='80' font-size='12' fill='%23C0868F' opacity='0.05' font-family='Georgia,serif'%3E%E2%99%A3%3C/text%3E%3C/svg%3E");
+  background-size: 100px 100px; pointer-events: none;
+}
+.page-eyebrow {
+  font-family: var(--serif-sc); font-size: 10px; font-weight: 300;
+  letter-spacing: 0.4em; color: var(--rose); margin-bottom: 16px;
+  position: relative;
+}
+.page-title {
+  font-family: var(--serif); font-size: clamp(40px, 6vw, 76px);
+  font-weight: 300; font-style: italic; color: var(--ink);
+  line-height: 1; position: relative;
+}
+.page-sub {
+  font-family: var(--serif); font-size: 18px; font-style: italic;
+  color: var(--ink-soft); margin-top: 14px; font-weight: 300;
+  opacity: 0.8; position: relative;
+}
+.page-orn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; margin-top: 22px; position: relative;
+}
+.orn-line { height: 1px; width: 70px; background: linear-gradient(to right, transparent, rgba(184,137,46,0.5)); }
+.orn-line.rev { background: linear-gradient(to left, transparent, rgba(184,137,46,0.5)); }
+.orn-sym { font-size: 10px; color: var(--gold); opacity: 0.6; font-family: Georgia, serif; line-height: 1; }
+.orn-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); opacity: 0.65; }
+
+.filters-bar {
+  position: sticky; top: 64px; z-index: 100;
+  background: var(--parchment-3);
+  border-bottom: 1px solid rgba(184,137,46,0.18);
+  padding: 14px 80px;
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+}
+.search-wrap {
+  position: relative; flex: 1; min-width: 180px; max-width: 300px;
+}
+.search-wrap svg {
+  position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+  width: 13px; height: 13px; stroke: var(--sepia); fill: none; stroke-width: 1.8;
+}
+.search-input {
+  width: 100%; padding: 9px 12px 9px 34px;
+  border: 1px solid rgba(184,137,46,0.25);
+  background: rgba(242,229,204,0.6);
+  font-family: var(--sans); font-size: 12px; font-weight: 300;
+  color: var(--ink); outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--gold); background: rgba(242,229,204,0.9); }
+.search-input::placeholder { color: var(--sepia); opacity: 0.5; }
+
+.cats-scroll { display: flex; gap: 8px; flex-wrap: wrap; }
+.cat-chip {
+  font-family: var(--serif-sc); font-size: 9px; font-weight: 300;
+  letter-spacing: 0.2em; padding: 7px 16px;
+  border: 1px solid rgba(184,137,46,0.25);
+  background: transparent; color: var(--ink-soft);
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.cat-chip:hover { border-color: var(--rose); color: var(--rose); }
+.cat-chip.active { background: var(--rose-deep); color: var(--parchment); border-color: var(--rose-deep); }
+
+.results-count {
+  font-family: var(--serif); font-size: 14px; font-style: italic;
+  color: var(--sepia); opacity: 0.7; margin-left: auto; white-space: nowrap;
+}
+
+.catalog-main { padding: 48px 80px 96px; background: var(--parchment-3); min-height: 60vh; }
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.item-card {
+  background: var(--white);
+  border: 1px solid rgba(184,137,46,0.18);
+  cursor: pointer;
+  transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+  position: relative; overflow: hidden;
+}
+.item-card::before {
+  content: '';
+  position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
+  border: 1px solid rgba(184,137,46,0.08);
+  pointer-events: none; z-index: 1; transition: border-color 0.25s;
+}
+.item-card:hover {
+  border-color: rgba(192,134,143,0.45);
+  box-shadow: 0 8px 36px rgba(125,90,60,0.13);
+  transform: translateY(-3px);
+}
+.item-card:hover::before { border-color: rgba(192,134,143,0.18); }
+.item-card.in-cart { border-color: var(--rose-deep); }
+.item-card.in-cart::after {
+  content: '✓';
+  position: absolute; top: 14px; right: 14px;
+  background: var(--rose-deep); color: var(--parchment);
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  font-size: 11px; font-family: var(--sans); font-weight: 500;
+  z-index: 2;
+}
+
+.card-img {
+  width: 100%; aspect-ratio: 1;
+  overflow: hidden; position: relative;
+  background: var(--parchment-2);
+}
+.card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(15%) saturate(0.8) brightness(1.02);
+  transition: transform 0.5s ease, filter 0.4s;
+}
+.item-card:hover .card-img img { transform: scale(1.05); filter: sepia(5%) saturate(0.95); }
+
+.card-img-placeholder {
+  width: 100%; height: 100%;
+  background:
+    repeating-linear-gradient(45deg, rgba(125,90,60,0.05) 0px, rgba(125,90,60,0.05) 1px, transparent 1px, transparent 13px),
+    linear-gradient(160deg, #E8D8C0 0%, #D8C9AE 100%);
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 10px;
+}
+.card-img-placeholder svg { width: 28px; height: 28px; stroke: var(--sepia); fill: none; stroke-width: 1.2; opacity: 0.4; }
+.card-img-placeholder span { font-family: 'Courier New', monospace; font-size: 10px; color: var(--sepia); opacity: 0.5; letter-spacing: 0.06em; text-align: center; padding: 0 12px; line-height: 1.5; }
+
+.card-body { padding: 18px 20px 22px; }
+.card-cat {
+  font-family: var(--serif-sc); font-size: 9px; font-weight: 300;
+  letter-spacing: 0.3em; color: var(--rose); margin-bottom: 6px;
+}
+.card-name {
+  font-family: var(--serif); font-size: 20px; font-weight: 400;
+  font-style: italic; color: var(--ink); line-height: 1.2; margin-bottom: 8px;
+}
+.card-desc {
+  font-family: var(--sans); font-size: 11px; font-weight: 300;
+  color: var(--ink-soft); line-height: 1.65; margin-bottom: 14px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.card-price {
+  font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--gold);
+}
+.card-price span { font-size: 11px; font-weight: 300; color: var(--sepia); font-family: var(--sans); opacity: 0.7; }
+.card-add {
+  font-family: var(--serif-sc); font-size: 9px; font-weight: 300;
+  letter-spacing: 0.15em;
+  background: none; border: 1px solid rgba(184,137,46,0.4);
+  color: var(--gold); padding: 7px 13px; cursor: pointer;
+  transition: all 0.2s;
+}
+.card-add:hover { background: var(--gold); color: var(--parchment); border-color: var(--gold); }
+.card-add.added { background: var(--rose-deep); border-color: var(--rose-deep); color: var(--parchment); }
+
+.state-msg { grid-column: 1 / -1; text-align: center; padding: 80px 0; }
+.state-msg p { font-family: var(--serif); font-size: 26px; font-style: italic; color: var(--ink-soft); font-weight: 300; }
+.state-msg small { display: block; margin-top: 10px; font-family: var(--sans); font-size: 11px; color: var(--sepia); opacity: 0.6; }
+.spinner {
+  width: 30px; height: 30px;
+  border: 1.5px solid rgba(184,137,46,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 18px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(26,14,7,0.65);
+  z-index: 300;
+  display: none; align-items: center; justify-content: center;
+  padding: 24px; backdrop-filter: blur(6px);
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  background: var(--parchment-3);
+  border: 1px solid rgba(184,137,46,0.25);
+  max-width: 780px; width: 100%; max-height: 92vh;
+  overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr;
+  position: relative;
+}
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  background: none; border: none; cursor: pointer;
+  font-size: 16px; color: var(--sepia); opacity: 0.6;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s; z-index: 1;
+}
+.modal-close:hover { opacity: 1; }
+.modal-img {
+  background: var(--parchment-2); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  aspect-ratio: 1;
+}
+.modal-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) saturate(0.8); }
+.modal-info { padding: 44px 36px; display: flex; flex-direction: column; }
+.modal-cat {
+  font-family: var(--serif-sc); font-size: 9px; font-weight: 300;
+  letter-spacing: 0.35em; color: var(--rose); margin-bottom: 10px;
+}
+.modal-name {
+  font-family: var(--serif); font-size: 34px; font-weight: 300;
+  font-style: italic; color: var(--ink); line-height: 1.15; margin-bottom: 18px;
+}
+.modal-price {
+  font-family: var(--serif); font-size: 30px; font-weight: 400; color: var(--gold); margin-bottom: 6px;
+}
+.modal-price small { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--sepia); opacity: 0.7; }
+.modal-stock { font-family: var(--sans); font-size: 11px; color: var(--sepia); opacity: 0.65; margin-bottom: 20px; letter-spacing: 0.05em; }
+.modal-rule { height: 1px; background: rgba(184,137,46,0.2); margin: 0 0 22px; }
+.modal-desc { font-family: var(--serif); font-size: 16px; font-weight: 300; color: var(--ink-soft); line-height: 1.85; margin-bottom: 28px; flex: 1; }
+.modal-qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.modal-qty-label { font-family: var(--serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.2em; color: var(--ink-soft); }
+.qty-btn {
+  width: 30px; height: 30px; border: 1px solid rgba(184,137,46,0.3);
+  background: none; cursor: pointer; font-size: 18px; color: var(--ink);
+  transition: all 0.15s; display: flex; align-items: center; justify-content: center;
+}
+.qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+.qty-display { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--ink); min-width: 28px; text-align: center; }
+.modal-add-btn {
+  font-family: var(--serif-sc); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.22em;
+  background: var(--rose-deep); color: var(--parchment-3);
+  border: none; padding: 16px 28px; cursor: pointer;
+  transition: background 0.2s; width: 100%;
+}
+.modal-add-btn:hover { background: var(--rose); }
+.modal-add-btn.added { background: var(--sepia); }
+
+.cart-overlay { position: fixed; inset: 0; background: rgba(26,14,7,0.45); z-index: 390; display: none; }
+.cart-overlay.open { display: block; }
+.cart-panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(560px, 100vw);
+  background: var(--parchment-3);
+  border-left: 1px solid rgba(184,137,46,0.2);
+  z-index: 400;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  display: flex; flex-direction: column;
+  box-shadow: -6px 0 40px rgba(26,14,7,0.12);
+}
+.cart-panel.open { transform: translateX(0); }
+
+.cart-header {
+  padding: 22px 28px;
+  border-bottom: 1px solid rgba(184,137,46,0.2);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.cart-header h2 { font-family: var(--serif); font-size: 26px; font-weight: 300; font-style: italic; color: var(--ink); }
+.cart-close { background: none; border: none; cursor: pointer; font-size: 16px; color: var(--sepia); opacity: 0.6; transition: opacity 0.2s; }
+.cart-close:hover { opacity: 1; }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 18px 28px; }
+.cart-empty { text-align: center; padding: 48px 0; font-family: var(--serif); font-size: 18px; font-style: italic; color: var(--sepia); font-weight: 300; opacity: 0.7; }
+
+.cart-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px 0; border-bottom: 1px solid rgba(184,137,46,0.15); }
+.ci-img { width: 72px; height: 72px; flex-shrink: 0; background: var(--parchment-2); overflow: hidden; }
+.ci-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(15%) saturate(0.8); }
+.ci-info { flex: 1; }
+.ci-cat { font-family: var(--serif-sc); font-size: 9px; font-weight: 300; letter-spacing: 0.25em; color: var(--rose); margin-bottom: 4px; }
+.ci-name { font-family: var(--serif); font-size: 18px; font-style: italic; font-weight: 300; color: var(--ink); line-height: 1.2; margin-bottom: 8px; }
+.ci-qty-row { display: flex; align-items: center; gap: 10px; }
+.ci-qty-btn { width: 28px; height: 28px; border: 1px solid rgba(184,137,46,0.25); background: none; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.ci-qty-btn:hover { border-color: var(--gold); color: var(--gold); }
+.ci-qty { font-family: var(--sans); font-size: 14px; color: var(--ink); min-width: 22px; text-align: center; font-weight: 400; }
+.ci-price { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--gold); white-space: nowrap; }
+.ci-remove { background: none; border: none; cursor: pointer; color: var(--sepia); opacity: 0.35; font-size: 14px; padding: 4px; transition: opacity 0.2s; }
+.ci-remove:hover { opacity: 0.8; color: var(--rose-deep); }
+
+.cart-total { padding: 16px 28px; border-top: 1px solid rgba(184,137,46,0.18); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.cart-total-label { font-family: var(--serif-sc); font-size: 9px; font-weight: 300; letter-spacing: 0.3em; color: var(--sepia); opacity: 0.7; }
+.cart-total-val { font-family: var(--serif); font-size: 28px; font-weight: 300; font-style: italic; color: var(--gold); }
+
+.quote-form { padding: 20px 28px 28px; border-top: 1px solid rgba(184,137,46,0.15); flex-shrink: 0; background: var(--parchment); }
+.quote-form h3 { font-family: var(--serif); font-size: 20px; font-weight: 300; font-style: italic; color: var(--ink); margin-bottom: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.form-field { display: flex; flex-direction: column; gap: 5px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-label { font-family: var(--serif-sc); font-size: 8px; font-weight: 300; letter-spacing: 0.25em; color: var(--sepia); opacity: 0.8; }
+.form-input {
+  padding: 9px 12px;
+  border: 1px solid rgba(184,137,46,0.22);
+  background: var(--parchment-3);
+  font-family: var(--sans); font-size: 12px; font-weight: 300;
+  color: var(--ink); outline: none; transition: border-color 0.2s;
+}
+.form-input:focus { border-color: var(--gold); }
+.form-input::placeholder { color: var(--sepia); opacity: 0.4; }
+.quote-actions { display: flex; gap: 10px; margin-top: 16px; }
+.btn-quote {
+  flex: 1; font-family: var(--serif-sc); font-size: 10px; font-weight: 400;
+  letter-spacing: 0.2em; background: var(--rose-deep); color: var(--parchment-3);
+  border: none; padding: 14px; cursor: pointer; transition: background 0.2s;
+}
+.btn-quote:hover { background: var(--rose); }
+.btn-whatsapp {
+  font-family: var(--serif-sc); font-size: 9px; font-weight: 400;
+  letter-spacing: 0.12em; background: #25D366; color: white;
+  border: none; padding: 14px 16px; cursor: pointer; transition: background 0.2s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-whatsapp:hover { background: #1ebe5d; }
+.btn-whatsapp svg { width: 15px; height: 15px; fill: white; }
+.success-msg { display: none; text-align: center; padding: 20px; font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--ink); font-weight: 300; }
+.success-msg.show { display: block; }
+
+footer {
+  background: var(--deep); padding: 26px 80px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(184,137,46,0.12);
+}
+.foot-logo { font-family: var(--serif-sc); font-size: 13px; font-weight: 400; letter-spacing: 0.22em; color: var(--gold-light); opacity: 0.8; }
+.foot-copy { font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.1em; color: rgba(184,137,46,0.3); }
+
+@media (max-width: 1100px) { .catalog-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  nav ul, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .filters-bar, .catalog-main { padding-left: 24px; padding-right: 24px; }
+  .page-header { padding: 100px 28px 44px; }
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .modal { grid-template-columns: 1fr; }
+  .modal-img { aspect-ratio: 4/3; }
+  footer { flex-direction: column; gap: 10px; text-align: center; padding: 22px 24px; }
+}
+@media (max-width: 520px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Wonderland Events</a>
+  <ul>
+    <li><a href="/#portfolio">Portfolio</a></li>
+    <li><a href="/catalogo" class="active">Catálogo</a></li>
+    <li><a href="/flores">Flores</a></li>
+    <li><a href="/nosotros">Nosotros</a></li>
+    <li><a href="/#contact">Contacto</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px">
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="nav-cart-btn" id="openCartBtn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Cotización
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Inicio</a>
+  <a href="/#portfolio">Portfolio</a>
+  <a href="/catalogo" class="active">Catálogo</a>
+  <a href="/flores">Flores</a>
+  <a href="/nosotros">Nosotros</a>
+  <a href="/#contact">Contacto</a>
+</div>
+
+<div class="page-header">
+  <p class="page-eyebrow">Rentals &amp; Decoration · Wonderland Events</p>
+  <h1 class="page-title">Catálogo</h1>
+  <p class="page-sub">Todo lo que necesitas para tu evento perfecto</p>
+  <div class="page-orn">
+    <div class="orn-line rev"></div>
+    <span class="orn-sym">♦</span>
+    <div class="orn-diamond"></div>
+    <span class="orn-sym" style="color:var(--rose);">♥</span>
+    <div class="orn-diamond"></div>
+    <span class="orn-sym">♦</span>
+    <div class="orn-line"></div>
+  </div>
+</div>
+
+<div class="filters-bar" id="filtersBar">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="Buscar artículo...">
+  </div>
+  <div class="cats-scroll" id="catsContainer">
+    <button class="cat-chip active" data-cat="all">Todos</button>
+  </div>
+  <span class="results-count" id="resultsCount"></span>
+</div>
+
+<div class="catalog-main">
+  <div class="catalog-grid" id="catalogGrid">
+    <div class="state-msg">
+      <div class="spinner"></div>
+      <p>Cargando artículos...</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-logo">Wonderland Events</span>
+  <span class="foot-copy">© 2026 · Curiouser and Curiouser · Rentals &amp; Decoration</span>
+</footer>
+
+<!-- DETAIL MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-info">
+      <p class="modal-cat" id="modalCat"></p>
+      <h2 class="modal-name" id="modalName"></h2>
+      <p class="modal-price" id="modalPrice"></p>
+      <p class="modal-stock" id="modalStock"></p>
+      <div class="modal-rule"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-qty-row">
+        <span class="modal-qty-label">Cantidad:</span>
+        <button class="qty-btn" id="qtyMinus">−</button>
+        <span class="qty-display" id="qtyDisplay">1</span>
+        <button class="qty-btn" id="qtyPlus">+</button>
+      </div>
+      <button class="modal-add-btn" id="modalAddBtn">Agregar a cotización</button>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h2>Mi Cotización</h2>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Aún no has agregado artículos.<br>¡Explora el catálogo!</p>
+  </div>
+  <div class="cart-total" id="cartTotalRow" style="display:none">
+    <span class="cart-total-label">Total estimado</span>
+    <span class="cart-total-val" id="cartTotalVal">$0</span>
+  </div>
+  <div class="quote-form" id="quoteForm">
+    <h3>Datos de contacto</h3>
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-input" id="fNombre" placeholder="Tu nombre">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Teléfono</label>
+        <input type="tel" class="form-input" id="fTelefono" placeholder="+1 000 000 0000">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field full">
+        <label class="form-label">Correo electrónico</label>
+        <input type="email" class="form-input" id="fCorreo" placeholder="tu@correo.com">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field full">
+        <label class="form-label">Fecha del evento</label>
+        <input type="date" class="form-input" id="fFecha">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field full">
+        <label class="form-label">Notas adicionales</label>
+        <input type="text" class="form-input" id="fNotas" placeholder="Tipo de evento, lugar, etc.">
+      </div>
+    </div>
+    <div class="quote-actions">
+      <button class="btn-quote" id="sendQuoteBtn">Enviar cotización</button>
+      <button class="btn-whatsapp" id="whatsappBtn">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.996 0C5.373 0 0 5.373 0 11.996c0 2.117.554 4.1 1.521 5.825L0 24l6.335-1.502a11.956 11.956 0 005.661 1.434h.005C18.622 23.932 24 18.558 24 11.935 24 5.373 18.622 0 11.996 0zm.009 21.906a9.928 9.928 0 01-5.058-1.382l-.363-.215-3.76.891.945-3.666-.237-.376a9.906 9.906 0 01-1.52-5.275c0-5.488 4.467-9.955 9.955-9.955a9.955 9.955 0 019.955 9.955c-.001 5.488-4.468 9.953-9.917 9.953v.07z"/></svg>
+        WhatsApp
+      </button>
+    </div>
+    <div class="success-msg" id="successMsg">
+      ¡Cotización enviada! ✦<br>
+      <small style="font-size:13px;font-style:normal;font-family:var(--sans);color:var(--sepia);opacity:0.8;">Nos pondremos en contacto contigo pronto.</small>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API_URL = 'https://damaris-backend.onrender.com/api/public/dama';
+  const WHATSAPP_NUMBER = '10000000000';
+  let allItems = [], filtered = [], activeCategory = 'all', searchTerm = '';
+  let cart = {}, currentItem = null, currentQty = 1;
+
+  async function loadCatalog() {
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error('Error ' + res.status);
+      const data = await res.json();
+      allItems = Array.isArray(data) ? data : (data.articulos || data.items || data.data || []);
+      buildCategories();
+      applyFilters();
+    } catch(e) {
+      document.getElementById('catalogGrid').innerHTML = `
+        <div class="state-msg">
+          <p>El catálogo estará disponible pronto</p>
+          <small>Estamos preparando los artículos. Contáctanos por WhatsApp para cotizar.</small>
+        </div>`;
+    }
+  }
+
+  function buildCategories() {
+    const cats = [...new Set(allItems.map(i => i.categoria).filter(Boolean))];
+    const container = document.getElementById('catsContainer');
+    container.innerHTML = '<button class="cat-chip active" data-cat="all">Todos</button>';
+    cats.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'cat-chip';
+      btn.dataset.cat = cat;
+      btn.textContent = cat;
+      container.appendChild(btn);
+    });
+    container.addEventListener('click', e => {
+      const chip = e.target.closest('.cat-chip');
+      if (!chip) return;
+      container.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCategory = chip.dataset.cat;
+      applyFilters();
+    });
+  }
+
+  function applyFilters() {
+    filtered = allItems.filter(item => {
+      const mc = activeCategory === 'all' || item.categoria === activeCategory;
+      const ms = !searchTerm || [item.nombre, item.descripcion, item.categoria].some(v => v?.toLowerCase().includes(searchTerm));
+      return mc && ms;
+    });
+    renderGrid();
+    document.getElementById('resultsCount').textContent = `${filtered.length} artículo${filtered.length !== 1 ? 's' : ''}`;
+  }
+
+  document.getElementById('searchInput').addEventListener('input', e => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    applyFilters();
+  });
+
+  function renderGrid() {
+    const grid = document.getElementById('catalogGrid');
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="state-msg"><p>Sin resultados</p><small>Prueba otra búsqueda o categoría</small></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(item => cardHTML(item)).join('');
+    grid.querySelectorAll('.item-card').forEach(card => {
+      card.addEventListener('click', e => {
+        const id = card.dataset.id;
+        if (e.target.closest('.card-add')) { e.stopPropagation(); toggleCartItem(id, 1); return; }
+        openModal(id);
+      });
+    });
+    updateCardStates();
+  }
+
+  function cardHTML(item) {
+    const img = item.imagenes?.length
+      ? `<img src="${item.imagenes[0]}" alt="${item.nombre}" loading="lazy">`
+      : imgPlaceholder(item.nombre);
+    return `<div class="item-card" data-id="${item.id}">
+      <div class="card-img">${img}</div>
+      <div class="card-body">
+        <p class="card-cat">${item.categoria || 'General'}</p>
+        <h3 class="card-name">${item.nombre}</h3>
+        ${item.descripcion ? `<p class="card-desc">${item.descripcion}</p>` : ''}
+        <div class="card-footer">
+          <div class="card-price">$${Number(item.precio_renta).toLocaleString()} <span>/ renta</span></div>
+          <button class="card-add" data-id="${item.id}">+ Agregar</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function imgPlaceholder(name) {
+    return `<div class="card-img-placeholder">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>${name || 'foto'}</span>
+    </div>`;
+  }
+
+  function updateCardStates() {
+    document.querySelectorAll('.item-card').forEach(card => {
+      const id = card.dataset.id;
+      const inCart = !!cart[id];
+      card.classList.toggle('in-cart', inCart);
+      const btn = card.querySelector('.card-add');
+      if (btn) { btn.textContent = inCart ? '✓ Agregado' : '+ Agregar'; btn.classList.toggle('added', inCart); }
+    });
+  }
+
+  function openModal(id) {
+    currentItem = allItems.find(i => String(i.id) === String(id));
+    if (!currentItem) return;
+    currentQty = cart[id]?.qty || 1;
+    const img = currentItem.imagenes?.length
+      ? `<img src="${currentItem.imagenes[0]}" alt="${currentItem.nombre}">`
+      : `<div class="card-img-placeholder" style="height:100%">${imgPlaceholder(currentItem.nombre)}</div>`;
+    document.getElementById('modalImg').innerHTML = img;
+    document.getElementById('modalCat').textContent = currentItem.categoria || 'General';
+    document.getElementById('modalName').textContent = currentItem.nombre;
+    document.getElementById('modalPrice').innerHTML = `$${Number(currentItem.precio_renta).toLocaleString()} <small>/ renta</small>`;
+    document.getElementById('modalStock').textContent = `Disponibilidad: ${currentItem.stock_total} unidades`;
+    document.getElementById('modalDesc').textContent = currentItem.descripcion || 'Artículo disponible para renta. Contáctanos para más detalles.';
+    document.getElementById('qtyDisplay').textContent = currentQty;
+    const inCart = !!cart[id];
+    const btn = document.getElementById('modalAddBtn');
+    btn.textContent = inCart ? '✓ En cotización' : 'Agregar a cotización';
+    btn.classList.toggle('added', inCart);
+    document.getElementById('modalBackdrop').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalBackdrop').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  function closeModal() { document.getElementById('modalBackdrop').classList.remove('open'); document.body.style.overflow = ''; currentItem = null; }
+
+  document.getElementById('qtyMinus').addEventListener('click', () => { if (currentQty > 1) { currentQty--; document.getElementById('qtyDisplay').textContent = currentQty; } });
+  document.getElementById('qtyPlus').addEventListener('click', () => { if (currentQty < (currentItem?.stock_total || 99)) { currentQty++; document.getElementById('qtyDisplay').textContent = currentQty; } });
+  document.getElementById('modalAddBtn').addEventListener('click', () => {
+    if (!currentItem) return;
+    toggleCartItem(String(currentItem.id), currentQty);
+    const inCart = !!cart[String(currentItem.id)];
+    document.getElementById('modalAddBtn').textContent = inCart ? '✓ En cotización' : 'Agregar a cotización';
+    document.getElementById('modalAddBtn').classList.toggle('added', inCart);
+  });
+
+  function toggleCartItem(id, qty) {
+    if (cart[id]) { delete cart[id]; }
+    else { const item = allItems.find(i => String(i.id) === String(id)); if (item) cart[id] = { item, qty: qty || 1 }; }
+    updateCartUI(); updateCardStates();
+  }
+
+  function updateCartUI() {
+    const ids = Object.keys(cart), count = ids.length;
+    const countEl = document.getElementById('cartCount');
+    countEl.textContent = count;
+    countEl.classList.toggle('visible', count > 0);
+    const itemsEl = document.getElementById('cartItems');
+    const totalRow = document.getElementById('cartTotalRow');
+    if (!count) { itemsEl.innerHTML = '<p class="cart-empty">Aún no has agregado artículos.<br>¡Explora el catálogo!</p>'; totalRow.style.display = 'none'; return; }
+    let total = 0;
+    itemsEl.innerHTML = ids.map(id => {
+      const { item, qty } = cart[id];
+      const sub = Number(item.precio_renta) * qty;
+      total += sub;
+      const img = item.imagenes?.length ? `<img src="${item.imagenes[0]}" alt="${item.nombre}">` : '';
+      return `<div class="cart-item" data-id="${id}">
+        <div class="ci-img">${img}</div>
+        <div class="ci-info">
+          <p class="ci-cat">${item.categoria || 'General'}</p>
+          <p class="ci-name">${item.nombre}</p>
+          <div class="ci-qty-row">
+            <button class="ci-qty-btn ci-minus">−</button>
+            <span class="ci-qty">${qty}</span>
+            <button class="ci-qty-btn ci-plus">+</button>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+          <p class="ci-price">$${sub.toLocaleString()}</p>
+          <button class="ci-remove">✕</button>
+        </div>
+      </div>`;
+    }).join('');
+    totalRow.style.display = 'flex';
+    document.getElementById('cartTotalVal').textContent = `$${total.toLocaleString()}`;
+    itemsEl.querySelectorAll('.cart-item').forEach(row => {
+      const id = row.dataset.id;
+      row.querySelector('.ci-remove').addEventListener('click', () => { delete cart[id]; updateCartUI(); updateCardStates(); });
+      row.querySelector('.ci-minus').addEventListener('click', () => { if (cart[id].qty > 1) { cart[id].qty--; updateCartUI(); } });
+      row.querySelector('.ci-plus').addEventListener('click', () => { cart[id].qty++; updateCartUI(); });
+    });
+  }
+
+  document.getElementById('openCartBtn').addEventListener('click', openCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  document.getElementById('cartOverlay').addEventListener('click', closeCart);
+  function openCart() { document.getElementById('cartPanel').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeCart() { document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+
+  document.getElementById('sendQuoteBtn').addEventListener('click', () => {
+    const n = document.getElementById('fNombre').value.trim();
+    const t = document.getElementById('fTelefono').value.trim();
+    const c = document.getElementById('fCorreo').value.trim();
+    if (!n || !t || !c) { alert('Por favor llena nombre, teléfono y correo.'); return; }
+    document.querySelector('.quote-actions').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('successMsg').classList.remove('show');
+      document.querySelector('.quote-actions').style.display = 'flex';
+      cart = {}; updateCartUI(); updateCardStates(); closeCart();
+    }, 3000);
+  });
+
+  document.getElementById('whatsappBtn').addEventListener('click', () => {
+    const nombre = document.getElementById('fNombre').value.trim() || 'Cliente';
+    const ids = Object.keys(cart);
+    if (!ids.length) { alert('Agrega artículos a tu cotización primero.'); return; }
+    const items = ids.map(id => { const { item, qty } = cart[id]; return `• ${item.nombre} x${qty} — $${(Number(item.precio_renta)*qty).toLocaleString()}`; }).join('\n');
+    const msg = `Hola! Soy *${nombre}* y me interesa cotizar:\n\n${items}\n\nFecha: ${document.getElementById('fFecha').value || 'Por definir'}\n${document.getElementById('fNotas').value || ''}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
+  hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
+  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mm.classList.remove('open'); }));
+
+  loadCatalog();
+</script>
+</body>
+</html>
