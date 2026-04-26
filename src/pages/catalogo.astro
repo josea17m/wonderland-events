@@ -66,6 +66,7 @@ nav::after {
 .nav-logo {
   font-family: var(--serif-sc); font-size: 16px; font-weight: 400;
   letter-spacing: 0.22em; color: var(--ink); text-decoration: none;
+  white-space: nowrap;
 }
 nav ul { list-style: none; display: flex; gap: 32px; }
 nav ul a {
@@ -486,7 +487,9 @@ footer {
 }
 @media (max-width: 480px) {
   .catalog-grid { grid-template-columns: 1fr; }
+  .nav-logo { font-size: 13px; letter-spacing: 0.12em; white-space: nowrap; }
   .nav-cart-btn span:not(.cart-count) { display: none; }
+  .card-img { aspect-ratio: 4/3; }
 }
 </style>
 </head>
