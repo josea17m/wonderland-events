@@ -54,41 +54,41 @@ nav::after {
 }
 
 /* ── Smooth animations ─────────────────────────────────────── */
-/* Portfolio: GPU-only transform (filter transitions cause repaints) */
+/* Portfolio: animate scale + transform (Tailwind v4 uses scale property) */
 #portfolio .group img {
-  will-change: transform;
-  transition: transform 550ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  will-change: scale, transform;
+  transition:
+    scale     550ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 550ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
-/* Catalog cards: proper easing + larger lift */
+/* Catalog cards: cover both translate and transform */
 .catalog-item {
-  will-change: transform;
+  will-change: translate, transform;
   transition:
     border-color 200ms ease,
     box-shadow   320ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    translate    280ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
     transform    280ms cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
-.catalog-item:hover { transform: translateY(-7px) !important; }
-
-/* Why section CTA button */
-#why a[href="#contact"] {
-  transition: background-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
-              color 220ms ease !important;
+.catalog-item:hover {
+  translate: 0 -7px !important;
+  transform: translateY(-7px) !important;
 }
 
-/* Hamburger spans: only animate the relevant properties */
+/* Hamburger spans */
 .hamburger span {
   transition:
     transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
     opacity   180ms ease !important;
 }
 
-/* Hero & nav CTA buttons */
-nav a[href="#contact"],
-#hero a {
-  transition: background-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
-              color 220ms ease,
-              border-color 220ms ease !important;
+/* CTA buttons */
+nav a[href="#contact"], #hero a {
+  transition:
+    background-color 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    color        220ms ease,
+    border-color 220ms ease !important;
 }
 </style>
 </head>
