@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 ---
 <!DOCTYPE html>
 <html lang="es">
@@ -10,297 +11,101 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --parchment:   #F2E5CC;
-  --parchment-2: #EBD9B8;
-  --parchment-3: #F8F1E4;
-  --rose:        #C0868F;
-  --rose-pale:   #EDD9DC;
-  --rose-deep:   #9A5F68;
-  --gold:        #B8892E;
-  --gold-light:  #D4A84B;
-  --gold-pale:   #E8D5AA;
-  --sepia:       #7D5A3C;
-  --ink:         #231409;
-  --ink-soft:    #56382A;
-  --deep:        #1A0E07;
-  --serif:       'Cormorant Garamond', Georgia, serif;
-  --serif-sc:    'Cormorant SC', Georgia, serif;
-  --sans:        'Raleway', sans-serif;
-}
-html { scroll-behavior: smooth; }
-body { background: var(--parchment-3); color: var(--ink); font-family: var(--sans); font-weight: 300; overflow-x: hidden; }
-body::after {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000; opacity: 1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  background-size: 300px 300px;
-}
-
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px; height: 64px;
-  background: rgba(242,229,204,0.97); backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(184,137,46,0.25);
-}
 nav::after {
-  content: ''; position: absolute; bottom: -3px; left: 48px; right: 48px; height: 1px;
+  content: '';
+  position: absolute; bottom: -3px; left: 48px; right: 48px; height: 1px;
   background: linear-gradient(to right, transparent, rgba(184,137,46,0.3) 20%, rgba(184,137,46,0.3) 80%, transparent);
 }
-.nav-logo { font-family: var(--serif-sc); font-size: 16px; font-weight: 400; letter-spacing: 0.22em; color: var(--ink); text-decoration: none; }
-nav ul { list-style: none; display: flex; gap: 36px; }
-nav ul a { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
-nav ul a:hover, nav ul a.active { color: var(--gold); }
-.nav-cta { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--parchment); background: var(--rose-deep); border: none; padding: 9px 22px; cursor: pointer; text-decoration: none; transition: background 0.2s; }
-.nav-cta:hover { background: var(--rose); }
-.hamburger { flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; display: none; }
-.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-.mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(242,229,204,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(184,137,46,0.2); z-index: 190; flex-direction: column; padding: 16px 0; }
 .mobile-menu.open { display: flex; }
-.mobile-menu a { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; padding: 14px 28px; border-bottom: 1px solid rgba(184,137,46,0.15); }
-.mobile-menu a:hover { color: var(--gold); }
 
-/* PAGE HEADER */
-.page-header {
-  min-height: 52vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 110px 80px 64px;
-  background: var(--parchment); position: relative; overflow: hidden;
-}
+/* Decorative ::before patterns */
 .page-header::before {
   content: ''; position: absolute; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='8' y='36' font-size='16' fill='%23B8892E' opacity='0.06' font-family='Georgia,serif'%3E%E2%99%A0%3C/text%3E%3Ctext x='58' y='82' font-size='16' fill='%23C0868F' opacity='0.06' font-family='Georgia,serif'%3E%E2%99%A5%3C/text%3E%3Ctext x='68' y='28' font-size='12' fill='%23B8892E' opacity='0.05' font-family='Georgia,serif'%3E%E2%99%A6%3C/text%3E%3Ctext x='10' y='80' font-size='12' fill='%23C0868F' opacity='0.05' font-family='Georgia,serif'%3E%E2%99%A3%3C/text%3E%3C/svg%3E");
   background-size: 100px 100px; pointer-events: none;
 }
-.ph-blob-l { position: absolute; width: 500px; height: 500px; border-radius: 60% 40% 70% 30%/50% 60% 40% 50%; background: radial-gradient(ellipse, rgba(192,134,143,0.14) 0%, transparent 70%); top: -120px; left: -180px; pointer-events: none; }
-.ph-blob-r { position: absolute; width: 400px; height: 400px; border-radius: 40% 60% 30% 70%/60% 40% 50% 50%; background: radial-gradient(ellipse, rgba(184,137,46,0.10) 0%, transparent 70%); bottom: -80px; right: -100px; pointer-events: none; }
-
-.page-eyebrow { font-family: var(--serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.4em; color: var(--rose); margin-bottom: 18px; position: relative; z-index: 1; }
-.page-title { font-family: var(--serif); font-size: clamp(48px,7vw,88px); font-weight: 300; font-style: italic; color: var(--ink); line-height: 1; position: relative; z-index: 1; }
-.page-sub { font-family: var(--serif); font-size: 19px; font-style: italic; color: var(--ink-soft); margin-top: 18px; font-weight: 300; opacity: 0.8; max-width: 560px; line-height: 1.7; position: relative; z-index: 1; }
-.page-orn { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; position: relative; z-index: 1; }
-.orn-line { height: 1px; width: 70px; background: linear-gradient(to right, transparent, rgba(184,137,46,0.5)); }
-.orn-line.rev { background: linear-gradient(to left, transparent, rgba(184,137,46,0.5)); }
-.orn-sym { font-size: 10px; color: var(--gold); opacity: 0.6; font-family: Georgia, serif; }
-.orn-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); opacity: 0.65; }
-
-/* SECTION BASE */
-.section { padding: 88px 80px; }
-.section-eyebrow { font-family: var(--serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.4em; color: var(--rose); display: block; margin-bottom: 14px; }
-.section-eyebrow.gold { color: var(--gold); }
-.section-title { font-family: var(--serif); font-size: clamp(32px,4vw,54px); font-weight: 300; font-style: italic; line-height: 1.15; color: var(--ink); }
-.section-title em { font-style: normal; }
-
-.orn-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px; }
-.orn-row-line { height: 1px; width: 72px; background: linear-gradient(to right, transparent, rgba(184,137,46,0.5)); }
-.orn-row-line.rev { background: linear-gradient(to left, transparent, rgba(184,137,46,0.5)); }
-.orn-row-sym { font-size: 11px; color: var(--gold); opacity: 0.65; line-height: 1; font-family: Georgia,serif; }
-.orn-row-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); opacity: 0.7; }
-
-/* STORY SECTION */
-.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.story-visual {
-  aspect-ratio: 3/4; position: relative;
-  border: 1px solid rgba(184,137,46,0.25);
-  background: repeating-linear-gradient(-45deg, rgba(125,90,60,0.04) 0px, rgba(125,90,60,0.04) 1px, transparent 1px, transparent 16px), linear-gradient(160deg, #E8D8C0 0%, #D4C5A5 100%);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.story-visual::before { content: ''; position: absolute; inset: 10px; border: 1px solid rgba(184,137,46,0.12); pointer-events: none; }
-.story-visual-inner { opacity: 0.3; text-align: center; }
-.story-visual-inner span { font-family: 'Courier New', monospace; font-size: 11px; color: var(--sepia); letter-spacing: 0.06em; line-height: 1.7; display: block; margin-top: 12px; }
-
-.story-text .section-header { margin-bottom: 32px; }
-.story-body { font-family: var(--serif); font-size: 18px; font-weight: 300; line-height: 2; color: var(--ink-soft); }
-.story-body p + p { margin-top: 22px; }
-.story-body strong { font-weight: 500; color: var(--ink); font-style: italic; }
-
-/* QUOTE PULL */
-.pull-quote {
-  background: var(--parchment); padding: 64px 80px; text-align: center; position: relative; overflow: hidden;
-  border-top: 1px solid rgba(184,137,46,0.18); border-bottom: 1px solid rgba(184,137,46,0.18);
-}
 .pull-quote::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(184,137,46,0.07) 0%, transparent 70%); pointer-events: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(184,137,46,0.07) 0%, transparent 70%);
+  pointer-events: none;
 }
-.quote-mark { font-family: var(--serif); font-size: 100px; line-height: 0.6; color: var(--gold); opacity: 0.2; display: block; margin-bottom: 18px; position: relative; z-index: 1; }
-.quote-text { font-family: var(--serif); font-size: clamp(22px,3vw,36px); font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.55; max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
-.quote-attr { font-family: var(--serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.3em; color: var(--gold); margin-top: 28px; display: block; opacity: 0.8; position: relative; z-index: 1; }
-
-/* VALUES */
-.values-section { background: var(--deep); padding: 96px 80px; position: relative; overflow: hidden; }
-.values-section::before {
+.values-section::before, .cta-section::before {
   content: ''; position: absolute; inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='8' y='32' font-size='16' fill='%23B8892E' opacity='0.07' font-family='Georgia,serif'%3E%E2%99%A0%3C/text%3E%3Ctext x='48' y='72' font-size='16' fill='%23C0868F' opacity='0.07' font-family='Georgia,serif'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
   background-size: 80px 80px; pointer-events: none;
 }
-.values-header { text-align: center; margin-bottom: 64px; position: relative; z-index: 1; }
-.values-header .section-eyebrow { color: rgba(192,134,143,0.8); }
-.values-header .section-title { color: var(--parchment); }
-.values-header .section-title em { color: var(--gold-light); font-style: normal; }
-.values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; position: relative; z-index: 1; }
-.value-card {
-  padding: 44px 28px 40px; text-align: center;
-  background: rgba(255,255,255,0.03); border: 1px solid rgba(184,137,46,0.14);
-  transition: background 0.3s;
+.story-visual::before {
+  content: ''; position: absolute; inset: 10px;
+  border: 1px solid rgba(184,137,46,0.12); pointer-events: none;
 }
-.value-card:hover { background: rgba(184,137,46,0.06); }
-.value-num { font-family: var(--serif); font-size: 56px; font-weight: 300; font-style: italic; color: var(--gold); line-height: 1; margin-bottom: 14px; opacity: 0.7; }
-.value-title { font-family: var(--serif-sc); font-size: 12px; font-weight: 400; letter-spacing: 0.24em; color: var(--parchment); margin-bottom: 16px; }
-.value-desc { font-family: var(--sans); font-size: 12px; font-weight: 300; color: rgba(235,217,184,0.6); line-height: 1.85; }
-
-/* PROCESS */
-.process-section { background: var(--parchment-3); padding: 96px 80px; }
-.process-header { text-align: center; margin-bottom: 72px; }
-.process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
-.process-steps::before {
-  content: ''; position: absolute; top: 36px; left: calc(10% + 18px); right: calc(10% + 18px); height: 1px;
-  background: linear-gradient(to right, rgba(184,137,46,0.3), rgba(192,134,143,0.3), rgba(184,137,46,0.3));
+.team-photo::before {
+  content: ''; position: absolute; inset: 8px;
+  border: 1px solid rgba(184,137,46,0.1);
 }
-.process-step { text-align: center; padding: 0 16px; position: relative; }
-.step-num {
-  width: 72px; height: 72px; border-radius: 50%;
-  border: 1px solid rgba(184,137,46,0.35);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 22px; background: var(--parchment-3); position: relative; z-index: 1;
-}
-.step-num-inner { font-family: var(--serif); font-size: 26px; font-weight: 300; font-style: italic; color: var(--gold); }
-.step-title { font-family: var(--serif-sc); font-size: 10px; font-weight: 400; letter-spacing: 0.22em; color: var(--ink); margin-bottom: 10px; }
-.step-desc { font-family: var(--sans); font-size: 11px; font-weight: 300; color: var(--ink-soft); line-height: 1.75; opacity: 0.8; }
-
-/* TEAM */
-.team-section { background: var(--parchment); padding: 96px 80px; }
-.team-header { text-align: center; margin-bottom: 64px; }
-.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.team-card { text-align: center; }
-.team-photo {
-  aspect-ratio: 3/4; margin-bottom: 24px; position: relative;
-  background: repeating-linear-gradient(45deg, rgba(125,90,60,0.05) 0px, rgba(125,90,60,0.05) 1px, transparent 1px, transparent 14px), linear-gradient(160deg, #E8D8C0 0%, #D8C9AE 100%);
-  border: 1px solid rgba(184,137,46,0.2); display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.team-photo::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(184,137,46,0.1); }
-.team-photo-inner { opacity: 0.28; text-align: center; }
-.team-photo-inner span { font-family: 'Courier New', monospace; font-size: 10px; color: var(--sepia); letter-spacing: 0.06em; display: block; margin-top: 10px; line-height: 1.6; }
-.team-name { font-family: var(--serif); font-size: 24px; font-weight: 400; font-style: italic; color: var(--ink); margin-bottom: 6px; }
-.team-role { font-family: var(--serif-sc); font-size: 9px; font-weight: 300; letter-spacing: 0.3em; color: var(--rose); margin-bottom: 14px; }
-.team-bio { font-family: var(--sans); font-size: 12px; font-weight: 300; color: var(--ink-soft); line-height: 1.8; }
-
-/* STATS */
-.stats-section {
-  background: var(--parchment-2); padding: 72px 80px;
-  border-top: 1px solid rgba(184,137,46,0.2); border-bottom: 1px solid rgba(184,137,46,0.2);
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-}
-.stat-item { text-align: center; padding: 24px; position: relative; }
 .stat-item + .stat-item::before {
   content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 1px;
   background: linear-gradient(to bottom, transparent, rgba(184,137,46,0.35), transparent);
 }
-.stat-num { font-family: var(--serif); font-size: 64px; font-weight: 300; font-style: italic; color: var(--rose); line-height: 1; }
-.stat-label { font-family: var(--serif-sc); font-size: 9px; font-weight: 300; letter-spacing: 0.22em; color: var(--sepia); margin-top: 10px; opacity: 0.8; }
-
-/* CTA */
-.cta-section {
-  background: var(--deep); text-align: center; padding: 96px 80px; position: relative; overflow: hidden;
-}
-.cta-section::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ctext x='8' y='32' font-size='16' fill='%23B8892E' opacity='0.07' font-family='Georgia,serif'%3E%E2%99%A0%3C/text%3E%3Ctext x='48' y='72' font-size='16' fill='%23C0868F' opacity='0.07' font-family='Georgia,serif'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
-  background-size: 80px 80px; pointer-events: none;
-}
-.cta-eyebrow { font-family: var(--serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.4em; color: rgba(192,134,143,0.8); margin-bottom: 16px; position: relative; z-index: 1; display: block; }
-.cta-title { font-family: var(--serif); font-size: clamp(34px,5vw,64px); font-weight: 300; font-style: italic; color: var(--parchment); line-height: 1.2; margin-bottom: 14px; position: relative; z-index: 1; }
-.cta-title em { font-style: normal; color: var(--gold-light); }
-.cta-sub { font-family: var(--serif); font-size: 18px; font-weight: 300; font-style: italic; color: rgba(235,217,184,0.65); margin-bottom: 44px; position: relative; z-index: 1; }
-.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-.btn-primary { font-family: var(--serif-sc); font-size: 11px; font-weight: 400; letter-spacing: 0.25em; color: var(--parchment-3); background: var(--rose-deep); padding: 16px 40px; text-decoration: none; transition: background 0.25s; display: inline-block; border: 1px solid transparent; }
-.btn-primary:hover { background: var(--rose); }
-.btn-ghost-light { font-family: var(--serif-sc); font-size: 11px; font-weight: 400; letter-spacing: 0.25em; color: var(--gold-light); border: 1px solid rgba(184,137,46,0.45); padding: 15px 40px; text-decoration: none; transition: all 0.25s; display: inline-block; }
-.btn-ghost-light:hover { background: var(--gold); color: var(--parchment); border-color: var(--gold); }
-
-/* FOOTER */
-footer { background: #100804; padding: 24px 80px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(184,137,46,0.15); }
-.foot-logo { font-family: var(--serif-sc); font-size: 13px; font-weight: 400; letter-spacing: 0.22em; color: var(--gold-light); opacity: 0.8; }
-.foot-copy { font-family: var(--sans); font-size: 10px; font-weight: 300; letter-spacing: 0.1em; color: rgba(184,137,46,0.3); }
-
-/* FLORAL DIVIDER */
-.floral-divider { width: 100%; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 18px 0; }
-
-/* RESPONSIVE */
-@media (max-width: 1000px) {
-  .values-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .process-steps::before { display: none; }
-  .stats-section { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 900px) {
-  nav { padding: 0 24px; }
-  nav ul, .nav-cta { display: none; }
-  .hamburger { display: flex; }
-  .section, .team-section, .process-section, .values-section, .pull-quote, .cta-section { padding: 64px 28px; }
-  .story-grid { grid-template-columns: 1fr; }
-  .story-visual { display: none; }
-  .team-grid { grid-template-columns: 1fr 1fr; }
-  .stats-section { padding: 48px 28px; }
-  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
-}
-@media (max-width: 560px) {
-  .team-grid { grid-template-columns: 1fr; }
-  .values-grid { grid-template-columns: 1fr; }
-  .process-steps { grid-template-columns: 1fr 1fr; }
-  .stats-section { grid-template-columns: 1fr 1fr; }
+.process-steps::before {
+  content: ''; position: absolute; top: 36px;
+  left: calc(10% + 18px); right: calc(10% + 18px); height: 1px;
+  background: linear-gradient(to right, rgba(184,137,46,0.3), rgba(192,134,143,0.3), rgba(184,137,46,0.3));
 }
 </style>
 </head>
-<body>
+<body class="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden">
 
 <!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">Wonderland Events</a>
-  <ul>
-    <li><a href="/#portfolio">Portfolio</a></li>
-    <li><a href="/catalogo">Catálogo</a></li>
-    <li><a href="/flores">Flores</a></li>
-    <li><a href="/nosotros" class="active">Nosotros</a></li>
-    <li><a href="/#contact">Contacto</a></li>
+<nav class="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-12 h-16 bg-parchment/97 backdrop-blur-[12px] border-b border-gold/25 relative max-[900px]:px-6">
+  <a href="/" class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline">Wonderland Events</a>
+  <ul class="list-none flex gap-9 max-[900px]:hidden">
+    <li><a href="/#portfolio" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Portfolio</a></li>
+    <li><a href="/catalogo" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Catálogo</a></li>
+    <li><a href="/flores" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Flores</a></li>
+    <li><a href="/nosotros" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-gold no-underline">Nosotros</a></li>
+    <li><a href="/#contact" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Contacto</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:12px">
-    <a href="/#contact" class="nav-cta">Cotizar</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  <div class="flex items-center gap-3">
+    <a href="/#contact" class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">Cotizar</a>
+    <button class="hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" id="hamburger">
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+    </button>
   </div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
+
+<div class="mobile-menu hidden fixed top-16 left-0 right-0 bg-parchment/98 backdrop-blur-[12px] border-b border-gold/20 z-[190] flex-col py-4" id="mobileMenu">
   <a href="/">Inicio</a>
-  <a href="/catalogo">Catálogo</a>
-  <a href="/flores">Flores</a>
-  <a href="/nosotros" class="active">Nosotros</a>
-  <a href="/#contact">Contacto</a>
+  <a href="/catalogo" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Catálogo</a>
+  <a href="/flores" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Flores</a>
+  <a href="/nosotros" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold no-underline py-[14px] px-7 border-b border-gold/15">Nosotros</a>
+  <a href="/#contact" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Contacto</a>
 </div>
 
 <!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="ph-blob-l"></div>
-  <div class="ph-blob-r"></div>
-  <p class="page-eyebrow">Nuestra Historia · Who We Are</p>
-  <h1 class="page-title">Nosotros</h1>
-  <p class="page-sub">Somos los artífices de los momentos que se recuerdan para siempre — con pasión, con detalle, con amor.</p>
-  <div class="page-orn">
-    <div class="orn-line rev"></div>
-    <span class="orn-sym">♦</span>
-    <div class="orn-diamond"></div>
-    <span class="orn-sym" style="color:var(--rose);">♥</span>
-    <div class="orn-diamond"></div>
-    <span class="orn-sym">♦</span>
-    <div class="orn-line"></div>
+<div class="page-header min-h-[52vh] flex flex-col items-center justify-center text-center pt-[110px] px-20 pb-16 bg-parchment relative overflow-hidden max-[900px]:pt-[100px] max-[900px]:px-6 max-[900px]:pb-11">
+  <div class="absolute w-[500px] h-[500px] rounded-[60%_40%_70%_30%/50%_60%_40%_50%] bg-[radial-gradient(ellipse,rgba(192,134,143,0.14)_0%,transparent_70%)] top-[-120px] left-[-180px] pointer-events-none"></div>
+  <div class="absolute w-[400px] h-[400px] rounded-[40%_60%_30%_70%/60%_40%_50%_50%] bg-[radial-gradient(ellipse,rgba(184,137,46,0.10)_0%,transparent_70%)] bottom-[-80px] right-[-100px] pointer-events-none"></div>
+  <p class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-rose mb-[18px] relative z-[1]">Nuestra Historia · Who We Are</p>
+  <h1 class="font-serif text-[clamp(48px,7vw,88px)] font-light italic text-ink leading-none relative z-[1]">Nosotros</h1>
+  <p class="font-serif text-[19px] italic text-ink-soft mt-[18px] font-light opacity-80 max-w-[560px] leading-[1.7] relative z-[1]">Somos los artífices de los momentos que se recuerdan para siempre — con pasión, con detalle, con amor.</p>
+  <div class="flex items-center justify-center gap-[10px] mt-[26px] relative z-[1]">
+    <div class="h-px w-[70px] bg-[linear-gradient(to_left,transparent,rgba(184,137,46,0.5))]"></div>
+    <span class="text-[10px] text-gold opacity-60 font-[Georgia,serif]">♦</span>
+    <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-65"></div>
+    <span class="text-[10px] text-rose opacity-60 font-[Georgia,serif]">♥</span>
+    <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-65"></div>
+    <span class="text-[10px] text-gold opacity-60 font-[Georgia,serif]">♦</span>
+    <div class="h-px w-[70px] bg-[linear-gradient(to_right,transparent,rgba(184,137,46,0.5))]"></div>
   </div>
 </div>
 
 <!-- FLORAL DIVIDER -->
-<div class="floral-divider" style="background:var(--parchment-3);padding:16px 0;">
+<div class="w-full overflow-hidden flex justify-center items-center py-4 bg-parchment-3">
   <svg viewBox="0 0 860 36" width="860" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="max-width:100%;">
     <line x1="0" y1="18" x2="310" y2="18" stroke="#B8892E" stroke-width="0.5" opacity="0.35"/>
     <path d="M310 18 Q322 8 334 18 Q322 28 310 18Z" fill="#B8892E" opacity="0.25"/>
@@ -316,27 +121,27 @@ footer { background: #100804; padding: 24px 80px; display: flex; justify-content
 </div>
 
 <!-- STORY -->
-<section class="section" style="background:var(--parchment-3);">
-  <div class="story-grid">
-    <div class="story-visual">
-      <div class="story-visual-inner">
+<section class="py-22 px-20 bg-parchment-3 max-[900px]:py-16 max-[900px]:px-7">
+  <div class="grid grid-cols-2 gap-20 items-center max-[900px]:grid-cols-1">
+    <div class="story-visual aspect-[3/4] relative border border-gold/25 bg-[repeating-linear-gradient(-45deg,rgba(125,90,60,0.04)_0px,rgba(125,90,60,0.04)_1px,transparent_1px,transparent_16px),linear-gradient(160deg,#E8D8C0_0%,#D4C5A5_100%)] flex items-center justify-center overflow-hidden max-[900px]:hidden">
+      <div class="opacity-30 text-center">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7D5A3C" stroke-width="1" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <span>fotografía del equipo<br>o espacio de trabajo</span>
+        <span class="font-[Courier_New,monospace] text-[11px] text-sepia tracking-[0.06em] leading-[1.7] block mt-3">fotografía del equipo<br>o espacio de trabajo</span>
       </div>
     </div>
-    <div class="story-text">
-      <div class="section-header" style="text-align:left;margin-bottom:32px;">
-        <span class="section-eyebrow">Nuestra Historia</span>
-        <h2 class="section-title">Nació de un <em>sueño</em></h2>
-        <div class="orn-row" style="justify-content:flex-start;">
-          <div class="orn-row-line rev"></div>
-          <span class="orn-row-sym">♦</span>
-          <div class="orn-row-diamond"></div>
+    <div>
+      <div class="text-left mb-8">
+        <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-rose block mb-[14px]">Nuestra Historia</span>
+        <h2 class="font-serif text-[clamp(32px,4vw,54px)] font-light italic leading-[1.15] text-ink">Nació de un <em class="not-italic">sueño</em></h2>
+        <div class="flex items-center gap-[10px] mt-5">
+          <div class="h-px w-[72px] bg-[linear-gradient(to_left,transparent,rgba(184,137,46,0.5))]"></div>
+          <span class="text-[11px] text-gold opacity-65 leading-none font-[Georgia,serif]">♦</span>
+          <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-70"></div>
         </div>
       </div>
-      <div class="story-body">
-        <p>Wonderland Events nació de la convicción de que <strong>cada celebración merece ser extraordinaria</strong>. Lo que comenzó como una pequeña empresa de renta de mobiliario se transformó, evento a evento, en un estudio completo de diseño y decoración de experiencias.</p>
-        <p>Nos inspiramos en el mundo de Alicia — ese lugar donde lo imposible se vuelve posible, donde cada rincón esconde magia y cada detalle cuenta una historia. Así abordamos cada evento que nos confían: con curiosidad, con atención al detalle y con la firme convicción de que <strong>nada debe dejarse al azar</strong>.</p>
+      <div class="font-serif text-lg font-light leading-[2] text-ink-soft [&_p+p]:mt-[22px]">
+        <p>Wonderland Events nació de la convicción de que <strong class="font-medium text-ink italic">cada celebración merece ser extraordinaria</strong>. Lo que comenzó como una pequeña empresa de renta de mobiliario se transformó, evento a evento, en un estudio completo de diseño y decoración de experiencias.</p>
+        <p>Nos inspiramos en el mundo de Alicia — ese lugar donde lo imposible se vuelve posible, donde cada rincón esconde magia y cada detalle cuenta una historia. Así abordamos cada evento que nos confían: con curiosidad, con atención al detalle y con la firme convicción de que <strong class="font-medium text-ink italic">nada debe dejarse al azar</strong>.</p>
         <p>Desde bodas íntimas hasta grandes celebraciones, nuestro equipo trabaja codo a codo con cada cliente para materializar su visión — aportando nuestra experiencia, nuestra red de proveedores y, sobre todo, nuestra pasión por lo bello.</p>
       </div>
     </div>
@@ -344,182 +149,192 @@ footer { background: #100804; padding: 24px 80px; display: flex; justify-content
 </section>
 
 <!-- PULL QUOTE -->
-<div class="pull-quote">
-  <span class="quote-mark">"</span>
-  <p class="quote-text">No decoramos espacios. Construimos mundos donde cada momento se convierte en un recuerdo eterno.</p>
-  <span class="quote-attr">✦ Wonderland Events · Filosofía</span>
+<div class="pull-quote bg-parchment py-16 px-20 text-center relative overflow-hidden border-t border-gold/18 border-b border-gold/18 max-[900px]:py-16 max-[900px]:px-7">
+  <span class="font-serif text-[100px] leading-[0.6] text-gold opacity-20 block mb-[18px] relative z-[1]">"</span>
+  <p class="font-serif text-[clamp(22px,3vw,36px)] font-light italic text-ink leading-[1.55] max-w-[780px] mx-auto relative z-[1]">No decoramos espacios. Construimos mundos donde cada momento se convierte en un recuerdo eterno.</p>
+  <span class="font-serif-sc text-[10px] font-light tracking-[0.3em] text-gold mt-7 block opacity-80 relative z-[1]">✦ Wonderland Events · Filosofía</span>
 </div>
 
 <!-- VALUES -->
-<section class="values-section">
-  <div class="values-header">
-    <span class="section-eyebrow" style="color:rgba(192,134,143,0.8);">Lo Que Nos Define</span>
-    <h2 class="section-title" style="color:var(--parchment);">Nuestros <em style="color:var(--gold-light);font-style:normal;">Pilares</em></h2>
-    <div class="orn-row" style="margin-top:20px;">
-      <div class="orn-row-line rev"></div>
-      <span class="orn-row-sym" style="color:var(--gold-light);">♦</span>
-      <div class="orn-row-diamond" style="background:var(--gold-light);"></div>
-      <span class="orn-row-sym" style="color:rgba(192,134,143,0.8);font-size:9px;">♥</span>
-      <div class="orn-row-diamond" style="background:var(--gold-light);"></div>
-      <span class="orn-row-sym" style="color:var(--gold-light);">♦</span>
-      <div class="orn-row-line"></div>
+<section class="values-section bg-deep py-24 px-20 relative overflow-hidden max-[900px]:py-16 max-[900px]:px-7">
+  <div class="text-center mb-16 relative z-[1]">
+    <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-[rgba(192,134,143,0.8)] block mb-[14px]">Lo Que Nos Define</span>
+    <h2 class="font-serif text-[clamp(32px,4vw,54px)] font-light leading-[1.15] text-parchment">Nuestros <em class="not-italic text-gold-light">Pilares</em></h2>
+    <div class="flex items-center justify-center gap-[10px] mt-5">
+      <div class="h-px w-[72px] bg-[linear-gradient(to_left,transparent,rgba(184,137,46,0.5))]"></div>
+      <span class="text-[11px] text-gold-light opacity-65 leading-none font-[Georgia,serif]">♦</span>
+      <div class="w-[5px] h-[5px] bg-gold-light rotate-45 opacity-70"></div>
+      <span class="text-[9px] text-[rgba(192,134,143,0.8)] leading-none font-[Georgia,serif]">♥</span>
+      <div class="w-[5px] h-[5px] bg-gold-light rotate-45 opacity-70"></div>
+      <span class="text-[11px] text-gold-light opacity-65 leading-none font-[Georgia,serif]">♦</span>
+      <div class="h-px w-[72px] bg-[linear-gradient(to_right,transparent,rgba(184,137,46,0.5))]"></div>
     </div>
   </div>
-  <div class="values-grid">
-    <div class="value-card">
-      <div class="value-num">01</div>
-      <div class="value-title">Atención al Detalle</div>
-      <p class="value-desc">Cada lazo, cada flor, cada vela tiene un propósito. Revisamos cada elemento hasta que todo encaja a la perfección.</p>
+  <div class="grid grid-cols-4 gap-[2px] relative z-[1] max-[1000px]:grid-cols-2 max-[560px]:grid-cols-1">
+    <div class="py-11 px-7 pb-10 text-center bg-[rgba(255,255,255,0.03)] border border-gold/14 transition-colors duration-300 hover:bg-[rgba(184,137,46,0.06)]">
+      <div class="font-serif text-[56px] font-light italic text-gold leading-none mb-[14px] opacity-70">01</div>
+      <div class="font-serif-sc text-xs font-normal tracking-[0.24em] text-parchment mb-4">Atención al Detalle</div>
+      <p class="font-sans text-xs font-light text-[rgba(235,217,184,0.6)] leading-[1.85]">Cada lazo, cada flor, cada vela tiene un propósito. Revisamos cada elemento hasta que todo encaja a la perfección.</p>
     </div>
-    <div class="value-card">
-      <div class="value-num">02</div>
-      <div class="value-title">Experiencia & Estética</div>
-      <p class="value-desc">Años de trabajo en el sector nos han dado un ojo privilegiado para la composición, el color y la armonía visual.</p>
+    <div class="py-11 px-7 pb-10 text-center bg-[rgba(255,255,255,0.03)] border border-gold/14 transition-colors duration-300 hover:bg-[rgba(184,137,46,0.06)]">
+      <div class="font-serif text-[56px] font-light italic text-gold leading-none mb-[14px] opacity-70">02</div>
+      <div class="font-serif-sc text-xs font-normal tracking-[0.24em] text-parchment mb-4">Experiencia &amp; Estética</div>
+      <p class="font-sans text-xs font-light text-[rgba(235,217,184,0.6)] leading-[1.85]">Años de trabajo en el sector nos han dado un ojo privilegiado para la composición, el color y la armonía visual.</p>
     </div>
-    <div class="value-card">
-      <div class="value-num">03</div>
-      <div class="value-title">Servicio Personalizado</div>
-      <p class="value-desc">No hay dos eventos iguales. Escuchamos, proponemos y ejecutamos a la medida de cada sueño y cada presupuesto.</p>
+    <div class="py-11 px-7 pb-10 text-center bg-[rgba(255,255,255,0.03)] border border-gold/14 transition-colors duration-300 hover:bg-[rgba(184,137,46,0.06)]">
+      <div class="font-serif text-[56px] font-light italic text-gold leading-none mb-[14px] opacity-70">03</div>
+      <div class="font-serif-sc text-xs font-normal tracking-[0.24em] text-parchment mb-4">Servicio Personalizado</div>
+      <p class="font-sans text-xs font-light text-[rgba(235,217,184,0.6)] leading-[1.85]">No hay dos eventos iguales. Escuchamos, proponemos y ejecutamos a la medida de cada sueño y cada presupuesto.</p>
     </div>
-    <div class="value-card">
-      <div class="value-num">04</div>
-      <div class="value-title">Confianza & Puntualidad</div>
-      <p class="value-desc">Tu día es irrepetible. Llegamos a tiempo, cumplimos lo que prometemos y estamos contigo de principio a fin.</p>
+    <div class="py-11 px-7 pb-10 text-center bg-[rgba(255,255,255,0.03)] border border-gold/14 transition-colors duration-300 hover:bg-[rgba(184,137,46,0.06)]">
+      <div class="font-serif text-[56px] font-light italic text-gold leading-none mb-[14px] opacity-70">04</div>
+      <div class="font-serif-sc text-xs font-normal tracking-[0.24em] text-parchment mb-4">Confianza &amp; Puntualidad</div>
+      <p class="font-sans text-xs font-light text-[rgba(235,217,184,0.6)] leading-[1.85]">Tu día es irrepetible. Llegamos a tiempo, cumplimos lo que prometemos y estamos contigo de principio a fin.</p>
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section class="process-section">
-  <div class="process-header">
-    <span class="section-eyebrow gold">Cómo Trabajamos</span>
-    <h2 class="section-title">De tu <em>visión</em> a la realidad</h2>
-    <div class="orn-row" style="margin-top:18px;">
-      <div class="orn-row-line rev"></div>
-      <span class="orn-row-sym">♦</span>
-      <div class="orn-row-diamond"></div>
-      <span class="orn-row-sym" style="color:var(--rose);font-size:9px;">♥</span>
-      <div class="orn-row-diamond"></div>
-      <span class="orn-row-sym">♦</span>
-      <div class="orn-row-line"></div>
+<section class="bg-parchment-3 py-24 px-20 max-[900px]:py-16 max-[900px]:px-7">
+  <div class="text-center mb-[72px]">
+    <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-gold block mb-[14px]">Cómo Trabajamos</span>
+    <h2 class="font-serif text-[clamp(32px,4vw,54px)] font-light italic leading-[1.15] text-ink">De tu <em class="not-italic">visión</em> a la realidad</h2>
+    <div class="flex items-center justify-center gap-[10px] mt-[18px]">
+      <div class="h-px w-[72px] bg-[linear-gradient(to_left,transparent,rgba(184,137,46,0.5))]"></div>
+      <span class="text-[11px] text-gold opacity-65 leading-none font-[Georgia,serif]">♦</span>
+      <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-70"></div>
+      <span class="text-[9px] text-rose leading-none font-[Georgia,serif]">♥</span>
+      <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-70"></div>
+      <span class="text-[11px] text-gold opacity-65 leading-none font-[Georgia,serif]">♦</span>
+      <div class="h-px w-[72px] bg-[linear-gradient(to_right,transparent,rgba(184,137,46,0.5))]"></div>
     </div>
   </div>
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num"><span class="step-num-inner">I</span></div>
-      <div class="step-title">Consulta inicial</div>
-      <p class="step-desc">Nos reunimos para conocer tu visión, estilo, presupuesto y fecha del evento.</p>
+  <div class="process-steps grid grid-cols-5 gap-0 relative max-[1000px]:grid-cols-3 max-[1000px]:gap-8 max-[560px]:grid-cols-2">
+    <div class="text-center px-4 relative">
+      <div class="w-[72px] h-[72px] rounded-full border border-gold/35 flex items-center justify-center mx-auto mb-[22px] bg-parchment-3 relative z-[1]">
+        <span class="font-serif text-[26px] font-light italic text-gold">I</span>
+      </div>
+      <div class="font-serif-sc text-[10px] font-normal tracking-[0.22em] text-ink mb-[10px]">Consulta inicial</div>
+      <p class="font-sans text-[11px] font-light text-ink-soft leading-[1.75] opacity-80">Nos reunimos para conocer tu visión, estilo, presupuesto y fecha del evento.</p>
     </div>
-    <div class="process-step">
-      <div class="step-num"><span class="step-num-inner">II</span></div>
-      <div class="step-title">Propuesta creativa</div>
-      <p class="step-desc">Elaboramos un concepto visual con moodboard, paleta y lista de artículos.</p>
+    <div class="text-center px-4 relative">
+      <div class="w-[72px] h-[72px] rounded-full border border-gold/35 flex items-center justify-center mx-auto mb-[22px] bg-parchment-3 relative z-[1]">
+        <span class="font-serif text-[26px] font-light italic text-gold">II</span>
+      </div>
+      <div class="font-serif-sc text-[10px] font-normal tracking-[0.22em] text-ink mb-[10px]">Propuesta creativa</div>
+      <p class="font-sans text-[11px] font-light text-ink-soft leading-[1.75] opacity-80">Elaboramos un concepto visual con moodboard, paleta y lista de artículos.</p>
     </div>
-    <div class="process-step">
-      <div class="step-num"><span class="step-num-inner">III</span></div>
-      <div class="step-title">Cotización</div>
-      <p class="step-desc">Presentamos una cotización detallada y flexible, sin sorpresas.</p>
+    <div class="text-center px-4 relative">
+      <div class="w-[72px] h-[72px] rounded-full border border-gold/35 flex items-center justify-center mx-auto mb-[22px] bg-parchment-3 relative z-[1]">
+        <span class="font-serif text-[26px] font-light italic text-gold">III</span>
+      </div>
+      <div class="font-serif-sc text-[10px] font-normal tracking-[0.22em] text-ink mb-[10px]">Cotización</div>
+      <p class="font-sans text-[11px] font-light text-ink-soft leading-[1.75] opacity-80">Presentamos una cotización detallada y flexible, sin sorpresas.</p>
     </div>
-    <div class="process-step">
-      <div class="step-num"><span class="step-num-inner">IV</span></div>
-      <div class="step-title">Logística & montaje</div>
-      <p class="step-desc">Coordinamos entrega, montaje y supervisión el día del evento.</p>
+    <div class="text-center px-4 relative">
+      <div class="w-[72px] h-[72px] rounded-full border border-gold/35 flex items-center justify-center mx-auto mb-[22px] bg-parchment-3 relative z-[1]">
+        <span class="font-serif text-[26px] font-light italic text-gold">IV</span>
+      </div>
+      <div class="font-serif-sc text-[10px] font-normal tracking-[0.22em] text-ink mb-[10px]">Logística &amp; montaje</div>
+      <p class="font-sans text-[11px] font-light text-ink-soft leading-[1.75] opacity-80">Coordinamos entrega, montaje y supervisión el día del evento.</p>
     </div>
-    <div class="process-step">
-      <div class="step-num"><span class="step-num-inner">V</span></div>
-      <div class="step-title">Desmontaje</div>
-      <p class="step-desc">Recogemos todo al finalizar. Tú solo disfrutas y recuerdas.</p>
+    <div class="text-center px-4 relative">
+      <div class="w-[72px] h-[72px] rounded-full border border-gold/35 flex items-center justify-center mx-auto mb-[22px] bg-parchment-3 relative z-[1]">
+        <span class="font-serif text-[26px] font-light italic text-gold">V</span>
+      </div>
+      <div class="font-serif-sc text-[10px] font-normal tracking-[0.22em] text-ink mb-[10px]">Desmontaje</div>
+      <p class="font-sans text-[11px] font-light text-ink-soft leading-[1.75] opacity-80">Recogemos todo al finalizar. Tú solo disfrutas y recuerdas.</p>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
-<div class="stats-section">
-  <div class="stat-item">
-    <div class="stat-num">200<span style="font-size:36px;">+</span></div>
-    <div class="stat-label">Eventos realizados</div>
+<div class="stats-section bg-parchment-2 py-[72px] px-20 border-t border-gold/20 border-b border-gold/20 grid grid-cols-4 gap-0 max-[1000px]:grid-cols-2 max-[900px]:py-12 max-[900px]:px-7 max-[560px]:grid-cols-2">
+  <div class="stat-item text-center py-6 relative">
+    <div class="font-serif text-[64px] font-light italic text-rose leading-none">200<span class="text-[36px]">+</span></div>
+    <div class="font-serif-sc text-[9px] font-light tracking-[0.22em] text-sepia mt-[10px] opacity-80">Eventos realizados</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-num">5<span style="font-size:36px;">★</span></div>
-    <div class="stat-label">Calificación promedio</div>
+  <div class="stat-item text-center py-6 relative">
+    <div class="font-serif text-[64px] font-light italic text-rose leading-none">5<span class="text-[36px]">★</span></div>
+    <div class="font-serif-sc text-[9px] font-light tracking-[0.22em] text-sepia mt-[10px] opacity-80">Calificación promedio</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-num">8</div>
-    <div class="stat-label">Años de experiencia</div>
+  <div class="stat-item text-center py-6 relative">
+    <div class="font-serif text-[64px] font-light italic text-rose leading-none">8</div>
+    <div class="font-serif-sc text-[9px] font-light tracking-[0.22em] text-sepia mt-[10px] opacity-80">Años de experiencia</div>
   </div>
-  <div class="stat-item">
-    <div class="stat-num">98<span style="font-size:36px;">%</span></div>
-    <div class="stat-label">Clientes satisfechos</div>
+  <div class="stat-item text-center py-6 relative">
+    <div class="font-serif text-[64px] font-light italic text-rose leading-none">98<span class="text-[36px]">%</span></div>
+    <div class="font-serif-sc text-[9px] font-light tracking-[0.22em] text-sepia mt-[10px] opacity-80">Clientes satisfechos</div>
   </div>
 </div>
 
 <!-- TEAM -->
-<section class="team-section">
-  <div class="team-header">
-    <span class="section-eyebrow">El Equipo</span>
-    <h2 class="section-title">Las mentes <em>detrás de la magia</em></h2>
-    <div class="orn-row" style="margin-top:18px;">
-      <div class="orn-row-line rev"></div>
-      <span class="orn-row-sym" style="color:var(--rose);">♥</span>
-      <div class="orn-row-diamond"></div>
-      <span class="orn-row-sym">♠</span>
-      <div class="orn-row-diamond"></div>
-      <span class="orn-row-sym" style="color:var(--rose);">♥</span>
-      <div class="orn-row-line"></div>
+<section class="bg-parchment py-24 px-20 max-[900px]:py-16 max-[900px]:px-7">
+  <div class="text-center mb-16">
+    <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-rose block mb-[14px]">El Equipo</span>
+    <h2 class="font-serif text-[clamp(32px,4vw,54px)] font-light italic leading-[1.15] text-ink">Las mentes <em class="not-italic">detrás de la magia</em></h2>
+    <div class="flex items-center justify-center gap-[10px] mt-[18px]">
+      <div class="h-px w-[72px] bg-[linear-gradient(to_left,transparent,rgba(184,137,46,0.5))]"></div>
+      <span class="text-[11px] text-rose opacity-65 leading-none font-[Georgia,serif]">♥</span>
+      <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-70"></div>
+      <span class="text-[11px] text-gold opacity-65 leading-none font-[Georgia,serif]">♠</span>
+      <div class="w-[5px] h-[5px] bg-gold rotate-45 opacity-70"></div>
+      <span class="text-[11px] text-rose opacity-65 leading-none font-[Georgia,serif]">♥</span>
+      <div class="h-px w-[72px] bg-[linear-gradient(to_right,transparent,rgba(184,137,46,0.5))]"></div>
     </div>
   </div>
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="team-photo">
-        <div class="team-photo-inner">
+  <div class="grid grid-cols-3 gap-8 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
+    <div class="text-center">
+      <div class="team-photo aspect-[3/4] mb-6 relative bg-[repeating-linear-gradient(45deg,rgba(125,90,60,0.05)_0px,rgba(125,90,60,0.05)_1px,transparent_1px,transparent_14px),linear-gradient(160deg,#E8D8C0_0%,#D8C9AE_100%)] border border-gold/20 flex items-center justify-center overflow-hidden">
+        <div class="opacity-[0.28] text-center">
           <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#7D5A3C" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <span>foto de perfil</span>
+          <span class="font-[Courier_New,monospace] text-[10px] text-sepia tracking-[0.06em] block mt-[10px] leading-[1.6]">foto de perfil</span>
         </div>
       </div>
-      <h3 class="team-name">Damaris Flores</h3>
-      <p class="team-role">Fundadora & Directora Creativa</p>
-      <p class="team-bio">Con más de 8 años transformando espacios, Damaris lidera cada proyecto con su mirada única y su pasión por los detalles que marcan la diferencia.</p>
+      <h3 class="font-serif text-2xl font-normal italic text-ink mb-[6px]">Damaris Flores</h3>
+      <p class="font-serif-sc text-[9px] font-light tracking-[0.3em] text-rose mb-[14px]">Fundadora &amp; Directora Creativa</p>
+      <p class="font-sans text-xs font-light text-ink-soft leading-[1.8]">Con más de 8 años transformando espacios, Damaris lidera cada proyecto con su mirada única y su pasión por los detalles que marcan la diferencia.</p>
     </div>
-    <div class="team-card">
-      <div class="team-photo">
-        <div class="team-photo-inner">
+    <div class="text-center">
+      <div class="team-photo aspect-[3/4] mb-6 relative bg-[repeating-linear-gradient(45deg,rgba(125,90,60,0.05)_0px,rgba(125,90,60,0.05)_1px,transparent_1px,transparent_14px),linear-gradient(160deg,#E8D8C0_0%,#D8C9AE_100%)] border border-gold/20 flex items-center justify-center overflow-hidden">
+        <div class="opacity-[0.28] text-center">
           <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#7D5A3C" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <span>foto de perfil</span>
+          <span class="font-[Courier_New,monospace] text-[10px] text-sepia tracking-[0.06em] block mt-[10px] leading-[1.6]">foto de perfil</span>
         </div>
       </div>
-      <h3 class="team-name">Coordinadora de Eventos</h3>
-      <p class="team-role">Logística & Producción</p>
-      <p class="team-bio">Especialista en coordinar los tiempos, proveedores y recursos para que cada evento fluya sin contratiempos desde el primer minuto.</p>
+      <h3 class="font-serif text-2xl font-normal italic text-ink mb-[6px]">Coordinadora de Eventos</h3>
+      <p class="font-serif-sc text-[9px] font-light tracking-[0.3em] text-rose mb-[14px]">Logística &amp; Producción</p>
+      <p class="font-sans text-xs font-light text-ink-soft leading-[1.8]">Especialista en coordinar los tiempos, proveedores y recursos para que cada evento fluya sin contratiempos desde el primer minuto.</p>
     </div>
-    <div class="team-card">
-      <div class="team-photo">
-        <div class="team-photo-inner">
+    <div class="text-center">
+      <div class="team-photo aspect-[3/4] mb-6 relative bg-[repeating-linear-gradient(45deg,rgba(125,90,60,0.05)_0px,rgba(125,90,60,0.05)_1px,transparent_1px,transparent_14px),linear-gradient(160deg,#E8D8C0_0%,#D8C9AE_100%)] border border-gold/20 flex items-center justify-center overflow-hidden">
+        <div class="opacity-[0.28] text-center">
           <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#7D5A3C" stroke-width="1" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <span>foto de perfil</span>
+          <span class="font-[Courier_New,monospace] text-[10px] text-sepia tracking-[0.06em] block mt-[10px] leading-[1.6]">foto de perfil</span>
         </div>
       </div>
-      <h3 class="team-name">Diseñadora Floral</h3>
-      <p class="team-role">Floricultura & Decoración</p>
-      <p class="team-bio">Su talento con las flores convierte cada arreglo en una pieza única. Especializada en composiciones para bodas y celebraciones temáticas.</p>
+      <h3 class="font-serif text-2xl font-normal italic text-ink mb-[6px]">Diseñadora Floral</h3>
+      <p class="font-serif-sc text-[9px] font-light tracking-[0.3em] text-rose mb-[14px]">Floricultura &amp; Decoración</p>
+      <p class="font-sans text-xs font-light text-ink-soft leading-[1.8]">Su talento con las flores convierte cada arreglo en una pieza única. Especializada en composiciones para bodas y celebraciones temáticas.</p>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
-  <span class="cta-eyebrow">¿Lista para tu evento perfecto?</span>
-  <h2 class="cta-title">Cuéntanos tu <em>historia</em></h2>
-  <p class="cta-sub">Nos encantaría ser parte de tu día especial</p>
-  <div class="cta-btns">
-    <a href="/#contact" class="btn-primary">Contactar ahora</a>
-    <a href="/catalogo" class="btn-ghost-light">Ver catálogo</a>
+<section class="cta-section bg-deep text-center py-24 px-20 relative overflow-hidden max-[900px]:py-16 max-[900px]:px-7">
+  <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-[rgba(192,134,143,0.8)] mb-4 relative z-[1] block">¿Lista para tu evento perfecto?</span>
+  <h2 class="font-serif text-[clamp(34px,5vw,64px)] font-light italic text-parchment leading-[1.2] mb-[14px] relative z-[1]">Cuéntanos tu <em class="not-italic text-gold-light">historia</em></h2>
+  <p class="font-serif text-lg font-light italic text-[rgba(235,217,184,0.65)] mb-11 relative z-[1]">Nos encantaría ser parte de tu día especial</p>
+  <div class="flex gap-4 justify-center flex-wrap relative z-[1]">
+    <a href="/#contact" class="font-serif-sc text-[11px] font-normal tracking-[0.25em] text-parchment-3 bg-rose-deep py-4 px-10 no-underline transition-colors duration-[250ms] inline-block border border-transparent hover:bg-rose">Contactar ahora</a>
+    <a href="/catalogo" class="font-serif-sc text-[11px] font-normal tracking-[0.25em] text-gold-light border border-gold/45 py-[15px] px-10 no-underline transition-all duration-[250ms] inline-block hover:bg-gold hover:text-parchment hover:border-gold">Ver catálogo</a>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <span class="foot-logo">Wonderland Events</span>
-  <span class="foot-copy">© 2026 · Curiouser and Curiouser · Rentals &amp; Decoration</span>
+<footer class="bg-[#100804] py-6 px-20 flex justify-between items-center border-t border-gold/15 max-[900px]:py-5 max-[900px]:px-6 max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
+  <span class="font-serif-sc text-[13px] font-normal tracking-[0.22em] text-gold-light opacity-80">Wonderland Events</span>
+  <span class="font-sans text-[10px] font-light tracking-[0.1em] text-gold/30">© 2026 · Curiouser and Curiouser · Rentals &amp; Decoration</span>
 </footer>
 
 <script>

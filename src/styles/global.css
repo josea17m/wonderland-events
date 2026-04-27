@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-parchment:   #F2E5CC;
+  --color-parchment-2: #EBD9B8;
+  --color-parchment-3: #F8F1E4;
+  --color-rose:        #C0868F;
+  --color-rose-pale:   #EDD9DC;
+  --color-rose-deep:   #9A5F68;
+  --color-gold:        #B8892E;
+  --color-gold-light:  #D4A84B;
+  --color-gold-pale:   #E8D5AA;
+  --color-sepia:       #7D5A3C;
+  --color-ink:         #231409;
+  --color-ink-soft:    #56382A;
+  --color-deep:        #1A0E07;
+  --color-warm-white:  #FDFAF5;
+
+  /* Font families */
+  --font-sans:      'Raleway', sans-serif;
+  --font-serif:     'Cormorant Garamond', Georgia, serif;
+  --font-serif-sc:  'Cormorant SC', Georgia, serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+/* Film-grain overlay on every page */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
