@@ -36,12 +36,6 @@ nav::after {
   border: 1px solid rgba(184,137,46,0.12); pointer-events: none; z-index: 1;
 }
 
-/* contact method separator */
-.contact-method + .contact-method::before {
-  content: ''; position: absolute; left: 0; top: 10%; bottom: 10%;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(184,137,46,0.3), transparent);
-}
 
 /* services bar accent lines */
 #services::before { top: 0; }
@@ -515,50 +509,98 @@ nav::after {
   </div>
 </section>
 
-<section id="contact" class="bg-deep text-center py-[100px] px-20 relative overflow-hidden max-[900px]:py-[72px] max-[900px]:px-7" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2780%27 height=%2780%27%3E%3Ctext x=%278%27 y=%2732%27 font-size=%2716%27 fill=%27%23B8892E%27 opacity=%270.07%27 font-family=%27Georgia,serif%27%3E%E2%99%A0%3C/text%3E%3Ctext x=%2748%27 y=%2772%27 font-size=%2716%27 fill=%27%23C0868F%27 opacity=%270.07%27 font-family=%27Georgia,serif%27%3E%E2%99%A5%3C/text%3E%3C/svg%3E');background-size:80px 80px;">
-  <span class="font-serif-sc text-[10px] font-light tracking-[0.4em] text-[rgba(192,134,143,0.8)] relative z-[1] block mb-4">Contáctanos · Get in Touch</span>
-  <h2 class="font-serif text-[clamp(34px,4.5vw,58px)] font-light italic text-parchment relative z-[1] mt-2">
-    ¿Listos para crear<br>algo <em class="not-italic text-gold-light">mágico?</em>
-  </h2>
-  <div class="relative z-[1] my-6">
-    <svg viewBox="0 0 400 24" width="400" height="24" fill="none" style="max-width:90%;">
-      <line x1="0" y1="12" x2="155" y2="12" stroke="#B8892E" stroke-width="0.5" opacity="0.35"/>
-      <path d="M155 12 Q165 4 175 12 Q165 20 155 12Z" fill="#B8892E" opacity="0.3"/>
-      <circle cx="200" cy="12" r="5" fill="none" stroke="#B8892E" stroke-width="0.8" opacity="0.5"/>
-      <circle cx="200" cy="12" r="2" fill="#B8892E" opacity="0.6"/>
-      <path d="M225 12 Q235 4 245 12 Q235 20 225 12Z" fill="#B8892E" opacity="0.3"/>
-      <line x1="245" y1="12" x2="400" y2="12" stroke="#B8892E" stroke-width="0.5" opacity="0.35"/>
-    </svg>
-  </div>
-  <div class="flex justify-center gap-0 mt-12 relative z-[1] flex-wrap max-[900px]:flex-col max-[900px]:gap-8 max-[900px]:items-center">
-    <div class="contact-method flex flex-col items-center gap-[10px] px-[52px] relative max-[900px]:px-0">
-      <div class="mb-1 opacity-50">
-        <svg width="20" height="20" fill="none" stroke="#B8892E" stroke-width="1.2" viewBox="0 0 20 20">
-          <path d="M3 5 Q10 12 17 5 M3 5 L3 15 L17 15 L17 5 L3 5Z"/>
-        </svg>
-      </div>
-      <span class="font-serif-sc text-[9px] font-light tracking-[0.35em] text-gold-light opacity-70">WhatsApp</span>
-      <span class="font-serif text-[21px] font-light italic text-parchment">+1 (000) 000-0000</span>
-    </div>
-    <div class="contact-method flex flex-col items-center gap-[10px] px-[52px] relative max-[900px]:px-0">
-      <div class="mb-1 opacity-50">
-        <svg width="20" height="20" fill="none" stroke="#B8892E" stroke-width="1.2" viewBox="0 0 20 20">
-          <rect x="2" y="4" width="16" height="12" rx="3"/>
-          <circle cx="10" cy="10" r="3"/>
-          <circle cx="14.5" cy="5.5" r="0.8" fill="#B8892E"/>
-        </svg>
-      </div>
-      <span class="font-serif-sc text-[9px] font-light tracking-[0.35em] text-gold-light opacity-70">Instagram</span>
-      <span class="font-serif text-[21px] font-light italic text-parchment">@wonderlandevents</span>
-    </div>
-    <div class="contact-method flex flex-col items-center gap-[10px] px-[52px] relative max-[900px]:px-0">
-      <div class="mb-1 opacity-50">
-        <svg width="20" height="20" fill="none" stroke="#B8892E" stroke-width="1.2" viewBox="0 0 20 20">
-          <path d="M2 5 Q10 13 18 5 M2 5 L2 15 L18 15 L18 5 L2 5Z"/>
-        </svg>
-      </div>
-      <span class="font-serif-sc text-[9px] font-light tracking-[0.35em] text-gold-light opacity-70">Email</span>
-      <span class="font-serif text-[21px] font-light italic text-parchment">hola@wonderlandevents.com</span>
+<section id="contact" class="py-20 px-8 relative overflow-hidden max-[600px]:px-4 max-[600px]:py-12" style="background:linear-gradient(160deg,#4A3520 0%,#3A2910 50%,#2E1E0A 100%);">
+
+  <div class="max-w-[920px] mx-auto">
+    <!-- Vintage letter card -->
+    <div class="relative" style="background-image:url('/letter-vintage.jpg');background-size:cover;background-position:center;padding:56px 72px 52px;box-shadow:0 24px 72px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);max-[600px]:padding:36px 24px 36px;">
+
+      <!-- Inner frame lines -->
+      <div class="absolute inset-[14px] border border-[rgba(125,90,60,0.25)] pointer-events-none max-[600px]:inset-[8px]"></div>
+
+      <!-- Date -->
+      <p class="text-right font-serif italic text-xl text-[#7D5A3C] mb-10 max-[600px]:text-base max-[600px]:mb-6" id="letterDate"></p>
+
+      <!-- Greeting -->
+      <p class="font-serif italic text-[26px] text-[#9A5F68] mb-12 max-[600px]:text-xl max-[600px]:mb-8">Querida Wonderland Events,</p>
+
+      <!-- Form -->
+      <form id="letterForm">
+
+        <!-- Name + Phone -->
+        <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
+          <div>
+            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi nombre es</label>
+            <input type="text" id="lNombre" placeholder="Tu nombre completo"
+              style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
+              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
+              placeholder="Tu nombre completo">
+          </div>
+          <div>
+            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi teléfono</label>
+            <input type="tel" id="lTelefono"
+              style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
+              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
+              placeholder="+1 000 000 0000">
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-10 max-[600px]:mb-7">
+          <input type="email" id="lCorreo"
+            style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
+            onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
+            placeholder="tu@correo.com">
+        </div>
+
+        <!-- Event type + Date -->
+        <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
+          <div>
+            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Tipo de evento</label>
+            <input type="text" id="lTipoEvento"
+              style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
+              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
+              placeholder="Boda, baby shower, graduación...">
+          </div>
+          <div>
+            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Fecha del evento</label>
+            <input type="date" id="lFechaEvento"
+              style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;color-scheme:light;"
+              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'">
+          </div>
+        </div>
+
+        <!-- Message -->
+        <div class="mb-14 max-[600px]:mb-10">
+          <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Me gustaría contarles que...</label>
+          <textarea id="lMensaje" rows="5"
+            style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;resize:none;display:block;"
+            onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
+            placeholder="Cuéntanos sobre tu evento, estilo, presupuesto o cualquier detalle especial..."></textarea>
+        </div>
+
+        <!-- Signature + Send button -->
+        <div class="flex justify-between items-end gap-6 max-[600px]:flex-col max-[600px]:items-start">
+          <div>
+            <p class="font-serif italic text-[#7D5A3C] text-lg leading-relaxed mb-1">Con cariño y mucha ilusión,</p>
+            <span class="font-serif italic text-[28px] text-[#9A5F68] leading-tight block" id="nameDisplay">Tu nombre</span>
+          </div>
+          <button type="submit"
+            class="font-serif-sc text-[11px] font-normal tracking-[0.25em] text-parchment-3 bg-rose-deep py-4 px-10 cursor-pointer transition-colors duration-[250ms] flex items-center gap-3 hover:bg-rose shrink-0 max-[600px]:w-full max-[600px]:justify-center">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            Enviar carta
+          </button>
+        </div>
+
+        <!-- Success -->
+        <div id="letterSuccess" style="display:none;" class="mt-10 text-center">
+          <p class="font-serif italic text-2xl text-[#9A5F68]">¡Gracias! Tu carta llegó con todo nuestro amor. ✦</p>
+          <p class="font-serif-sc text-[10px] tracking-[0.3em] text-[#7D5A3C] mt-3 opacity-80">Nos pondremos en contacto muy pronto.</p>
+        </div>
+
+      </form>
     </div>
   </div>
 </section>
@@ -573,6 +615,43 @@ nav::after {
   const mm = document.getElementById('mobileMenu');
   hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
   mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mm.classList.remove('open'); }));
+
+  // ── Vintage letter form ──────────────────────────────────────
+  (() => {
+    const MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const DAYS   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    const now    = new Date();
+    const dateEl = document.getElementById('letterDate');
+    if (dateEl) dateEl.textContent = `${DAYS[now.getDay()]}, ${now.getDate()} de ${MONTHS[now.getMonth()]} de ${now.getFullYear()}`;
+
+    const nameInput   = document.getElementById('lNombre');
+    const nameDisplay = document.getElementById('nameDisplay');
+    if (nameInput && nameDisplay) {
+      nameInput.addEventListener('input', () => {
+        nameDisplay.textContent = nameInput.value.trim() || 'Tu nombre';
+      });
+    }
+
+    const form = document.getElementById('letterForm');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const nombre  = (document.getElementById('lNombre')?.value   || '').trim();
+        const tel     = (document.getElementById('lTelefono')?.value  || '').trim();
+        const correo  = (document.getElementById('lCorreo')?.value    || '').trim();
+        const tipo    = (document.getElementById('lTipoEvento')?.value || '').trim();
+        const fecha   = (document.getElementById('lFechaEvento')?.value|| '').trim();
+        const msg     = (document.getElementById('lMensaje')?.value   || '').trim();
+        const subject = encodeURIComponent(`Cotización Wonderland Events — ${nombre}`);
+        const body    = encodeURIComponent(
+          `Nombre: ${nombre}\nTeléfono: ${tel}\nCorreo: ${correo}\nTipo de evento: ${tipo}\nFecha del evento: ${fecha}\n\nMensaje:\n${msg}`
+        );
+        window.open(`mailto:hola@wonderlandevents.com?subject=${subject}&body=${body}`, '_blank');
+        const success = document.getElementById('letterSuccess');
+        if (success) success.style.display = 'block';
+      });
+    }
+  })();
 </script>
 
 </body>
