@@ -7,6 +7,7 @@ import "../styles/global.css";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wonderland Events — Rentals &amp; Decoration</title>
+<meta name="description" content="Wonderland Events — Rentals y decoración para bodas, baby showers, graduaciones y eventos temáticos. Transformamos espacios en momentos inolvidables.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
@@ -66,7 +67,7 @@ nav::after {
   </ul>
   <div class="flex items-center gap-3">
     <a href="#contact" class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">Cotizar</a>
-    <button class="hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" id="hamburger">
+    <button class="hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" id="hamburger" aria-label="Abrir menú">
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
@@ -262,7 +263,7 @@ nav::after {
   </div>
   <div class="grid grid-cols-3 gap-[3px] max-[900px]:grid-cols-2 max-[500px]:grid-cols-1">
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover filter-[sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:filter-[sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=70&fit=crop" alt="Boda">
+      <img class="w-full h-full object-cover filter-[sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:filter-[sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=70&fit=crop" alt="Boda" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Bodas · Weddings</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Bodas de Ensueño</h3>
@@ -270,7 +271,7 @@ nav::after {
       </div>
     </div>
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=70&fit=crop" alt="Mesa floral">
+      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=700&q=70&fit=crop" alt="Mesa floral" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Bodas · Weddings</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Mesas &amp; Florales</h3>
@@ -278,7 +279,7 @@ nav::after {
       </div>
     </div>
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=700&q=70&fit=crop" alt="Baby shower">
+      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=700&q=70&fit=crop" alt="Baby shower" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Baby Showers</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Baby Shower</h3>
@@ -286,7 +287,7 @@ nav::after {
       </div>
     </div>
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=70&fit=crop" alt="Photobooth">
+      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=70&fit=crop" alt="Photobooth" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Baby Showers</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Photobooth &amp; Backdrops</h3>
@@ -294,7 +295,7 @@ nav::after {
       </div>
     </div>
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1627556704302-624286467c65?w=700&q=70&fit=crop" alt="Graduación">
+      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1627556704302-624286467c65?w=700&q=70&fit=crop" alt="Graduación" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Graduaciones</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Graduaciones</h3>
@@ -302,7 +303,7 @@ nav::after {
       </div>
     </div>
     <div class="relative aspect-[3/4] overflow-hidden bg-parchment-2 cursor-pointer group">
-      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=70&fit=crop" alt="Arco floral">
+      <img class="w-full h-full object-cover [filter:sepia(20%)_saturate(0.75)_brightness(1.02)] transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:[filter:sepia(5%)_saturate(0.9)]" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=70&fit=crop" alt="Arco floral" loading="lazy" decoding="async" width="700" height="933">
       <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(26,14,7,0.88)_0%,rgba(26,14,7,0.1)_55%,transparent_100%)] flex flex-col justify-end p-7">
         <span class="font-serif-sc text-[9px] font-light tracking-[0.32em] text-rose-pale opacity-85 mb-[6px]">Graduaciones</span>
         <h3 class="font-serif text-[26px] font-light italic text-[rgba(242,229,204,0.95)] leading-[1.2]">Arcos &amp; Estructuras</h3>
@@ -525,20 +526,21 @@ nav::after {
       <p class="font-serif italic text-[26px] text-[#9A5F68] mb-12 max-[600px]:text-xl max-[600px]:mb-8">Querida Wonderland Events,</p>
 
       <!-- Form -->
-      <form id="letterForm">
+      <form id="letterForm" name="cotizacion" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="cotizacion">
+        <input type="hidden" name="bot-field">
 
         <!-- Name + Phone -->
         <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
           <div>
-            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi nombre es</label>
-            <input type="text" id="lNombre" placeholder="Tu nombre completo"
+            <label for="lNombre" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi nombre es</label>
+            <input type="text" id="lNombre" name="nombre" placeholder="Tu nombre completo"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
-              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
-              placeholder="Tu nombre completo">
+              onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'">
           </div>
           <div>
-            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi teléfono</label>
-            <input type="tel" id="lTelefono"
+            <label for="lTelefono" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi teléfono</label>
+            <input type="tel" id="lTelefono" name="telefono"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
               placeholder="+1 000 000 0000">
@@ -547,7 +549,8 @@ nav::after {
 
         <!-- Email -->
         <div class="mb-10 max-[600px]:mb-7">
-          <input type="email" id="lCorreo"
+          <label for="lCorreo" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi correo</label>
+          <input type="email" id="lCorreo" name="correo"
             style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
             onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
             placeholder="tu@correo.com">
@@ -556,15 +559,15 @@ nav::after {
         <!-- Event type + Date -->
         <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
           <div>
-            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Tipo de evento</label>
-            <input type="text" id="lTipoEvento"
+            <label for="lTipoEvento" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Tipo de evento</label>
+            <input type="text" id="lTipoEvento" name="tipo-evento"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
               placeholder="Boda, baby shower, graduación...">
           </div>
           <div>
-            <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Fecha del evento</label>
-            <input type="date" id="lFechaEvento"
+            <label for="lFechaEvento" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Fecha del evento</label>
+            <input type="date" id="lFechaEvento" name="fecha-evento"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;color-scheme:light;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'">
           </div>
@@ -572,8 +575,8 @@ nav::after {
 
         <!-- Message -->
         <div class="mb-14 max-[600px]:mb-10">
-          <label class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Me gustaría contarles que...</label>
-          <textarea id="lMensaje" rows="5"
+          <label for="lMensaje" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Me gustaría contarles que...</label>
+          <textarea id="lMensaje" name="mensaje" rows="5"
             style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;resize:none;display:block;"
             onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
             placeholder="Cuéntanos sobre tu evento, estilo, presupuesto o cualquier detalle especial..."></textarea>
@@ -662,19 +665,23 @@ nav::after {
     if (form) {
       form.addEventListener('submit', e => {
         e.preventDefault();
-        const nombre  = (document.getElementById('lNombre')?.value   || '').trim();
-        const tel     = (document.getElementById('lTelefono')?.value  || '').trim();
-        const correo  = (document.getElementById('lCorreo')?.value    || '').trim();
-        const tipo    = (document.getElementById('lTipoEvento')?.value || '').trim();
-        const fecha   = (document.getElementById('lFechaEvento')?.value|| '').trim();
-        const msg     = (document.getElementById('lMensaje')?.value   || '').trim();
-        const subject = encodeURIComponent(`Cotización Wonderland Events — ${nombre}`);
-        const body    = encodeURIComponent(
-          `Nombre: ${nombre}\nTeléfono: ${tel}\nCorreo: ${correo}\nTipo de evento: ${tipo}\nFecha del evento: ${fecha}\n\nMensaje:\n${msg}`
-        );
-        window.open(`mailto:hola@wonderlandevents.com?subject=${subject}&body=${body}`, '_blank');
-        const success = document.getElementById('letterSuccess');
-        if (success) success.style.display = 'block';
+        const data = new FormData(form);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        }).then(() => {
+          const success = document.getElementById('letterSuccess');
+          if (success) success.style.display = 'block';
+          form.reset();
+          const nameDisplay = document.getElementById('nameDisplay');
+          if (nameDisplay) nameDisplay.textContent = 'Tu nombre';
+        }).catch(() => {
+          // Fallback: open mailto if fetch fails (e.g. local dev)
+          const nombre = (document.getElementById('lNombre')?.value || '').trim();
+          const subject = encodeURIComponent(`Cotización Wonderland Events — ${nombre}`);
+          window.open(`mailto:josea1701m@gmail.com?subject=${subject}`, '_blank');
+        });
       });
     }
   })();
