@@ -90,6 +90,54 @@ nav a[href="#contact"], #hero a {
     color        220ms ease,
     border-color 220ms ease !important;
 }
+
+/* ── Vintage letter form ──────────────────────────────────── */
+.letter-label {
+  font-family: 'Cormorant SC', Georgia, serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7D5A3C;
+  display: block;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+.letter-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(125, 90, 60, 0.4);
+  width: 100%;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 300;
+  color: #3F2718;
+  outline: none;
+  padding: 10px 0;
+  transition: border-bottom-color 250ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.letter-input::placeholder {
+  color: rgba(125, 90, 60, 0.45);
+  font-style: italic;
+}
+.letter-input:hover  { border-bottom-color: rgba(125, 90, 60, 0.65); }
+.letter-input:focus  { border-bottom-color: rgba(154, 95, 104, 0.85); }
+textarea.letter-input {
+  resize: none;
+  display: block;
+  line-height: 1.7;
+  min-height: 130px;
+}
+/* Date input dark text */
+.letter-input[type="date"] { color-scheme: light; }
+
+@media (max-width: 600px) {
+  .letter-input { font-size: 18px; }
+  .letter-label { font-size: 11px; letter-spacing: 0.25em; margin-bottom: 10px; }
+}
 </style>
 </head>
 <body class="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden">
@@ -550,9 +598,9 @@ nav a[href="#contact"], #hero a {
 
 <section id="contact" class="py-20 px-8 pb-16 relative overflow-hidden max-[600px]:px-4 max-[600px]:py-12" style="background:linear-gradient(160deg,#4A3520 0%,#3A2910 50%,#2E1E0A 100%);">
 
-  <div class="max-w-[920px] mx-auto">
+  <div class="max-w-[500px] md:max-w-[920px] mx-auto">
     <!-- Vintage letter card -->
-    <div class="relative" style="background-image:url('/letter-vintage.jpg');background-size:cover;background-position:center;padding:56px 72px 52px;box-shadow:0 24px 72px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);max-[600px]:padding:36px 24px 36px;">
+    <div class="relative pt-[56px] px-[45px] md:px-[76px] pb-[45px]" style="background-image:url('/letter-vintage.jpg');background-size:cover;background-position:center;box-shadow:0 24px 72px rgba(0,0,0,0.5),0 4px 16px rgba(0,0,0,0.3);max-[600px]:padding:36px 24px 36px;">
 
       <!-- Inner frame lines -->
       <div class="absolute inset-[14px] border border-[rgba(125,90,60,0.25)] pointer-events-none max-[600px]:inset-[8px]"></div>
@@ -571,13 +619,13 @@ nav a[href="#contact"], #hero a {
         <!-- Name + Phone -->
         <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
           <div>
-            <label for="lNombre" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi nombre es</label>
+            <label for="lNombre" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi nombre es</label>
             <input type="text" id="lNombre" name="nombre" placeholder="Tu nombre completo"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'">
           </div>
           <div>
-            <label for="lTelefono" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi teléfono</label>
+            <label for="lTelefono" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi teléfono</label>
             <input type="tel" id="lTelefono" name="telefono"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
@@ -587,7 +635,7 @@ nav a[href="#contact"], #hero a {
 
         <!-- Email -->
         <div class="mb-10 max-[600px]:mb-7">
-          <label for="lCorreo" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi correo</label>
+          <label for="lCorreo" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Mi correo</label>
           <input type="email" id="lCorreo" name="correo"
             style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
             onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
@@ -597,14 +645,14 @@ nav a[href="#contact"], #hero a {
         <!-- Event type + Date -->
         <div class="grid grid-cols-2 gap-12 mb-10 max-[600px]:grid-cols-1 max-[600px]:gap-7 max-[600px]:mb-7">
           <div>
-            <label for="lTipoEvento" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Tipo de evento</label>
+            <label for="lTipoEvento" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Tipo de evento</label>
             <input type="text" id="lTipoEvento" name="tipo-evento"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
               placeholder="Boda, baby shower, graduación...">
           </div>
           <div>
-            <label for="lFechaEvento" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Fecha del evento</label>
+            <label for="lFechaEvento" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Fecha del evento</label>
             <input type="date" id="lFechaEvento" name="fecha-evento"
               style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;color-scheme:light;"
               onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'">
@@ -613,7 +661,7 @@ nav a[href="#contact"], #hero a {
 
         <!-- Message -->
         <div class="mb-14 max-[600px]:mb-10">
-          <label for="lMensaje" class="font-serif-sc text-[10px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Me gustaría contarles que...</label>
+          <label for="lMensaje" class="font-serif-sc font-medium text-[15px] tracking-[0.38em] text-[#7D5A3C] block mb-3">Me gustaría contarles que...</label>
           <textarea id="lMensaje" name="mensaje" rows="5"
             style="background:transparent;border:none;border-bottom:1px solid rgba(125,90,60,0.45);width:100%;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:18px;color:#56382A;outline:none;padding:6px 0;transition:border-color 0.2s;resize:none;display:block;"
             onfocus="this.style.borderBottomColor='rgba(125,90,60,0.8)'" onblur="this.style.borderBottomColor='rgba(125,90,60,0.45)'"
