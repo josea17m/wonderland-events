@@ -34,7 +34,7 @@
   const fechaFin    = SCRIPT.getAttribute('data-fecha-fin') || '';
   const disponible  = SCRIPT.getAttribute('data-disponible') || '';
 
-  const API_BASE = 'https://damaris-backend.onrender.com/api';
+  const API_BASE = SCRIPT.getAttribute('data-api-base') || 'https://api.alyxflow.com/api';
 
   const i18n = {
     es: {

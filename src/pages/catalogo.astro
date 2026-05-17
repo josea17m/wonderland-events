@@ -357,7 +357,25 @@ nav::after {
   let allItems = [], filtered = [], activeCategory = 'all', searchTerm = '';
   let cart = {}, currentItem = null, currentQty = 1;
 
+  function showComingSoon() {
+    document.getElementById('catalogGrid').innerHTML = `
+      <div class="state-msg">
+        <p>El catálogo estará disponible pronto</p>
+        <small>Estamos preparando los artículos. Contáctanos por WhatsApp para cotizar.</small>
+      </div>`;
+  }
+
+  // Hosts known to be dead. Keeps the page quiet until PUBLIC_API_URL is
+  // pointed at a live catalog backend (e.g. api.alyxflow.com).
+  const DEAD_HOSTS = ['damaris-backend.onrender.com'];
+
   async function loadCatalog() {
+    // Skip the network call when the catalog API isn't configured (or points at a dead host).
+    // Avoids noisy 404s in the console while still showing the "coming soon" state.
+    if (!API_URL || !/^https?:\/\//.test(API_URL) || DEAD_HOSTS.some((h) => API_URL.includes(h))) {
+      showComingSoon();
+      return;
+    }
     try {
       const res = await fetch(API_URL);
       if (!res.ok) throw new Error('Error ' + res.status);
@@ -366,11 +384,7 @@ nav::after {
       buildCategories();
       applyFilters();
     } catch(e) {
-      document.getElementById('catalogGrid').innerHTML = `
-        <div class="state-msg">
-          <p>El catálogo estará disponible pronto</p>
-          <small>Estamos preparando los artículos. Contáctanos por WhatsApp para cotizar.</small>
-        </div>`;
+      showComingSoon();
     }
   }
 
