@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import CartShell from "../components/CartShell.astro";
 ---
 <Base
   title="Catálogo — Wonderland Events"
@@ -768,111 +769,16 @@ footer {
   <Footer />
 </Fragment>
 
-<!-- DETAIL MODAL -->
-<div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+<CartShell
+  emptyMessageHtml="<p class='cart-empty'>Aún no has agregado artículos.<br>¡Explora el catálogo!</p>"
+/>
 
-    <!-- IMAGE side: photo + thumbnail strip -->
-    <div class="modal-img-wrap" id="modalImgWrap">
-      <div class="modal-img" id="modalImg"></div>
-      <!-- thumbs render here -->
-      <div class="modal-thumbs" id="modalThumbs" style="display:none;"></div>
-    </div>
+<script type="module">
+  import { initQuoteCatalog } from "../scripts/catalog";
 
-    <!-- INFO side -->
-    <div class="modal-info">
-      <div class="modal-info-head">
-        <p class="modal-cat" id="modalCat"></p>
-        <h2 class="modal-name" id="modalName"></h2>
-      </div>
-
-      <div class="modal-price-row">
-        <p class="modal-price" id="modalPrice"></p>
-        <span class="modal-stock-pill" id="modalStock"></span>
-      </div>
-
-      <p class="modal-desc" id="modalDesc"></p>
-
-      <div class="modal-actions">
-        <div class="modal-qty-row">
-          <span class="modal-qty-label">Cantidad</span>
-          <div class="qty-control">
-            <button class="qty-btn" id="qtyMinus" aria-label="Restar">−</button>
-            <span class="qty-display" id="qtyDisplay">1</span>
-            <button class="qty-btn" id="qtyPlus" aria-label="Sumar">+</button>
-          </div>
-        </div>
-        <button class="modal-add-btn" id="modalAddBtn">Agregar a cotización</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CART -->
-<div class="cart-overlay" id="cartOverlay"></div>
-<div class="cart-panel" id="cartPanel">
-  <div class="cart-header">
-    <h2>Mi Cotización</h2>
-    <button class="cart-close" id="cartClose">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <p class="cart-empty">Aún no has agregado artículos.<br>¡Explora el catálogo!</p>
-  </div>
-  <div class="cart-total" id="cartTotalRow" style="display:none">
-    <span class="cart-total-label">Total estimado</span>
-    <span class="cart-total-val" id="cartTotalVal">$0</span>
-  </div>
-  <div class="quote-form" id="quoteForm">
-    <h3>Datos de contacto</h3>
-    <div class="form-row">
-      <div class="form-field">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-input" id="fNombre" placeholder="Tu nombre">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Teléfono</label>
-        <input type="tel" class="form-input" id="fTelefono" placeholder="+1 000 000 0000">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-field full">
-        <label class="form-label">Correo electrónico</label>
-        <input type="email" class="form-input" id="fCorreo" placeholder="tu@correo.com">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-field full">
-        <label class="form-label">Fecha del evento</label>
-        <input type="date" class="form-input" id="fFecha">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-field full">
-        <label class="form-label">Notas adicionales</label>
-        <input type="text" class="form-input" id="fNotas" placeholder="Tipo de evento, lugar, etc.">
-      </div>
-    </div>
-    <div class="quote-actions">
-      <button class="btn-quote" id="sendQuoteBtn">Enviar cotización</button>
-      <button class="btn-whatsapp" id="whatsappBtn">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.996 0C5.373 0 0 5.373 0 11.996c0 2.117.554 4.1 1.521 5.825L0 24l6.335-1.502a11.956 11.956 0 005.661 1.434h.005C18.622 23.932 24 18.558 24 11.935 24 5.373 18.622 0 11.996 0zm.009 21.906a9.928 9.928 0 01-5.058-1.382l-.363-.215-3.76.891.945-3.666-.237-.376a9.906 9.906 0 01-1.52-5.275c0-5.488 4.467-9.955 9.955-9.955a9.955 9.955 0 019.955 9.955c-.001 5.488-4.468 9.953-9.917 9.953v.07z"/></svg>
-        WhatsApp
-      </button>
-    </div>
-    <div class="success-msg" id="successMsg">
-      ¡Cotización enviada! ✦<br>
-      <small style="font-size:13px;font-style:normal;font-family:var(--sans);color:var(--sepia);opacity:0.8;">Nos pondremos en contacto contigo pronto.</small>
-    </div>
-  </div>
-</div>
-
-<script is:inline>
   // TODO: cuando la API esté lista, reemplazar MOCK_ITEMS por fetch a este endpoint
   const API_URL = 'https://damaris-backend.onrender.com/api/public/hola';
   const WHATSAPP_NUMBER = '10000000000';
-  let allItems = [], filtered = [], activeCategory = 'all', searchTerm = '';
-  let cart = {}, currentItem = null, currentQty = 1, currentPhotoIdx = 0;
 
   // ── MOCK DATA (10 productos · 3 categorías · varias fotos c/u) ──
   const MOCK_ITEMS = [
@@ -988,88 +894,11 @@ footer {
     }
   ];
 
-  async function loadCatalog() {
-    // Usando data mock para probar UI
-    allItems = MOCK_ITEMS;
-    buildCategories();
-    applyFilters();
-  }
-
-  function buildCategories() {
-    const cats = [...new Set(allItems.map(i => i.categoria).filter(Boolean))];
-    const container = document.getElementById('catsContainer');
-    container.innerHTML = '<button class="cat-chip active" data-cat="all">Todos</button>';
-    cats.forEach(cat => {
-      const btn = document.createElement('button');
-      btn.className = 'cat-chip';
-      btn.dataset.cat = cat;
-      btn.textContent = cat;
-      container.appendChild(btn);
-    });
-    container.addEventListener('click', e => {
-      const chip = e.target.closest('.cat-chip');
-      if (!chip) return;
-      container.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeCategory = chip.dataset.cat;
-      applyFilters();
-    });
-  }
-
-  function applyFilters() {
-    filtered = allItems.filter(item => {
-      const mc = activeCategory === 'all' || item.categoria === activeCategory;
-      const ms = !searchTerm || [item.nombre, item.descripcion, item.categoria].some(v => v?.toLowerCase().includes(searchTerm));
-      return mc && ms;
-    });
-    renderGrid();
-    document.getElementById('resultsCount').textContent = `${filtered.length} artículo${filtered.length !== 1 ? 's' : ''}`;
-  }
-
-  document.getElementById('searchInput').addEventListener('input', e => {
-    searchTerm = e.target.value.toLowerCase().trim();
-    applyFilters();
-  });
-
-  function renderGrid() {
-    const grid = document.getElementById('catalogGrid');
-    if (!filtered.length) {
-      grid.innerHTML = '<div class="state-msg"><p>Sin resultados</p><small>Prueba otra búsqueda o categoría</small></div>';
-      return;
-    }
-    grid.innerHTML = filtered.map(item => cardHTML(item)).join('');
-    grid.querySelectorAll('.item-card').forEach(card => {
-      card.addEventListener('click', e => {
-        const id = card.dataset.id;
-        if (e.target.closest('.card-add')) { e.stopPropagation(); toggleCartItem(id, 1); return; }
-        openModal(id);
-      });
-      // hover cycle thru photos
-      const slots = card.querySelectorAll('.card-img-slot');
-      const dots = card.querySelectorAll('.card-dot');
-      if (slots.length > 1) {
-        let idx = 0, timer;
-        card.addEventListener('mouseenter', () => {
-          timer = setInterval(() => {
-            slots[idx].classList.remove('active');
-            dots[idx]?.classList.remove('active');
-            idx = (idx + 1) % slots.length;
-            slots[idx].classList.add('active');
-            dots[idx]?.classList.add('active');
-          }, 900);
-        });
-        card.addEventListener('mouseleave', () => {
-          clearInterval(timer);
-          slots.forEach((s, i) => s.classList.toggle('active', i === 0));
-          dots.forEach((d, i) => d.classList.toggle('active', i === 0));
-          idx = 0;
-        });
-      }
-    });
-    updateCardStates();
-  }
-
-  function cardHTML(item) {
+  const imgPlaceholder = (name) => `<div class="card-img-placeholder">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    <span>${name || 'foto'}</span>
+  </div>`;
+  const cardHTML = (item) => {
     const imgs = item.imagenes || [];
     let imgHTML;
     if (imgs.length) {
@@ -1095,192 +924,17 @@ footer {
         </div>
       </div>
     </div>`;
-  }
+  };
 
-  function imgPlaceholder(name) {
-    return `<div class="card-img-placeholder">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>${name || 'foto'}</span>
-    </div>`;
-  }
-
-  function updateCardStates() {
-    document.querySelectorAll('.item-card').forEach(card => {
-      const id = card.dataset.id;
-      const inCart = !!cart[id];
-      card.classList.toggle('in-cart', inCart);
-      const btn = card.querySelector('.card-add');
-      if (btn) { btn.textContent = inCart ? '✓ Agregado' : '+ Agregar'; btn.classList.toggle('added', inCart); }
-    });
-  }
-
-  function openModal(id) {
-    currentItem = allItems.find(i => String(i.id) === String(id));
-    if (!currentItem) return;
-    currentQty = cart[id]?.qty || 1;
-    currentPhotoIdx = 0;
-    renderModalGallery();
-    document.getElementById('modalCat').textContent = currentItem.categoria || 'General';
-    document.getElementById('modalName').textContent = currentItem.nombre;
-    document.getElementById('modalPrice').innerHTML = `$${Number(currentItem.precio_renta).toLocaleString()} <small>/ renta</small>`;
-    document.getElementById('modalStock').textContent = `${currentItem.stock_total} disponibles`;
-    document.getElementById('modalDesc').textContent = currentItem.descripcion || 'Artículo disponible para renta. Contáctanos para más detalles.';
-    document.getElementById('qtyDisplay').textContent = currentQty;
-    const inCart = !!cart[id];
-    const btn = document.getElementById('modalAddBtn');
-    btn.textContent = inCart ? '✓ En cotización' : 'Agregar a cotización';
-    btn.classList.toggle('added', inCart);
-    document.getElementById('modalBackdrop').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function renderModalGallery() {
-    const imgs = currentItem.imagenes || [];
-    const wrap = document.getElementById('modalImg');
-    const thumbsEl = document.getElementById('modalThumbs');
-    if (!imgs.length) {
-      wrap.innerHTML = imgPlaceholder(currentItem.nombre);
-      thumbsEl.style.display = 'none';
-      thumbsEl.innerHTML = '';
-      return;
-    }
-    const src = imgs[currentPhotoIdx];
-    let html = `<div class="modal-gallery-main"><img src="${src}" alt="${currentItem.nombre}"></div>`;
-    if (imgs.length > 1) {
-      html += `<div class="modal-counter">${currentPhotoIdx + 1} / ${imgs.length}</div>`;
-      html += `<button class="modal-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>`;
-      html += `<button class="modal-arrow next" data-dir="1" aria-label="Foto siguiente">›</button>`;
-    }
-    wrap.innerHTML = html;
-
-    if (imgs.length > 1) {
-      thumbsEl.style.display = 'flex';
-      thumbsEl.innerHTML = imgs.map((s, i) =>
-        `<div class="modal-thumb ${i === currentPhotoIdx ? 'active' : ''}" data-idx="${i}"><img src="${s}" alt=""></div>`
-      ).join('');
-      thumbsEl.querySelectorAll('.modal-thumb').forEach(t => {
-        t.addEventListener('click', e => {
-          e.stopPropagation();
-          currentPhotoIdx = Number(t.dataset.idx);
-          renderModalGallery();
-        });
-      });
-    } else {
-      thumbsEl.style.display = 'none';
-      thumbsEl.innerHTML = '';
-    }
-
-    wrap.querySelectorAll('.modal-arrow').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const dir = Number(btn.dataset.dir);
-        const n = imgs.length;
-        currentPhotoIdx = (currentPhotoIdx + dir + n) % n;
-        renderModalGallery();
-      });
-    });
-  }
-
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalBackdrop').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
-  function closeModal() { document.getElementById('modalBackdrop').classList.remove('open'); document.body.style.overflow = ''; currentItem = null; }
-
-  // Keyboard nav on modal
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('modalBackdrop').classList.contains('open')) return;
-    if (e.key === 'Escape') { closeModal(); return; }
-    if (!currentItem?.imagenes || currentItem.imagenes.length < 2) return;
-    const n = currentItem.imagenes.length;
-    if (e.key === 'ArrowLeft') { currentPhotoIdx = (currentPhotoIdx - 1 + n) % n; renderModalGallery(); }
-    if (e.key === 'ArrowRight') { currentPhotoIdx = (currentPhotoIdx + 1) % n; renderModalGallery(); }
+  initQuoteCatalog({
+    items: MOCK_ITEMS,
+    whatsappNumber: WHATSAPP_NUMBER,
+    emptyCartHtml: "<p class='cart-empty'>Aún no has agregado artículos.<br>¡Explora el catálogo!</p>",
+    whatsappGreeting: "Hola! Soy",
+    notesFallback: "",
+    placeholderHtml: imgPlaceholder,
+    cardHtml: cardHTML,
+    dynamicCategories: true,
   });
-
-  document.getElementById('qtyMinus').addEventListener('click', () => { if (currentQty > 1) { currentQty--; document.getElementById('qtyDisplay').textContent = currentQty; } });
-  document.getElementById('qtyPlus').addEventListener('click', () => { if (currentQty < (currentItem?.stock_total || 99)) { currentQty++; document.getElementById('qtyDisplay').textContent = currentQty; } });
-  document.getElementById('modalAddBtn').addEventListener('click', () => {
-    if (!currentItem) return;
-    toggleCartItem(String(currentItem.id), currentQty);
-    const inCart = !!cart[String(currentItem.id)];
-    document.getElementById('modalAddBtn').textContent = inCart ? '✓ En cotización' : 'Agregar a cotización';
-    document.getElementById('modalAddBtn').classList.toggle('added', inCart);
-  });
-
-  function toggleCartItem(id, qty) {
-    if (cart[id]) { delete cart[id]; }
-    else { const item = allItems.find(i => String(i.id) === String(id)); if (item) cart[id] = { item, qty: qty || 1 }; }
-    updateCartUI(); updateCardStates();
-  }
-
-  function updateCartUI() {
-    const ids = Object.keys(cart), count = ids.length;
-    const countEl = document.getElementById('cartCount');
-    countEl.textContent = count;
-    countEl.classList.toggle('visible', count > 0);
-    const itemsEl = document.getElementById('cartItems');
-    const totalRow = document.getElementById('cartTotalRow');
-    if (!count) { itemsEl.innerHTML = '<p class="cart-empty">Aún no has agregado artículos.<br>¡Explora el catálogo!</p>'; totalRow.style.display = 'none'; return; }
-    let total = 0;
-    itemsEl.innerHTML = ids.map(id => {
-      const { item, qty } = cart[id];
-      const sub = Number(item.precio_renta) * qty;
-      total += sub;
-      const img = item.imagenes?.length ? `<img src="${item.imagenes[0]}" alt="${item.nombre}">` : '';
-      return `<div class="cart-item" data-id="${id}">
-        <div class="ci-img">${img}</div>
-        <div class="ci-info">
-          <p class="ci-cat">${item.categoria || 'General'}</p>
-          <p class="ci-name">${item.nombre}</p>
-          <div class="ci-qty-row">
-            <button class="ci-qty-btn ci-minus">−</button>
-            <span class="ci-qty">${qty}</span>
-            <button class="ci-qty-btn ci-plus">+</button>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-          <p class="ci-price">$${sub.toLocaleString()}</p>
-          <button class="ci-remove">✕</button>
-        </div>
-      </div>`;
-    }).join('');
-    totalRow.style.display = 'flex';
-    document.getElementById('cartTotalVal').textContent = `$${total.toLocaleString()}`;
-    itemsEl.querySelectorAll('.cart-item').forEach(row => {
-      const id = row.dataset.id;
-      row.querySelector('.ci-remove').addEventListener('click', () => { delete cart[id]; updateCartUI(); updateCardStates(); });
-      row.querySelector('.ci-minus').addEventListener('click', () => { if (cart[id].qty > 1) { cart[id].qty--; updateCartUI(); } });
-      row.querySelector('.ci-plus').addEventListener('click', () => { cart[id].qty++; updateCartUI(); });
-    });
-  }
-
-  document.getElementById('openCartBtn').addEventListener('click', openCart);
-  document.getElementById('cartClose').addEventListener('click', closeCart);
-  document.getElementById('cartOverlay').addEventListener('click', closeCart);
-  function openCart() { document.getElementById('cartPanel').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function closeCart() { document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow = ''; }
-
-  document.getElementById('sendQuoteBtn').addEventListener('click', () => {
-    const n = document.getElementById('fNombre').value.trim();
-    const t = document.getElementById('fTelefono').value.trim();
-    const c = document.getElementById('fCorreo').value.trim();
-    if (!n || !t || !c) { alert('Por favor llena nombre, teléfono y correo.'); return; }
-    document.querySelector('.quote-actions').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
-    setTimeout(() => {
-      document.getElementById('successMsg').classList.remove('show');
-      document.querySelector('.quote-actions').style.display = 'flex';
-      cart = {}; updateCartUI(); updateCardStates(); closeCart();
-    }, 3000);
-  });
-
-  document.getElementById('whatsappBtn').addEventListener('click', () => {
-    const nombre = document.getElementById('fNombre').value.trim() || 'Cliente';
-    const ids = Object.keys(cart);
-    if (!ids.length) { alert('Agrega artículos a tu cotización primero.'); return; }
-    const items = ids.map(id => { const { item, qty } = cart[id]; return `• ${item.nombre} x${qty} — $${(Number(item.precio_renta)*qty).toLocaleString()}`; }).join('\n');
-    const msg = `Hola! Soy *${nombre}* y me interesa cotizar:\n\n${items}\n\nFecha: ${document.getElementById('fFecha').value || 'Por definir'}\n${document.getElementById('fNotas').value || ''}`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-  });
-
-  loadCatalog();
 </script>
 </Base>
