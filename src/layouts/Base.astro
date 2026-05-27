@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import WhatsAppFAB from "../components/WhatsAppFAB.astro";
 
 interface Props {
   title: string;
@@ -49,6 +50,8 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
     <main>
       <slot />
     </main>
+    <!-- TODO(datos): número real de WhatsApp sin + ni espacios -->
+    <WhatsAppFAB phone="5215500000000" />
     <slot name="footer" />
   </body>
  </html>
