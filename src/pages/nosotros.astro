@@ -85,11 +85,9 @@ import Footer from "../components/Footer.astro";
 <!-- STORY -->
 <section class="py-22 px-20 bg-parchment-3 max-[900px]:py-16 max-[900px]:px-7">
   <div class="grid grid-cols-2 gap-20 items-center max-[900px]:grid-cols-1">
-    <div class="story-visual aspect-[3/4] relative border border-gold/25 bg-[repeating-linear-gradient(-45deg,rgba(125,90,60,0.04)_0px,rgba(125,90,60,0.04)_1px,transparent_1px,transparent_16px),linear-gradient(160deg,#E8D8C0_0%,#D4C5A5_100%)] flex items-center justify-center overflow-hidden max-[900px]:hidden">
-      <div class="opacity-30 text-center">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7D5A3C" stroke-width="1" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <span class="font-[Courier_New,monospace] text-[11px] text-sepia tracking-[0.06em] leading-[1.7] block mt-3">fotografía del equipo<br>o espacio de trabajo</span>
-      </div>
+    <div class="story-visual aspect-[3/4] relative border border-gold/25 overflow-hidden max-[900px]:hidden">
+      <!-- TODO(datos): fotografía real del equipo o espacio de trabajo -->
+      <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=900&q=75&fit=crop" alt="Montaje floral y espacio de trabajo de Wonderland Events" class="h-full w-full object-cover [filter:sepia(14%)_saturate(0.88)_brightness(1.02)]" loading="lazy" decoding="async" width="900" height="1200" />
     </div>
     <div>
       <div class="text-left mb-8">
