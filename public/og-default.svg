@@ -1,0 +1,39 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="92" y1="54" x2="1108" y2="576" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F1E4"/>
+      <stop offset="0.54" stop-color="#EBD9B8"/>
+      <stop offset="1" stop-color="#D7C09A"/>
+    </linearGradient>
+    <radialGradient id="rose" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(259 176) rotate(29.211) scale(342.168 261.562)">
+      <stop stop-color="#C0868F" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#C0868F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(954 456) rotate(149.69) scale(361.382 273.87)">
+      <stop stop-color="#B8892E" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#B8892E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="34" y="34" width="1132" height="562" rx="20" fill="none" stroke="#B8892E" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="54" y="54" width="1092" height="522" rx="14" fill="none" stroke="#B8892E" stroke-opacity="0.18"/>
+  <circle cx="248" cy="176" r="270" fill="url(#rose)"/>
+  <circle cx="972" cy="458" r="286" fill="url(#gold)"/>
+  <g opacity="0.92">
+    <path d="M176 180C197.333 151.333 225.333 137 260 137C294.667 137 322.667 151.333 344 180" stroke="#B8892E" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="260" cy="180" r="24" stroke="#B8892E" stroke-width="3"/>
+    <circle cx="260" cy="180" r="10" fill="#B8892E"/>
+    <path d="M260 206V300" stroke="#B8892E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M260 244H288" stroke="#B8892E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M260 272H288" stroke="#B8892E" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <text x="418" y="208" fill="#7D5A3C" font-family="Cormorant SC, Georgia, serif" font-size="30" letter-spacing="11">WONDERLAND EVENTS</text>
+  <text x="418" y="310" fill="#231409" font-family="Cormorant Garamond, Georgia, serif" font-size="84" font-style="italic">Transformamos espacios</text>
+  <text x="418" y="390" fill="#231409" font-family="Cormorant Garamond, Georgia, serif" font-size="84">en momentos inolvidables</text>
+  <text x="420" y="456" fill="#9A5F68" font-family="Raleway, Arial, sans-serif" font-size="24" letter-spacing="6">RENTALS · FLORALES · DECORACION PARA EVENTOS</text>
+  <g opacity="0.7">
+    <path d="M420 510H574" stroke="#B8892E"/>
+    <rect x="594" y="504" width="12" height="12" transform="rotate(45 594 504)" fill="#B8892E"/>
+    <path d="M624 510H778" stroke="#B8892E"/>
+  </g>
+</svg>
