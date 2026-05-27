@@ -1,43 +1,78 @@
-# Astro Starter Kit: Minimal
+# Wonderland Events
+
+Sitio corporativo y catálogo de Wonderland Events construido con Astro 6 y Tailwind CSS v4.
+
+## Stack
+
+- Astro 6
+- Tailwind CSS v4 con `@tailwindcss/vite`
+- Páginas `.astro` con estilos inline y componentes compartidos
+
+## Desarrollo local
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+El build de producción se valida con:
 
-## 🚀 Project Structure
+```sh
+npm run build
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura del proyecto
 
 ```text
 /
-├── public/
+├── public/                  # assets estáticos, OG, favicon, imágenes
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/          # navegación, footer y componentes reutilizables
+│   ├── layouts/             # layout base compartido
+│   ├── pages/               # rutas Astro
+│   └── styles/              # tokens globales y utilidades
+├── PLAN.md                  # backlog operativo del rediseño
+├── PENDIENTES.md            # datos reales todavía faltantes
+└── RESUMEN.md               # estado final de ejecución
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Rutas principales
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `/` inicio y formulario de cotización
+- `/catalogo` catálogo general de rentals
+- `/flores` catálogo floral
+- `/nosotros` historia y presentación del estudio
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Dónde editar contenido
 
-## 🧞 Commands
+- Home principal: [src/pages/index.astro](/Users/josemontero/Desktop/wonderland-events/src/pages/index.astro)
+- Catálogo mock temporal: [src/pages/catalogo.astro](/Users/josemontero/Desktop/wonderland-events/src/pages/catalogo.astro)
+- Catálogo floral: [src/pages/flores.astro](/Users/josemontero/Desktop/wonderland-events/src/pages/flores.astro)
+- Página Nosotros: [src/pages/nosotros.astro](/Users/josemontero/Desktop/wonderland-events/src/pages/nosotros.astro)
+- Layout compartido: [src/layouts/Base.astro](/Users/josemontero/Desktop/wonderland-events/src/layouts/Base.astro)
 
-All commands are run from the root of the project, from a terminal:
+Mientras no exista API, el catálogo sigue saliendo de `MOCK_ITEMS` dentro de `src/pages/catalogo.astro`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deploy
 
-## 👀 Want to learn more?
+El proyecto ya tiene `site` configurado para `https://wonderlandevents.mx` como placeholder operativo para canonical, sitemap y OG.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Antes de publicar:
+
+- Confirmar dominio final
+- Definir hosting real
+- Confirmar el proveedor del formulario de cotización
+- Reemplazar placeholders documentados en `PENDIENTES.md`
+
+## Verificación rápida
+
+```sh
+npm run build
+```
+
+Si quieres validar el sitemap generado:
+
+```sh
+npm run build
+ls dist
+```
