@@ -1,27 +1,14 @@
 ---
-import "../styles/global.css";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosotros — Wonderland Events</title>
-<meta name="description" content="Conoce al equipo detrás de Wonderland Events. Creamos experiencias únicas para bodas, baby showers, graduaciones y más.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<Base
+  title="Nosotros — Wonderland Events"
+  description="Conoce al equipo detrás de Wonderland Events. Creamos experiencias únicas para bodas, baby showers, graduaciones y más."
+  bodyClass="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden"
+>
 <style>
-nav::after {
-  content: '';
-  position: absolute; bottom: -3px; left: 48px; right: 48px; height: 1px;
-  background: linear-gradient(to right, transparent, rgba(184,137,46,0.3) 20%, rgba(184,137,46,0.3) 80%, transparent);
-}
-.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-.mobile-menu.open { display: flex; }
-
 /* Decorative ::before patterns */
 .page-header::before {
   content: ''; position: absolute; inset: 0;
@@ -56,36 +43,10 @@ nav::after {
   background: linear-gradient(to right, rgba(184,137,46,0.3), rgba(192,134,143,0.3), rgba(184,137,46,0.3));
 }
 </style>
-</head>
-<body class="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden">
-
-<!-- NAV -->
-<nav class="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-12 h-16 bg-parchment/97 backdrop-blur-[12px] border-b border-gold/25 max-[900px]:px-6">
-  <a href="/" class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline">Wonderland Events</a>
-  <ul class="list-none flex gap-9 max-[900px]:hidden">
-    <li><a href="/#portfolio" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Portfolio</a></li>
-    <li><a href="/catalogo" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Catálogo</a></li>
-    <li><a href="/flores" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Flores</a></li>
-    <li><a href="/nosotros" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-gold no-underline">Nosotros</a></li>
-    <li><a href="/#contact" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Contacto</a></li>
-  </ul>
-  <div class="flex items-center gap-3">
-    <a href="/#contact" class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">Cotizar</a>
-    <button class="hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" id="hamburger">
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-menu hidden fixed top-16 left-0 right-0 bg-parchment/98 backdrop-blur-[12px] border-b border-gold/20 z-[190] flex-col py-4" id="mobileMenu">
-  <a href="/">Inicio</a>
-  <a href="/catalogo" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Catálogo</a>
-  <a href="/flores" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Flores</a>
-  <a href="/nosotros" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold no-underline py-[14px] px-7 border-b border-gold/15">Nosotros</a>
-  <a href="/#contact" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Contacto</a>
-</div>
+</style>
+<Fragment slot="nav">
+  <Nav currentPage="nosotros" />
+</Fragment>
 
 <!-- PAGE HEADER -->
 <div class="page-header min-h-[52vh] flex flex-col items-center justify-center text-center pt-[110px] px-20 pb-16 bg-parchment relative overflow-hidden max-[900px]:pt-[100px] max-[900px]:px-6 max-[900px]:pb-11">
@@ -332,16 +293,10 @@ nav::after {
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="bg-[#100804] py-6 px-20 flex justify-between items-center border-t border-gold/15 max-[900px]:py-5 max-[900px]:px-6 max-[900px]:flex-col max-[900px]:gap-2 max-[900px]:text-center">
-  <span class="font-serif-sc text-[13px] font-normal tracking-[0.22em] text-gold-light opacity-80">Wonderland Events</span>
-  <span class="font-sans text-[10px] font-light tracking-[0.1em] text-gold/30">© 2026 · Curiouser and Curiouser · Rentals &amp; Decoration</span>
-</footer>
+<Fragment slot="footer">
+  <Footer />
+</Fragment>
 
 <script>
-  const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
-  hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
-  mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mm.classList.remove('open'); }));
 </script>
-</body>
-</html>
+</Base>

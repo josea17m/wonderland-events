@@ -1,0 +1,128 @@
+---
+interface Props {
+  currentPage?: "home" | "catalogo" | "flores" | "nosotros";
+}
+
+const { currentPage = "home" } = Astro.props;
+
+const portfolioHref = currentPage === "home" ? "#portfolio" : "/#portfolio";
+const contactHref = currentPage === "home" ? "#contact" : "/#contact";
+
+const links = [
+  { href: portfolioHref, label: "Portfolio", key: "portfolio" },
+  { href: "/catalogo", label: "Catálogo", key: "catalogo" },
+  { href: "/flores", label: "Flores", key: "flores" },
+  { href: "/nosotros", label: "Nosotros", key: "nosotros" },
+  { href: contactHref, label: "Contacto", key: "contacto" },
+];
+
+const isActive = (key: string) =>
+  (currentPage === "catalogo" && key === "catalogo") ||
+  (currentPage === "flores" && key === "flores") ||
+  (currentPage === "nosotros" && key === "nosotros");
+---
+
+<nav class="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-12 h-16 bg-parchment/97 backdrop-blur-[12px] border-b border-gold/25 max-[900px]:px-6">
+  <a href="/" class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline whitespace-nowrap max-[480px]:text-[13px] max-[480px]:tracking-[0.12em]">Wonderland Events</a>
+  <ul class="list-none flex gap-9 max-[900px]:hidden">
+    {links.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class:list={[
+            "font-sans text-[10px] font-medium tracking-[0.22em] uppercase no-underline transition-colors duration-200 hover:text-gold",
+            isActive(link.key) ? "text-gold" : "text-ink-soft",
+          ]}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="flex items-center gap-3">
+    <slot name="actions">
+      <a href={contactHref} class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">Cotizar</a>
+    </slot>
+    <button class="nav-hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" aria-label="Abrir menú">
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu hidden fixed top-16 left-0 right-0 bg-parchment/98 backdrop-blur-[12px] border-b border-gold/20 z-[190] flex-col py-4">
+  {currentPage !== "home" && (
+    <a href="/" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Inicio</a>
+  )}
+  {links.map((link) => (
+    <a
+      href={link.href}
+      class:list={[
+        "font-sans text-xs font-medium tracking-[0.2em] uppercase no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold",
+        isActive(link.key) ? "text-gold" : "text-ink-soft",
+      ]}
+    >
+      {link.label}
+    </a>
+  ))}
+</div>
+
+<style>
+  nav::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 48px;
+    right: 48px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(184, 137, 46, 0.3) 20%, rgba(184, 137, 46, 0.3) 80%, transparent);
+  }
+
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+
+  .nav-mobile-menu.open {
+    display: flex;
+  }
+
+  .nav-hamburger span {
+    transition:
+      transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 180ms ease;
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const nav = document.currentScript?.closest("body")?.querySelector("nav");
+    if (!nav) return;
+
+    const hamburger = nav.querySelector(".nav-hamburger");
+    const mobileMenu = document.querySelector(".nav-mobile-menu");
+    if (!(hamburger instanceof HTMLButtonElement) || !(mobileMenu instanceof HTMLElement)) {
+      return;
+    }
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+      });
+    });
+  })();
+</script>

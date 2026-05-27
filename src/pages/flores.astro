@@ -1,16 +1,13 @@
 ---
-import "../styles/global.css";
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 ---
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flores — Wonderland Events</title>
-<meta name="description" content="Arreglos florales, coronas y decoración con flores para bodas y eventos. Wonderland Events — cada pétalo cuenta una historia.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<Base
+  title="Flores — Wonderland Events"
+  description="Arreglos florales, coronas y decoración con flores para bodas y eventos. Wonderland Events — cada pétalo cuenta una historia."
+  bodyClass="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden"
+>
 <style is:global>
 /* NAV */
 nav::after { content: ''; position: absolute; bottom: -3px; left: 48px; right: 48px; height: 1px; background: linear-gradient(to right, transparent, rgba(184,137,46,0.28) 20%, rgba(184,137,46,0.28) 80%, transparent); }
@@ -75,31 +72,212 @@ nav::after { content: ''; position: absolute; bottom: -3px; left: 48px; right: 4
 /* MODAL */
 .modal-backdrop { position: fixed; inset: 0; background: rgba(26,14,7,0.65); z-index: 300; display: none; align-items: center; justify-content: center; padding: 24px; backdrop-filter: blur(6px); }
 .modal-backdrop.open { display: flex; }
-.modal { background: var(--color-parchment-3); border: 1px solid rgba(192,134,143,0.25); max-width: 780px; width: 100%; max-height: 92vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; position: relative; }
-.modal-close { position: absolute; top: 14px; right: 14px; background: none; border: none; cursor: pointer; font-size: 16px; color: var(--color-sepia); opacity: 0.6; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; z-index: 1; }
-.modal-close:hover { opacity: 1; }
-.modal-img { background: linear-gradient(160deg, #EDD9DC 0%, #D8C5C8 100%); overflow: hidden; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; }
-.modal-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) saturate(0.85); }
-.modal-info { padding: 44px 36px; display: flex; flex-direction: column; }
-.modal-cat { font-family: var(--font-serif-sc); font-size: 9px; font-weight: 300; letter-spacing: 0.35em; color: var(--color-rose); margin-bottom: 10px; }
-.modal-name { font-family: var(--font-serif); font-size: 34px; font-weight: 300; font-style: italic; color: var(--color-ink); line-height: 1.15; margin-bottom: 18px; }
-.modal-price { font-family: var(--font-serif); font-size: 30px; font-weight: 400; color: var(--color-gold); margin-bottom: 6px; }
-.modal-price small { font-family: var(--font-sans); font-size: 13px; font-weight: 300; color: var(--color-sepia); opacity: 0.7; }
-.modal-stock { font-family: var(--font-sans); font-size: 11px; color: var(--color-sepia); opacity: 0.65; margin-bottom: 20px; letter-spacing: 0.05em; }
-.modal-rule { height: 1px; background: rgba(192,134,143,0.2); margin: 0 0 22px; }
-.modal-desc { font-family: var(--font-serif); font-size: 16px; font-weight: 300; color: var(--color-ink-soft); line-height: 1.85; margin-bottom: 28px; flex: 1; }
-.modal-qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-.modal-qty-label { font-family: var(--font-serif-sc); font-size: 10px; font-weight: 300; letter-spacing: 0.2em; color: var(--color-ink-soft); }
-.qty-btn { width: 30px; height: 30px; border: 1px solid rgba(192,134,143,0.35); background: none; cursor: pointer; font-size: 18px; color: var(--color-ink); transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
-.qty-btn:hover { border-color: var(--color-rose); color: var(--color-rose); }
-.qty-display { font-family: var(--font-serif); font-size: 22px; font-weight: 300; color: var(--color-ink); min-width: 28px; text-align: center; }
-.modal-add-btn { font-family: var(--font-serif-sc); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; background: var(--color-rose-deep); color: var(--color-parchment-3); border: none; padding: 16px 28px; cursor: pointer; transition: background 0.2s; width: 100%; }
+.modal {
+  background: var(--color-parchment-3);
+  border: 1px solid rgba(184,137,46,0.25);
+  max-width: 960px; width: 100%; max-height: 90vh;
+  overflow: hidden;
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  position: relative;
+  box-shadow: 0 30px 80px -20px rgba(26,14,7,0.5);
+}
+.modal-close {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(242,229,204,0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(184,137,46,0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px; color: var(--color-ink-soft);
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; z-index: 4;
+}
+.modal-close:hover { color: var(--color-ink); border-color: var(--color-gold); background: var(--color-parchment-3); }
+
+/* IMAGE side */
+.modal-img-wrap {
+  background: var(--color-parchment-2);
+  position: relative; display: flex; flex-direction: column;
+  min-height: 0; overflow: hidden;
+}
+.modal-img {
+  position: relative; width: 100%; flex: 1;
+  min-height: 280px; overflow: hidden;
+  background: linear-gradient(160deg, #EDD9DC 0%, #D8C5C8 100%);
+}
+.modal-img img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) saturate(0.85); display: block; }
+.modal-gallery-main { position: absolute; inset: 0; }
+.modal-gallery-main img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) saturate(0.85); display: block; }
+.modal-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(184,137,46,0.35);
+  background: rgba(242,229,204,0.9); backdrop-filter: blur(6px);
+  color: var(--color-ink); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 22px; line-height: 1;
+  padding: 0 0 3px; z-index: 3;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.modal-arrow:hover { background: var(--color-parchment-3); border-color: var(--color-gold); transform: translateY(-50%) scale(1.05); }
+.modal-arrow.prev { left: 12px; }
+.modal-arrow.next { right: 12px; }
+
+.modal-counter {
+  position: absolute; top: 12px; left: 12px;
+  background: rgba(26,14,7,0.55); color: var(--color-parchment-3);
+  font-family: var(--font-serif-sc); font-size: 10px;
+  letter-spacing: 0.18em; padding: 5px 11px;
+  border-radius: 999px; backdrop-filter: blur(4px); z-index: 3;
+}
+
+.modal-thumbs {
+  display: flex; gap: 6px; padding: 10px 14px;
+  background: var(--color-parchment);
+  border-top: 1px solid rgba(184,137,46,0.18);
+  overflow-x: auto; scrollbar-width: thin;
+  scrollbar-color: rgba(184,137,46,0.3) transparent;
+  flex-shrink: 0;
+}
+.modal-thumbs::-webkit-scrollbar { height: 4px; }
+.modal-thumbs::-webkit-scrollbar-thumb { background: rgba(184,137,46,0.3); border-radius: 2px; }
+.modal-thumb {
+  width: 56px; height: 56px; overflow: hidden;
+  border: 1.5px solid rgba(184,137,46,0.2);
+  cursor: pointer; flex-shrink: 0; opacity: 0.6;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.modal-thumb img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%) saturate(0.85); }
+.modal-thumb.active { opacity: 1; border-color: var(--color-gold); }
+.modal-thumb:hover { opacity: 1; }
+
+/* INFO side */
+.modal-info {
+  padding: 40px 38px 32px;
+  display: flex; flex-direction: column;
+  overflow-y: auto; min-height: 0;
+}
+.modal-info-head { margin-bottom: 22px; }
+.modal-cat {
+  font-family: var(--font-serif-sc); font-size: 9.5px; font-weight: 300;
+  letter-spacing: 0.36em; color: var(--color-rose); margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.modal-name {
+  font-family: var(--font-serif); font-size: 28px; font-weight: 300;
+  font-style: italic; color: var(--color-ink); line-height: 1.18;
+}
+.modal-price-row {
+  display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: 8px 14px; padding: 14px 0 12px;
+  border-top: 1px solid rgba(184,137,46,0.18);
+  border-bottom: 1px solid rgba(184,137,46,0.18);
+  margin-bottom: 20px;
+}
+.modal-price {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 400;
+  color: var(--color-gold); line-height: 1; margin: 0;
+}
+.modal-price small {
+  font-family: var(--font-sans); font-size: 11px; font-weight: 300;
+  color: var(--color-sepia); opacity: 0.75; letter-spacing: 0.06em; margin-left: 2px;
+}
+.modal-stock-pill {
+  font-family: var(--font-serif-sc); font-size: 9px; font-weight: 300;
+  letter-spacing: 0.22em; color: var(--color-sepia);
+  padding: 4px 11px; border: 1px solid rgba(184,137,46,0.3);
+  border-radius: 999px; background: rgba(248,241,228,0.55);
+  white-space: nowrap;
+}
+.modal-desc {
+  font-family: var(--font-serif); font-size: 15px; font-weight: 300;
+  font-style: italic; color: var(--color-ink-soft); line-height: 1.75;
+  margin-bottom: 24px; flex: 1;
+}
+.modal-actions {
+  display: flex; flex-direction: column; gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(184,137,46,0.15);
+  margin-top: auto;
+}
+.modal-qty-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.modal-qty-label {
+  font-family: var(--font-serif-sc); font-size: 10px; font-weight: 300;
+  letter-spacing: 0.24em; color: var(--color-ink-soft); text-transform: uppercase;
+}
+.qty-control {
+  display: flex; align-items: center;
+  border: 1px solid rgba(184,137,46,0.3);
+}
+.qty-btn {
+  width: 34px; height: 34px; border: none;
+  background: none; cursor: pointer; font-size: 16px;
+  color: var(--color-ink); transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans);
+}
+.qty-btn:hover { background: var(--color-gold); color: var(--color-parchment); }
+.qty-display {
+  font-family: var(--font-serif); font-size: 18px; font-weight: 400;
+  color: var(--color-ink); min-width: 36px; text-align: center;
+  border-left: 1px solid rgba(184,137,46,0.2);
+  border-right: 1px solid rgba(184,137,46,0.2);
+  padding: 6px 0;
+}
+.modal-add-btn {
+  font-family: var(--font-serif-sc); font-size: 11px; font-weight: 400;
+  letter-spacing: 0.24em;
+  background: var(--color-rose-deep); color: var(--color-parchment-3);
+  border: none; padding: 15px 24px; cursor: pointer;
+  transition: background 0.2s; width: 100%;
+  text-transform: uppercase;
+}
 .modal-add-btn:hover { background: var(--color-rose); }
 .modal-add-btn.added { background: var(--color-sepia); }
-@media (max-width: 900px) {
-  .modal { grid-template-columns: 1fr; }
-  .modal-img { aspect-ratio: 4/3; }
-  .modal-info { padding: 28px 24px; }
+
+@media (max-width: 740px) {
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+  .modal {
+    max-width: 100%; max-height: 94vh;
+    grid-template-columns: 1fr; grid-template-rows: auto 1fr;
+    border-radius: 14px 14px 0 0;
+    border-left: none; border-right: none; border-bottom: none;
+    animation: sheetUp 0.32s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes sheetUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .modal::before {
+    content: ''; position: absolute;
+    top: 8px; left: 50%; transform: translateX(-50%);
+    width: 42px; height: 4px; border-radius: 999px;
+    background: rgba(184,137,46,0.35); z-index: 5;
+  }
+  .modal-img-wrap { max-height: 56vh; }
+  .modal-img { aspect-ratio: 4 / 3; }
+  .modal-arrow { width: 34px; height: 34px; font-size: 18px; }
+  .modal-arrow.prev { left: 8px; }
+  .modal-arrow.next { right: 8px; }
+  .modal-counter { top: 16px; left: 10px; font-size: 9px; padding: 4px 9px; }
+  .modal-close { top: 14px; right: 12px; width: 30px; height: 30px; font-size: 13px; }
+  .modal-thumbs { padding: 8px 12px; gap: 5px; }
+  .modal-thumb { width: 48px; height: 48px; }
+  .modal-info { padding: 22px 22px 24px; }
+  .modal-info-head { margin-bottom: 14px; }
+  .modal-cat { font-size: 9px; letter-spacing: 0.32em; margin-bottom: 6px; }
+  .modal-name { font-size: 22px; line-height: 1.2; }
+  .modal-price-row { padding: 11px 0 10px; margin-bottom: 16px; }
+  .modal-price { font-size: 22px; }
+  .modal-price small { font-size: 10px; }
+  .modal-stock-pill { font-size: 8.5px; padding: 3px 9px; letter-spacing: 0.18em; }
+  .modal-desc { font-size: 13.5px; line-height: 1.7; margin-bottom: 18px; }
+  .modal-actions { gap: 12px; padding-top: 14px; }
+  .modal-qty-label { font-size: 9.5px; letter-spacing: 0.2em; }
+  .qty-btn { width: 32px; height: 32px; font-size: 15px; }
+  .qty-display { font-size: 16px; min-width: 34px; padding: 5px 0; }
+  .modal-add-btn { padding: 14px 20px; font-size: 10.5px; letter-spacing: 0.22em; }
 }
 
 /* CART PANEL */
@@ -159,39 +337,17 @@ nav::after { content: ''; position: absolute; bottom: -3px; left: 48px; right: 4
   .card-img { aspect-ratio: 4/3; }
 }
 </style>
-</head>
-<body class="bg-parchment-3 text-ink font-sans font-light overflow-x-hidden">
-
-<!-- NAV -->
-<nav class="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-12 h-16 bg-parchment/97 backdrop-blur-[12px] border-b border-gold/[.22] max-[900px]:px-5">
-  <a href="/" class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline whitespace-nowrap max-[480px]:text-[13px] max-[480px]:tracking-[0.12em]">Wonderland Events</a>
-  <ul class="list-none flex gap-8 max-[900px]:hidden">
-    <li><a href="/#portfolio" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Portfolio</a></li>
-    <li><a href="/catalogo" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Catálogo</a></li>
-    <li><a href="/flores" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-gold no-underline">Flores</a></li>
-    <li><a href="/nosotros" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Nosotros</a></li>
-    <li><a href="/#contact" class="font-sans text-[10px] font-medium tracking-[0.22em] uppercase text-ink-soft no-underline transition-colors duration-200 hover:text-gold">Contacto</a></li>
-  </ul>
-  <div class="flex items-center gap-3">
-    <button class="hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" id="hamburger">
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-      <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
-    </button>
-    <button class="nav-cart-btn font-serif-sc text-[10px] font-normal tracking-[0.18em] text-parchment-3 bg-rose-deep border-none py-[9px] px-5 cursor-pointer transition-colors duration-200 flex items-center gap-2 hover:bg-rose" id="openCartBtn">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-      <span>Cotización</span>
-      <span class="cart-count bg-gold text-ink text-[9px] font-semibold font-sans w-[18px] h-[18px] rounded-full hidden items-center justify-center" id="cartCount">0</span>
-    </button>
-  </div>
-</nav>
-<div class="mobile-menu hidden fixed top-16 left-0 right-0 bg-parchment/[.98] backdrop-blur-[12px] border-b border-gold/20 z-[190] flex-col py-4" id="mobileMenu">
-  <a href="/" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/[.12] transition-colors duration-200 hover:text-gold">Inicio</a>
-  <a href="/catalogo" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/[.12] transition-colors duration-200 hover:text-gold">Catálogo</a>
-  <a href="/flores" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-gold no-underline py-[14px] px-7 border-b border-gold/[.12]">Flores</a>
-  <a href="/nosotros" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/[.12] transition-colors duration-200 hover:text-gold">Nosotros</a>
-  <a href="/#contact" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/[.12] transition-colors duration-200 hover:text-gold">Contacto</a>
-</div>
+<Fragment slot="nav">
+  <Nav currentPage="flores">
+    <Fragment slot="actions">
+      <button class="nav-cart-btn font-serif-sc text-[10px] font-normal tracking-[0.18em] text-parchment-3 bg-rose-deep border-none py-[9px] px-5 cursor-pointer transition-colors duration-200 flex items-center gap-2 hover:bg-rose" id="openCartBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>Cotización</span>
+        <span class="cart-count bg-gold text-ink text-[9px] font-semibold font-sans w-[18px] h-[18px] rounded-full hidden items-center justify-center" id="cartCount">0</span>
+      </button>
+    </Fragment>
+  </Nav>
+</Fragment>
 
 <!-- PAGE HEADER -->
 <div class="page-header bg-parchment pt-[110px] pb-[60px] px-20 text-center relative overflow-hidden min-h-[42vh] flex flex-col items-center justify-center max-[900px]:pt-[100px] max-[900px]:pb-[44px] max-[900px]:px-6">
@@ -236,31 +392,44 @@ nav::after { content: ''; position: absolute; bottom: -3px; left: 48px; right: 4
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="bg-deep py-[26px] px-20 flex justify-between items-center border-t border-gold/[.12] max-[900px]:flex-col max-[900px]:gap-[10px] max-[900px]:text-center max-[900px]:px-6">
-  <span class="font-serif-sc text-[13px] font-normal tracking-[0.22em] text-gold-light opacity-80">Wonderland Events</span>
-  <span class="font-sans text-[10px] font-light tracking-[0.1em] text-gold/30">© 2026 · Curiouser and Curiouser · Rentals &amp; Decoration</span>
-</footer>
+<Fragment slot="footer">
+  <Footer />
+</Fragment>
 
 <!-- DETAIL MODAL -->
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose">✕</button>
-    <div class="modal-img" id="modalImg"></div>
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+
+    <div class="modal-img-wrap" id="modalImgWrap">
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-thumbs" id="modalThumbs" style="display:none;"></div>
+    </div>
+
     <div class="modal-info">
-      <p class="modal-cat" id="modalCat"></p>
-      <h2 class="modal-name" id="modalName"></h2>
-      <p class="modal-price" id="modalPrice"></p>
-      <p class="modal-stock" id="modalStock"></p>
-      <div class="modal-rule"></div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-qty-row">
-        <span class="modal-qty-label">Cantidad:</span>
-        <button class="qty-btn" id="qtyMinus">−</button>
-        <span class="qty-display" id="qtyDisplay">1</span>
-        <button class="qty-btn" id="qtyPlus">+</button>
+      <div class="modal-info-head">
+        <p class="modal-cat" id="modalCat"></p>
+        <h2 class="modal-name" id="modalName"></h2>
       </div>
-      <button class="modal-add-btn" id="modalAddBtn">Agregar a cotización</button>
+
+      <div class="modal-price-row">
+        <p class="modal-price" id="modalPrice"></p>
+        <span class="modal-stock-pill" id="modalStock"></span>
+      </div>
+
+      <p class="modal-desc" id="modalDesc"></p>
+
+      <div class="modal-actions">
+        <div class="modal-qty-row">
+          <span class="modal-qty-label">Cantidad</span>
+          <div class="qty-control">
+            <button class="qty-btn" id="qtyMinus" aria-label="Restar">−</button>
+            <span class="qty-display" id="qtyDisplay">1</span>
+            <button class="qty-btn" id="qtyPlus" aria-label="Sumar">+</button>
+          </div>
+        </div>
+        <button class="modal-add-btn" id="modalAddBtn">Agregar a cotización</button>
+      </div>
     </div>
   </div>
 </div>
@@ -309,30 +478,49 @@ nav::after { content: ''; position: absolute; bottom: -3px; left: 48px; right: 4
 </div>
 
 <script>
+const U = id => `https://images.unsplash.com/photo-${id}?w=900&q=75&fit=crop`;
 const FLORES_DATA = [
-  { id: 'f1', nombre: 'Arco Floral Campestre', categoria: 'Arcos Florales', precio_renta: 280, stock_total: 3, descripcion: 'Arco redondo cubierto con rosas, peonías y eucalipto. Ideal para bodas y sesiones fotográficas. Dimensiones: 2.40m × 2.40m.', imagen: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=75&fit=crop' },
-  { id: 'f2', nombre: 'Arco Media Luna', categoria: 'Arcos Florales', precio_renta: 320, stock_total: 2, descripcion: 'Semicírculo floral asimétrico con flores silvestres, ramas y follaje verde. Estructura de metal incluida.', imagen: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=75&fit=crop' },
-  { id: 'f3', nombre: 'Arco Marquesina Blanco', categoria: 'Arcos Florales', precio_renta: 450, stock_total: 1, descripcion: 'Gran estructura rectangular con guirnaldas de flores blancas y hojas verdes. Elegante para ceremonias al aire libre.', imagen: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=75&fit=crop' },
-  { id: 'f4', nombre: 'Centro Alto Cristal', categoria: 'Centros de Mesa', precio_renta: 85, stock_total: 20, descripcion: 'Jarrón de cristal alto con rosas, astromelias y greenery. Altura aproximada 70cm. Precio por unidad.', imagen: 'https://images.unsplash.com/photo-1533038590840-1cde6e668a91?w=600&q=75&fit=crop' },
-  { id: 'f5', nombre: 'Centro Bajo Rústico', categoria: 'Centros de Mesa', precio_renta: 55, stock_total: 30, descripcion: 'Caja de madera con flores de temporada, suculentas y musgo. Perfecto para mesas largas estilo rústico o boho.', imagen: null },
-  { id: 'f6', nombre: 'Centro Minimalista', categoria: 'Centros de Mesa', precio_renta: 45, stock_total: 25, descripcion: 'Florero cilíndrico negro con 3 tallos de flor exótica y follaje seco. Moderno y elegante para eventos contemporáneos.', imagen: null },
-  { id: 'f7', nombre: 'Centro Cascada Novia', categoria: 'Centros de Mesa', precio_renta: 110, stock_total: 10, descripcion: 'Centro tipo cascada con rosas inglesas, lisianthus y wisteria colgante. Efecto dramático y romántico.', imagen: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=75&fit=crop' },
-  { id: 'f8', nombre: 'Bouquet Novia Romántico', categoria: 'Bouquets', precio_renta: 120, stock_total: 5, descripcion: 'Ramo redondo compacto de rosas inglesas David Austin, peonías y eucalipto. Incluye cinta de raso.', imagen: 'https://images.unsplash.com/photo-1627556704302-624286467c65?w=600&q=75&fit=crop' },
-  { id: 'f9', nombre: 'Bouquet Silvestre', categoria: 'Bouquets', precio_renta: 85, stock_total: 8, descripcion: 'Ramo asimétrico con flores de temporada, hierbas aromáticas y follaje silvestre. Estilo boho chic.', imagen: null },
-  { id: 'f10', nombre: 'Bouquet Dama de Honor', categoria: 'Bouquets', precio_renta: 60, stock_total: 12, descripcion: 'Ramo pequeño coordinado con el bouquet de novia. Perfecto para el cortejo nupcial.', imagen: null },
-  { id: 'f11', nombre: 'Corona Floral Cabeza', categoria: 'Coronas & Guirnaldas', precio_renta: 45, stock_total: 6, descripcion: 'Corona para la cabeza con flores frescas pequeñas y follaje delicado. Ideal para novias, quinceañeras y baby showers.', imagen: null },
-  { id: 'f12', nombre: 'Guirnalda Eucalipto & Rosas', categoria: 'Coronas & Guirnaldas', precio_renta: 35, stock_total: 15, descripcion: 'Por metro lineal. Guirnalda de eucalipto natural con rosas intercaladas. Para decorar mesas, escaleras o entradas.', imagen: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=75&fit=crop' },
-  { id: 'f13', nombre: 'Swag Floral para Silla', categoria: 'Coronas & Guirnaldas', precio_renta: 22, stock_total: 40, descripcion: 'Decoración floral para el respaldo de sillas. Incluye cinta y flor central. Precio por unidad.', imagen: null },
-  { id: 'f14', nombre: 'Camino de Pétalos Rosas', categoria: 'Pétalos & Suelos', precio_renta: 75, stock_total: 10, descripcion: 'Camino de pétalos de rosa natural para la entrada de la ceremonia. Longitud 10m. Colores personalizables.', imagen: null },
-  { id: 'f15', nombre: 'Alfombra Floral Bebé', categoria: 'Pétalos & Suelos', precio_renta: 140, stock_total: 3, descripcion: 'Composición floral en el suelo tipo "flower floor" para fotos. 2m × 1.5m con flores variadas y hojas.', imagen: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=75&fit=crop' },
-  { id: 'f16', nombre: 'Jarrón Vintage Bronce', categoria: 'Accesorios', precio_renta: 18, stock_total: 20, descripcion: 'Jarrón estilo vintage en tono bronce envejecido. No incluye flores. Ideal para uso decorativo o con flores secas.', imagen: null },
-  { id: 'f17', nombre: 'Florero de Cristal Burbuja', categoria: 'Accesorios', precio_renta: 12, stock_total: 30, descripcion: 'Florero esférico de cristal soplado. No incluye flores. Perfecto como elemento decorativo o porta velas flotantes.', imagen: null },
-  { id: 'f18', nombre: 'Caja Madera para Flores', categoria: 'Accesorios', precio_renta: 15, stock_total: 18, descripcion: 'Caja rectangular de madera pintada en blanco. No incluye flores. Uso como base para centros de mesa o arreglos.', imagen: null },
+  { id: 'f1', nombre: 'Arco Floral Campestre', categoria: 'Arcos Florales', precio_renta: 280, stock_total: 3, descripcion: 'Arco redondo cubierto con rosas, peonías y eucalipto. Ideal para bodas y sesiones fotográficas. Dimensiones: 2.40m × 2.40m.',
+    imagenes: [U('1519225421980-715cb0215aed'), U('1507003211169-0a1dd7228f2d'), U('1525772764200-be829a350797'), U('1606490194859-07c18c9f0968')] },
+  { id: 'f2', nombre: 'Arco Media Luna', categoria: 'Arcos Florales', precio_renta: 320, stock_total: 2, descripcion: 'Semicírculo floral asimétrico con flores silvestres, ramas y follaje verde. Estructura de metal incluida.',
+    imagenes: [U('1465495976277-4387d4b0b4c6'), U('1606490194859-07c18c9f0968'), U('1525772764200-be829a350797')] },
+  { id: 'f3', nombre: 'Arco Marquesina Blanco', categoria: 'Arcos Florales', precio_renta: 450, stock_total: 1, descripcion: 'Gran estructura rectangular con guirnaldas de flores blancas y hojas verdes. Elegante para ceremonias al aire libre.',
+    imagenes: [U('1519741497674-611481863552'), U('1507003211169-0a1dd7228f2d'), U('1519225421980-715cb0215aed')] },
+  { id: 'f4', nombre: 'Centro Alto Cristal', categoria: 'Centros de Mesa', precio_renta: 85, stock_total: 20, descripcion: 'Jarrón de cristal alto con rosas, astromelias y greenery. Altura aproximada 70cm. Precio por unidad.',
+    imagenes: [U('1533038590840-1cde6e668a91'), U('1606800052052-a08af7148866'), U('1487530811176-3780de880c2d')] },
+  { id: 'f5', nombre: 'Centro Bajo Rústico', categoria: 'Centros de Mesa', precio_renta: 55, stock_total: 30, descripcion: 'Caja de madera con flores de temporada, suculentas y musgo. Perfecto para mesas largas estilo rústico o boho.',
+    imagenes: [U('1478146896981-b80fe463b330'), U('1487530811176-3780de880c2d'), U('1606800052052-a08af7148866')] },
+  { id: 'f6', nombre: 'Centro Minimalista', categoria: 'Centros de Mesa', precio_renta: 45, stock_total: 25, descripcion: 'Florero cilíndrico negro con 3 tallos de flor exótica y follaje seco. Moderno y elegante para eventos contemporáneos.',
+    imagenes: [U('1561128290-024d7d22cf2d'), U('1487530811176-3780de880c2d')] },
+  { id: 'f7', nombre: 'Centro Cascada Novia', categoria: 'Centros de Mesa', precio_renta: 110, stock_total: 10, descripcion: 'Centro tipo cascada con rosas inglesas, lisianthus y wisteria colgante. Efecto dramático y romántico.',
+    imagenes: [U('1507003211169-0a1dd7228f2d'), U('1494774157365-9e04c6720e47'), U('1487530811176-3780de880c2d'), U('1606800052052-a08af7148866')] },
+  { id: 'f8', nombre: 'Bouquet Novia Romántico', categoria: 'Bouquets', precio_renta: 120, stock_total: 5, descripcion: 'Ramo redondo compacto de rosas inglesas David Austin, peonías y eucalipto. Incluye cinta de raso.',
+    imagenes: [U('1494774157365-9e04c6720e47'), U('1487530811176-3780de880c2d'), U('1525772764200-be829a350797')] },
+  { id: 'f9', nombre: 'Bouquet Silvestre', categoria: 'Bouquets', precio_renta: 85, stock_total: 8, descripcion: 'Ramo asimétrico con flores de temporada, hierbas aromáticas y follaje silvestre. Estilo boho chic.',
+    imagenes: [U('1487530811176-3780de880c2d'), U('1494774157365-9e04c6720e47')] },
+  { id: 'f10', nombre: 'Bouquet Dama de Honor', categoria: 'Bouquets', precio_renta: 60, stock_total: 12, descripcion: 'Ramo pequeño coordinado con el bouquet de novia. Perfecto para el cortejo nupcial.',
+    imagenes: [U('1494774157365-9e04c6720e47'), U('1487530811176-3780de880c2d')] },
+  { id: 'f11', nombre: 'Corona Floral Cabeza', categoria: 'Coronas & Guirnaldas', precio_renta: 45, stock_total: 6, descripcion: 'Corona para la cabeza con flores frescas pequeñas y follaje delicado. Ideal para novias, quinceañeras y baby showers.',
+    imagenes: [U('1487530811176-3780de880c2d'), U('1494774157365-9e04c6720e47'), U('1525772764200-be829a350797')] },
+  { id: 'f12', nombre: 'Guirnalda Eucalipto & Rosas', categoria: 'Coronas & Guirnaldas', precio_renta: 35, stock_total: 15, descripcion: 'Por metro lineal. Guirnalda de eucalipto natural con rosas intercaladas. Para decorar mesas, escaleras o entradas.',
+    imagenes: [U('1465495976277-4387d4b0b4c6'), U('1533038590840-1cde6e668a91'), U('1478146896981-b80fe463b330')] },
+  { id: 'f13', nombre: 'Swag Floral para Silla', categoria: 'Coronas & Guirnaldas', precio_renta: 22, stock_total: 40, descripcion: 'Decoración floral para el respaldo de sillas. Incluye cinta y flor central. Precio por unidad.',
+    imagenes: [U('1487530811176-3780de880c2d'), U('1494774157365-9e04c6720e47')] },
+  { id: 'f14', nombre: 'Camino de Pétalos Rosas', categoria: 'Pétalos & Suelos', precio_renta: 75, stock_total: 10, descripcion: 'Camino de pétalos de rosa natural para la entrada de la ceremonia. Longitud 10m. Colores personalizables.',
+    imagenes: [U('1561128290-024d7d22cf2d'), U('1606800052052-a08af7148866'), U('1487530811176-3780de880c2d')] },
+  { id: 'f15', nombre: 'Alfombra Floral Bebé', categoria: 'Pétalos & Suelos', precio_renta: 140, stock_total: 3, descripcion: 'Composición floral en el suelo tipo "flower floor" para fotos. 2m × 1.5m con flores variadas y hojas.',
+    imagenes: [U('1519225421980-715cb0215aed'), U('1606800052052-a08af7148866'), U('1561128290-024d7d22cf2d')] },
+  { id: 'f16', nombre: 'Jarrón Vintage Bronce', categoria: 'Accesorios', precio_renta: 18, stock_total: 20, descripcion: 'Jarrón estilo vintage en tono bronce envejecido. No incluye flores. Ideal para uso decorativo o con flores secas.',
+    imagenes: [U('1478146896981-b80fe463b330'), U('1487530811176-3780de880c2d')] },
+  { id: 'f17', nombre: 'Florero de Cristal Burbuja', categoria: 'Accesorios', precio_renta: 12, stock_total: 30, descripcion: 'Florero esférico de cristal soplado. No incluye flores. Perfecto como elemento decorativo o porta velas flotantes.',
+    imagenes: [U('1478146896981-b80fe463b330'), U('1487530811176-3780de880c2d')] },
+  { id: 'f18', nombre: 'Caja Madera para Flores', categoria: 'Accesorios', precio_renta: 15, stock_total: 18, descripcion: 'Caja rectangular de madera pintada en blanco. No incluye flores. Uso como base para centros de mesa o arreglos.',
+    imagenes: [U('1478146896981-b80fe463b330'), U('1606800052052-a08af7148866')] },
 ];
 
 const WHATSAPP_NUMBER = '10000000000';
 let allItems = [...FLORES_DATA], filtered = [...FLORES_DATA], activeCategory = 'all', searchTerm = '';
-let cart = {}, currentItem = null, currentQty = 1;
+let cart = {}, currentItem = null, currentQty = 1, currentPhotoIdx = 0;
 
 function init() { applyFilters(); }
 
@@ -385,8 +573,9 @@ function flowerPlaceholder(name) {
 }
 
 function cardHTML(item) {
-  const img = item.imagen
-    ? `<img src="${item.imagen}" alt="${item.nombre}" loading="lazy">`
+  const first = item.imagenes?.[0];
+  const img = first
+    ? `<img src="${first}" alt="${item.nombre}" loading="lazy">`
     : flowerPlaceholder(item.nombre);
   return `<div class="item-card" data-id="${item.id}">
     <div class="card-img">${img}</div>
@@ -416,14 +605,12 @@ function openModal(id) {
   currentItem = allItems.find(i => String(i.id) === String(id));
   if (!currentItem) return;
   currentQty = cart[id]?.qty || 1;
-  const img = currentItem.imagen
-    ? `<img src="${currentItem.imagen}" alt="${currentItem.nombre}">`
-    : `<div style="height:100%;display:flex;align-items:center;justify-content:center;">${flowerPlaceholder(currentItem.nombre)}</div>`;
-  document.getElementById('modalImg').innerHTML = img;
+  currentPhotoIdx = 0;
+  renderModalGallery();
   document.getElementById('modalCat').textContent = currentItem.categoria;
   document.getElementById('modalName').textContent = currentItem.nombre;
   document.getElementById('modalPrice').innerHTML = `$${Number(currentItem.precio_renta).toLocaleString()} <small>/ renta</small>`;
-  document.getElementById('modalStock').textContent = `Disponibilidad: ${currentItem.stock_total} unidades`;
+  document.getElementById('modalStock').textContent = `${currentItem.stock_total} disponibles`;
   document.getElementById('modalDesc').textContent = currentItem.descripcion;
   document.getElementById('qtyDisplay').textContent = currentQty;
   const inCart = !!cart[id];
@@ -434,9 +621,65 @@ function openModal(id) {
   document.body.style.overflow = 'hidden';
 }
 
+function renderModalGallery() {
+  const imgs = currentItem.imagenes || [];
+  const wrap = document.getElementById('modalImg');
+  const thumbsEl = document.getElementById('modalThumbs');
+  if (!imgs.length) {
+    wrap.innerHTML = `<div style="height:100%;display:flex;align-items:center;justify-content:center;">${flowerPlaceholder(currentItem.nombre)}</div>`;
+    thumbsEl.style.display = 'none';
+    thumbsEl.innerHTML = '';
+    return;
+  }
+  const src = imgs[currentPhotoIdx];
+  let html = `<div class="modal-gallery-main"><img src="${src}" alt="${currentItem.nombre}"></div>`;
+  if (imgs.length > 1) {
+    html += `<div class="modal-counter">${currentPhotoIdx + 1} / ${imgs.length}</div>`;
+    html += `<button class="modal-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>`;
+    html += `<button class="modal-arrow next" data-dir="1" aria-label="Foto siguiente">›</button>`;
+  }
+  wrap.innerHTML = html;
+
+  if (imgs.length > 1) {
+    thumbsEl.style.display = 'flex';
+    thumbsEl.innerHTML = imgs.map((s, i) =>
+      `<div class="modal-thumb ${i === currentPhotoIdx ? 'active' : ''}" data-idx="${i}"><img src="${s}" alt=""></div>`
+    ).join('');
+    thumbsEl.querySelectorAll('.modal-thumb').forEach(t => {
+      t.addEventListener('click', e => {
+        e.stopPropagation();
+        currentPhotoIdx = Number(t.dataset.idx);
+        renderModalGallery();
+      });
+    });
+  } else {
+    thumbsEl.style.display = 'none';
+    thumbsEl.innerHTML = '';
+  }
+
+  wrap.querySelectorAll('.modal-arrow').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const dir = Number(btn.dataset.dir);
+      const n = imgs.length;
+      currentPhotoIdx = (currentPhotoIdx + dir + n) % n;
+      renderModalGallery();
+    });
+  });
+}
+
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 function closeModal() { document.getElementById('modalBackdrop').classList.remove('open'); document.body.style.overflow = ''; currentItem = null; }
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('modalBackdrop').classList.contains('open')) return;
+  if (e.key === 'Escape') { closeModal(); return; }
+  if (!currentItem?.imagenes || currentItem.imagenes.length < 2) return;
+  const n = currentItem.imagenes.length;
+  if (e.key === 'ArrowLeft') { currentPhotoIdx = (currentPhotoIdx - 1 + n) % n; renderModalGallery(); }
+  if (e.key === 'ArrowRight') { currentPhotoIdx = (currentPhotoIdx + 1) % n; renderModalGallery(); }
+});
 
 document.getElementById('qtyMinus').addEventListener('click', () => { if (currentQty > 1) { currentQty--; document.getElementById('qtyDisplay').textContent = currentQty; } });
 document.getElementById('qtyPlus').addEventListener('click', () => { if (currentQty < (currentItem?.stock_total || 99)) { currentQty++; document.getElementById('qtyDisplay').textContent = currentQty; } });
@@ -467,7 +710,7 @@ function updateCartUI() {
     const { item, qty } = cart[id];
     const sub = Number(item.precio_renta) * qty;
     total += sub;
-    const img = item.imagen ? `<img src="${item.imagen}" alt="${item.nombre}">` : '';
+    const img = item.imagenes?.[0] ? `<img src="${item.imagenes[0]}" alt="${item.nombre}">` : '';
     return `<div class="cart-item" data-id="${id}">
       <div class="ci-img">${img}</div>
       <div class="ci-info">
@@ -524,11 +767,6 @@ document.getElementById('whatsappBtn').addEventListener('click', () => {
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 });
 
-const hb = document.getElementById('hamburger'), mm = document.getElementById('mobileMenu');
-hb.addEventListener('click', () => { hb.classList.toggle('open'); mm.classList.toggle('open'); });
-mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mm.classList.remove('open'); }));
-
 init();
 </script>
-</body>
-</html>
+</Base>
