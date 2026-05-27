@@ -46,7 +46,9 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
   </head>
   <body class={bodyClass}>
     <slot name="nav" />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <slot name="footer" />
   </body>
  </html>
