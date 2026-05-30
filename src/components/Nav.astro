@@ -102,16 +102,15 @@ const isActive = (key: string) =>
   }
 </style>
 
-<script is:inline>
-  (() => {
-    const nav = document.currentScript?.closest("body")?.querySelector("nav");
-    if (!nav) return;
+<script>
+  const hamburger = document.querySelector<HTMLButtonElement>(".nav-hamburger");
+  const mobileMenu = document.querySelector<HTMLElement>(".nav-mobile-menu");
 
-    const hamburger = nav.querySelector(".nav-hamburger");
-    const mobileMenu = document.querySelector(".nav-mobile-menu");
-    if (!(hamburger instanceof HTMLButtonElement) || !(mobileMenu instanceof HTMLElement)) {
-      return;
-    }
+  if (hamburger && mobileMenu) {
+    const close = () => {
+      hamburger.classList.remove("open");
+      mobileMenu.classList.remove("open");
+    };
 
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("open");
@@ -119,10 +118,7 @@ const isActive = (key: string) =>
     });
 
     mobileMenu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        hamburger.classList.remove("open");
-        mobileMenu.classList.remove("open");
-      });
+      link.addEventListener("click", close);
     });
-  })();
+  }
 </script>

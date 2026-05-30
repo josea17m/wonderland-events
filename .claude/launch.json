@@ -5,7 +5,7 @@
       "name": "wonderland-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 4325
+      "port": 4321
     }
   ]
 }
