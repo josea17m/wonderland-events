@@ -1,24 +1,22 @@
 ---
 import "../styles/catalog-shell.css";
+import { useTranslations, type Lang } from "../i18n/utils";
 
 interface Props {
-  cartTitle?: string;
+  lang: Lang;
+  cartTitle: string;
   emptyMessageHtml: string;
-  notesPlaceholder?: string;
-  successMessageHtml?: string;
+  notesPlaceholder: string;
+  successMessageHtml: string;
 }
 
-const {
-  cartTitle = "Mi Cotización",
-  emptyMessageHtml,
-  notesPlaceholder = "Tipo de evento, lugar, etc.",
-  successMessageHtml = '¡Cotización enviada! ✦<br><small style="font-size:13px;font-style:normal;font-family:var(--sans);color:var(--sepia);opacity:0.8;">Nos pondremos en contacto contigo pronto.</small>',
-} = Astro.props;
+const { lang, cartTitle, emptyMessageHtml, notesPlaceholder, successMessageHtml } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal" id="modal">
-    <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    <button class="modal-close" id="modalClose" aria-label={t("cart.close")}>✕</button>
 
     <div class="modal-img-wrap" id="modalImgWrap">
       <div class="modal-img" id="modalImg"></div>
@@ -40,14 +38,14 @@ const {
 
       <div class="modal-actions">
         <div class="modal-qty-row">
-          <span class="modal-qty-label">Cantidad</span>
+          <span class="modal-qty-label">{t("cart.quantity")}</span>
           <div class="qty-control">
-            <button class="qty-btn" id="qtyMinus" aria-label="Restar">−</button>
+            <button class="qty-btn" id="qtyMinus" aria-label={t("cart.subtract")}>−</button>
             <span class="qty-display" id="qtyDisplay">1</span>
-            <button class="qty-btn" id="qtyPlus" aria-label="Sumar">+</button>
+            <button class="qty-btn" id="qtyPlus" aria-label={t("cart.add")}>+</button>
           </div>
         </div>
-        <button class="modal-add-btn" id="modalAddBtn">Agregar a cotización</button>
+        <button class="modal-add-btn" id="modalAddBtn">{t("cart.modalAdd")}</button>
       </div>
     </div>
   </div>
@@ -63,44 +61,44 @@ const {
     <Fragment set:html={emptyMessageHtml} />
   </div>
   <div class="cart-total" id="cartTotalRow" style="display:none">
-    <span class="cart-total-label">Total estimado</span>
+    <span class="cart-total-label">{t("cart.totalLabel")}</span>
     <span class="cart-total-val" id="cartTotalVal">$0</span>
   </div>
   <div class="quote-form" id="quoteForm">
-    <h3>Datos de contacto</h3>
+    <h3>{t("cart.contactTitle")}</h3>
     <div class="form-row">
       <div class="form-field">
-        <label class="form-label" for="fNombre">Nombre</label>
-        <input type="text" class="form-input" id="fNombre" placeholder="Tu nombre" />
+        <label class="form-label" for="fNombre">{t("cart.lblName")}</label>
+        <input type="text" class="form-input" id="fNombre" placeholder={t("cart.phName")} />
       </div>
       <div class="form-field">
-        <label class="form-label" for="fTelefono">Teléfono</label>
-        <input type="tel" class="form-input" id="fTelefono" placeholder="+1 000 000 0000" />
+        <label class="form-label" for="fTelefono">{t("cart.lblPhone")}</label>
+        <input type="tel" class="form-input" id="fTelefono" placeholder={t("cart.phPhone")} />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field full">
-        <label class="form-label" for="fCorreo">Correo electrónico</label>
-        <input type="email" class="form-input" id="fCorreo" placeholder="tu@correo.com" />
+        <label class="form-label" for="fCorreo">{t("cart.lblEmail")}</label>
+        <input type="email" class="form-input" id="fCorreo" placeholder={t("cart.phEmail")} />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field full">
-        <label class="form-label" for="fFecha">Fecha del evento</label>
+        <label class="form-label" for="fFecha">{t("cart.lblDate")}</label>
         <input type="date" class="form-input" id="fFecha" />
       </div>
     </div>
     <div class="form-row">
       <div class="form-field full">
-        <label class="form-label" for="fNotas">Notas adicionales</label>
+        <label class="form-label" for="fNotas">{t("cart.lblNotes")}</label>
         <input type="text" class="form-input" id="fNotas" placeholder={notesPlaceholder} />
       </div>
     </div>
     <div class="quote-actions">
-      <button class="btn-quote" id="sendQuoteBtn">Enviar cotización</button>
+      <button class="btn-quote" id="sendQuoteBtn">{t("cart.send")}</button>
       <button class="btn-whatsapp" id="whatsappBtn">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.996 0C5.373 0 0 5.373 0 11.996c0 2.117.554 4.1 1.521 5.825L0 24l6.335-1.502a11.956 11.956 0 005.661 1.434h.005C18.622 23.932 24 18.558 24 11.935 24 5.373 18.622 0 11.996 0zm.009 21.906a9.928 9.928 0 01-5.058-1.382l-.363-.215-3.76.891.945-3.666-.237-.376a9.906 9.906 0 01-1.52-5.275c0-5.488 4.467-9.955 9.955-9.955a9.955 9.955 0 019.955 9.955c-.001 5.488-4.468 9.953-9.917 9.953v.07z"/></svg>
-        WhatsApp
+        {t("cart.whatsapp")}
       </button>
     </div>
     <div class="success-msg" id="successMsg">

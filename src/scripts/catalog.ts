@@ -8,6 +8,29 @@ type Item = {
   imagenes?: string[];
 };
 
+type Labels = {
+  allCategory: string;
+  addToCart: string;
+  addedToCart: string;
+  prevPhoto: string;
+  nextPhoto: string;
+  generalCategory: string;
+  availableSuffix: string;
+  itemAvailable: string;
+  perRent: string;
+  modalAdd: string;
+  modalInCart: string;
+  noResultsTitle: string;
+  noResultsHint: string;
+  countSingular: string;
+  countPlural: string;
+  fillRequired: string;
+  emptyQuoteAlert: string;
+  dateTBD: string;
+  whatsappWants: string;
+  whatsappDate: string;
+};
+
 type InitOptions = {
   items: Item[];
   whatsappNumber: string;
@@ -15,6 +38,7 @@ type InitOptions = {
   whatsappGreeting: string;
   itemLabel?: string;
   notesFallback: string;
+  labels: Labels;
   placeholderHtml: (name: string) => string;
   cardHtml: (item: Item) => string;
   dynamicCategories?: boolean;
@@ -41,11 +65,13 @@ export function initQuoteCatalog(options: InitOptions) {
 
   if (!grid || !searchInput || !resultsCount || !catsContainer) return;
 
+  const L = options.labels;
+
   const buildCategories = () => {
     if (!options.dynamicCategories) return;
 
     const cats = [...new Set(state.allItems.map((item) => item.categoria).filter(Boolean))];
-    catsContainer.innerHTML = '<button class="cat-chip active" data-cat="all">Todos</button>';
+    catsContainer.innerHTML = `<button class="cat-chip active" data-cat="all">${L.allCategory}</button>`;
     cats.forEach((cat) => {
       const btn = document.createElement("button");
       btn.className = "cat-chip";
@@ -62,7 +88,7 @@ export function initQuoteCatalog(options: InitOptions) {
       card.classList.toggle("in-cart", inCart);
       const btn = card.querySelector<HTMLButtonElement>(".card-add");
       if (btn) {
-        btn.textContent = inCart ? "✓ Agregado" : "+ Agregar";
+        btn.textContent = inCart ? L.addedToCart : L.addToCart;
         btn.classList.toggle("added", inCart);
       }
     });
@@ -87,8 +113,8 @@ export function initQuoteCatalog(options: InitOptions) {
     let html = `<div class="modal-gallery-main"><img src="${src}" alt="${state.currentItem.nombre}"></div>`;
     if (imgs.length > 1) {
       html += `<div class="modal-counter">${state.currentPhotoIdx + 1} / ${imgs.length}</div>`;
-      html += `<button class="modal-arrow prev" data-dir="-1" aria-label="Foto anterior">‹</button>`;
-      html += `<button class="modal-arrow next" data-dir="1" aria-label="Foto siguiente">›</button>`;
+      html += `<button class="modal-arrow prev" data-dir="-1" aria-label="${L.prevPhoto}">‹</button>`;
+      html += `<button class="modal-arrow next" data-dir="1" aria-label="${L.nextPhoto}">›</button>`;
     }
     wrap.innerHTML = html;
 
@@ -152,7 +178,7 @@ export function initQuoteCatalog(options: InitOptions) {
         return `<div class="cart-item" data-id="${id}">
           <div class="ci-img">${image}</div>
           <div class="ci-info">
-            <p class="ci-cat">${item.categoria || "General"}</p>
+            <p class="ci-cat">${item.categoria || L.generalCategory}</p>
             <p class="ci-name">${item.nombre}</p>
             <div class="ci-qty-row">
               <button class="ci-qty-btn ci-minus">−</button>
@@ -217,16 +243,16 @@ export function initQuoteCatalog(options: InitOptions) {
     state.currentQty = state.cart[id]?.qty || 1;
     state.currentPhotoIdx = 0;
     renderModalGallery();
-    $("modalCat")!.textContent = state.currentItem.categoria || "General";
+    $("modalCat")!.textContent = state.currentItem.categoria || L.generalCategory;
     $("modalName")!.textContent = state.currentItem.nombre;
-    $("modalPrice")!.innerHTML = `$${Number(state.currentItem.precio_renta).toLocaleString()} <small>/ renta</small>`;
-    $("modalStock")!.textContent = `${state.currentItem.stock_total || 0} disponibles`;
-    $("modalDesc")!.textContent = state.currentItem.descripcion || "Artículo disponible para renta.";
+    $("modalPrice")!.innerHTML = `$${Number(state.currentItem.precio_renta).toLocaleString()} <small>${L.perRent}</small>`;
+    $("modalStock")!.textContent = `${state.currentItem.stock_total || 0} ${L.availableSuffix}`;
+    $("modalDesc")!.textContent = state.currentItem.descripcion || L.itemAvailable;
     $("qtyDisplay")!.textContent = String(state.currentQty);
     const inCart = Boolean(state.cart[id]);
     const modalAddBtn = $("modalAddBtn");
     if (modalAddBtn) {
-      modalAddBtn.textContent = inCart ? "✓ En cotización" : "Agregar a cotización";
+      modalAddBtn.textContent = inCart ? L.modalInCart : L.modalAdd;
       modalAddBtn.classList.toggle("added", inCart);
     }
     $("modalBackdrop")?.classList.add("open");
@@ -235,7 +261,7 @@ export function initQuoteCatalog(options: InitOptions) {
 
   const renderGrid = () => {
     if (!state.filtered.length) {
-      grid.innerHTML = '<div class="state-msg"><p>Sin resultados</p><small>Prueba otra búsqueda o categoría</small></div>';
+      grid.innerHTML = `<div class="state-msg"><p>${L.noResultsTitle}</p><small>${L.noResultsHint}</small></div>`;
       return;
     }
 
@@ -287,7 +313,7 @@ export function initQuoteCatalog(options: InitOptions) {
       return matchesCategory && matchesSearch;
     });
     renderGrid();
-    resultsCount.textContent = `${state.filtered.length} artículo${state.filtered.length !== 1 ? "s" : ""}`;
+    resultsCount.textContent = `${state.filtered.length} ${state.filtered.length !== 1 ? L.countPlural : L.countSingular}`;
   };
 
   catsContainer.addEventListener("click", (event) => {
@@ -345,7 +371,7 @@ export function initQuoteCatalog(options: InitOptions) {
     const inCart = Boolean(state.cart[String(state.currentItem.id)]);
     const modalAddBtn = $("modalAddBtn");
     if (modalAddBtn) {
-      modalAddBtn.textContent = inCart ? "✓ En cotización" : "Agregar a cotización";
+      modalAddBtn.textContent = inCart ? L.modalInCart : L.modalAdd;
       modalAddBtn.classList.toggle("added", inCart);
     }
   });
@@ -371,7 +397,7 @@ export function initQuoteCatalog(options: InitOptions) {
     const phone = ($("fTelefono") as HTMLInputElement | null)?.value.trim();
     const email = ($("fCorreo") as HTMLInputElement | null)?.value.trim();
     if (!name || !phone || !email) {
-      alert("Por favor llena nombre, teléfono y correo.");
+      alert(L.fillRequired);
       return;
     }
     document.querySelector<HTMLElement>(".quote-actions")!.style.display = "none";
@@ -392,7 +418,7 @@ export function initQuoteCatalog(options: InitOptions) {
     const name = ($("fNombre") as HTMLInputElement | null)?.value.trim() || "Cliente";
     const ids = Object.keys(state.cart);
     if (!ids.length) {
-      alert(options.itemLabel === "flores" ? "Agrega flores a tu cotización primero." : "Agrega artículos a tu cotización primero.");
+      alert(L.emptyQuoteAlert);
       return;
     }
     const items = ids
@@ -401,10 +427,10 @@ export function initQuoteCatalog(options: InitOptions) {
         return `• ${item.nombre} x${qty} — $${(Number(item.precio_renta) * qty).toLocaleString()}`;
       })
       .join("\n");
-    const eventDate = ($("fFecha") as HTMLInputElement | null)?.value || "Por definir";
+    const eventDate = ($("fFecha") as HTMLInputElement | null)?.value || L.dateTBD;
     const notes = ($("fNotas") as HTMLInputElement | null)?.value || options.notesFallback;
     const itemLabel = options.itemLabel ? ` ${options.itemLabel}` : "";
-    const message = `${options.whatsappGreeting} *${name}* y me interesa cotizar${itemLabel}:\n\n${items}\n\nFecha: ${eventDate}\n${notes}`;
+    const message = `${options.whatsappGreeting} *${name}* ${L.whatsappWants}${itemLabel}:\n\n${items}\n\n${L.whatsappDate}: ${eventDate}\n${notes}`;
     window.open(`https://wa.me/${options.whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
   });
 

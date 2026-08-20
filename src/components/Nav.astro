@@ -1,29 +1,41 @@
 ---
+import {
+  localizedPath,
+  homeAnchor,
+  ROUTES,
+  useTranslations,
+  type RouteKey,
+  type Lang,
+} from "../i18n/utils";
+
 interface Props {
-  currentPage?: "home" | "catalogo" | "flores" | "nosotros";
+  currentPage?: RouteKey;
+  lang: Lang;
 }
 
-const { currentPage = "home" } = Astro.props;
+const { currentPage = "home", lang } = Astro.props;
+const t = useTranslations(lang);
 
-const portfolioHref = currentPage === "home" ? "#portfolio" : "/#portfolio";
-const contactHref = currentPage === "home" ? "#contact" : "/#contact";
+const portfolioHref = currentPage === "home" ? "#portfolio" : homeAnchor(lang, "portfolio");
+const contactHref = currentPage === "home" ? "#contact" : homeAnchor(lang, "contact");
 
 const links = [
-  { href: portfolioHref, label: "Portfolio", key: "portfolio" },
-  { href: "/catalogo", label: "Catálogo", key: "catalogo" },
-  { href: "/flores", label: "Flores", key: "flores" },
-  { href: "/nosotros", label: "Nosotros", key: "nosotros" },
-  { href: contactHref, label: "Contacto", key: "contacto" },
+  { href: portfolioHref, label: t("nav.portfolio"), key: "portfolio" },
+  { href: localizedPath("catalog", lang), label: t("nav.catalog"), key: "catalog" },
+  { href: localizedPath("flowers", lang), label: t("nav.flowers"), key: "flowers" },
+  { href: localizedPath("about", lang), label: t("nav.about"), key: "about" },
+  { href: contactHref, label: t("nav.contact"), key: "contact" },
 ];
 
-const isActive = (key: string) =>
-  (currentPage === "catalogo" && key === "catalogo") ||
-  (currentPage === "flores" && key === "flores") ||
-  (currentPage === "nosotros" && key === "nosotros");
+const isActive = (key: string) => key === currentPage;
+
+// Language switcher — same page in each locale.
+const enHref = ROUTES[currentPage].en;
+const esHref = ROUTES[currentPage].es;
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-12 h-16 bg-parchment/97 backdrop-blur-[12px] border-b border-gold/25 max-[900px]:px-6">
-  <a href="/" class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline whitespace-nowrap max-[480px]:text-[13px] max-[480px]:tracking-[0.12em]">Wonderland Events</a>
+  <a href={ROUTES.home[lang]} class="font-serif-sc text-base font-normal tracking-[0.22em] text-ink no-underline whitespace-nowrap max-[480px]:text-[13px] max-[480px]:tracking-[0.12em]">Wonderland Events</a>
   <ul class="list-none flex gap-9 max-[900px]:hidden">
     {links.map((link) => (
       <li>
@@ -40,10 +52,15 @@ const isActive = (key: string) =>
     ))}
   </ul>
   <div class="flex items-center gap-3">
+    <div class="flex items-center gap-1.5 font-sans text-[10px] font-medium tracking-[0.12em] max-[900px]:hidden">
+      <a href={enHref} aria-label="English" class:list={["no-underline transition-colors duration-200 hover:text-gold", lang === "en" ? "text-gold" : "text-ink-soft/60"]}>EN</a>
+      <span class="text-gold/40">/</span>
+      <a href={esHref} aria-label="Español" class:list={["no-underline transition-colors duration-200 hover:text-gold", lang === "es" ? "text-gold" : "text-ink-soft/60"]}>ES</a>
+    </div>
     <slot name="actions">
-      <a href={contactHref} class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">Cotizar</a>
+      <a href={contactHref} class="font-sans text-[10px] font-medium tracking-[0.18em] uppercase text-parchment bg-rose-deep border-none py-[9px] px-[22px] cursor-pointer no-underline transition-colors duration-200 hover:bg-rose max-[900px]:hidden">{t("nav.quote")}</a>
     </slot>
-    <button class="nav-hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" aria-label="Abrir menú">
+    <button class="nav-hamburger hidden flex-col gap-[5px] bg-transparent border-none cursor-pointer p-1 max-[900px]:flex" aria-label={t("nav.openMenu")}>
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
       <span class="block w-[22px] h-[1.5px] bg-ink transition-all duration-300"></span>
@@ -53,7 +70,7 @@ const isActive = (key: string) =>
 
 <div class="nav-mobile-menu hidden fixed top-16 left-0 right-0 bg-parchment/98 backdrop-blur-[12px] border-b border-gold/20 z-[190] flex-col py-4">
   {currentPage !== "home" && (
-    <a href="/" class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">Inicio</a>
+    <a href={ROUTES.home[lang]} class="font-sans text-xs font-medium tracking-[0.2em] uppercase text-ink-soft no-underline py-[14px] px-7 border-b border-gold/15 transition-colors hover:text-gold">{t("nav.home")}</a>
   )}
   {links.map((link) => (
     <a
@@ -66,6 +83,11 @@ const isActive = (key: string) =>
       {link.label}
     </a>
   ))}
+  <div class="flex items-center gap-2 font-sans text-xs font-medium tracking-[0.2em] py-[14px] px-7">
+    <a href={enHref} class:list={["no-underline transition-colors hover:text-gold", lang === "en" ? "text-gold" : "text-ink-soft/60"]}>EN</a>
+    <span class="text-gold/40">/</span>
+    <a href={esHref} class:list={["no-underline transition-colors hover:text-gold", lang === "es" ? "text-gold" : "text-ink-soft/60"]}>ES</a>
+  </div>
 </div>
 
 <style>

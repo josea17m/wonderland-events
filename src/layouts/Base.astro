@@ -1,10 +1,14 @@
 ---
 import "../styles/global.css";
 import WhatsAppFAB from "../components/WhatsAppFAB.astro";
+import { ROUTES, type RouteKey, type Lang } from "../i18n/utils";
+import { useTranslations } from "../i18n/utils";
 
 interface Props {
   title: string;
   description: string;
+  lang: Lang;
+  routeKey: RouteKey;
   ogImage?: string;
   bodyClass?: string;
 }
@@ -12,21 +16,33 @@ interface Props {
 const {
   title,
   description,
+  lang,
+  routeKey,
   ogImage = "/og-default.jpg",
   bodyClass = "",
 } = Astro.props;
 
+const t = useTranslations(lang);
+
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
 const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
+
+const base = Astro.site ?? Astro.url;
+const enHref = new URL(ROUTES[routeKey].en, base).href;
+const esHref = new URL(ROUTES[routeKey].es, base).href;
+const ogLocale = lang === "es" ? "es_MX" : "en_US";
 ---
 <!DOCTYPE html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="es" href={esHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -38,7 +54,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -51,7 +67,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).href;
       <slot />
     </main>
     <!-- TODO(datos): número real de WhatsApp sin + ni espacios -->
-    <WhatsAppFAB phone="5215500000000" />
+    <WhatsAppFAB phone="5215500000000" message={t("fab.message")} ariaLabel={t("fab.aria")} />
     <slot name="footer" />
   </body>
  </html>
